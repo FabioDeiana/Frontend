@@ -1,35 +1,35 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
-const mockActivities = [
-  {
-    id: 1,
-    name: "Ristorante Verde",
-    type: "restaurant",
-    lat: 41.9028,
-    lng: 12.4964,
-  },
-  {
-    id: 2,
-    name: "EcoShop Bio",
-    type: "shop",
-    lat: 41.9109,
-    lng: 12.4818,
-  },
-  {
-    id: 3,
-    name: "Mercato Contadino",
-    type: "market",
-    lat: 41.8919,
-    lng: 12.5113,
-  },
-];
-
 function MapSection() {
+  const [activities, setActivities] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    async function fetchActivities() {
+      try {
+        const response = await axios.get("http://localhost:5000/api/activities");
+        setActivities(response.data);
+      } catch (err) {
+        setError("Errore nel recupero delle attività");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchActivities();
+  }, []);
+
   return (
     <section id="map" className="py-16 px-6">
       <h2 className="text-3xl font-bold mb-8 text-center text-green-700">
         Esplora le attività sulla mappa
       </h2>
+
+      {loading && <p className="text-center">Caricamento attività...</p>}
+      {error && <p className="text-center text-red-600">{error}</p>}
 
       <div className="h-[500px] w-full max-w-5xl mx-auto rounded-xl overflow-hidden shadow-lg">
         <MapContainer
@@ -43,8 +43,11 @@ function MapSection() {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
 
-          {mockActivities.map((activity) => (
-            <Marker key={activity.id} position={[activity.lat, activity.lng]}>
+          {activities.map((activity) => (
+            <Marker
+              key={activity._id}
+              position={[activity.location.coordinates[1], activity.location.coordinates[0]]}
+            >
               <Popup>
                 <strong>{activity.name}</strong>
                 <br />
