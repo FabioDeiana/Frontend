@@ -10,7 +10,9 @@ function MapSection() {
   useEffect(() => {
     async function fetchActivities() {
       try {
-        const response = await axios.get("http://localhost:5000/api/activities");
+        const response = await axios.get(
+          "http://localhost:5000/api/activities",
+        );
         setActivities(response.data);
       } catch (err) {
         setError("Errore nel recupero delle attività");
@@ -46,12 +48,12 @@ function MapSection() {
           {activities.map((activity) => (
             <Marker
               key={activity._id}
-              position={[activity.location.coordinates[1], activity.location.coordinates[0]]}
+              position={[activity.coordinates.lat, activity.coordinates.lng]}
             >
               <Popup>
                 <strong>{activity.name}</strong>
                 <br />
-                {activity.type}
+                {activity.category}
               </Popup>
             </Marker>
           ))}
