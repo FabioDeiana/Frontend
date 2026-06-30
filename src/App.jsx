@@ -1,9 +1,16 @@
+import { BrowserRouter } from "react-router-dom";
+import AppRouter from "./router/AppRouter";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+
 function App() {
   return (
-    <div className="min-h-screen bg-green-50 flex items-center justify-center">
-      <h1 className="text-4xl font-bold text-green-700">GreenMap 🌍</h1>
-    </div>
-  )
+    <BrowserRouter>
+      <Navbar />
+      <AppRouter />
+      <Footer />
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
