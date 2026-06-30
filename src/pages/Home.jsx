@@ -1,5 +1,15 @@
+import HeroSection from "../components/home/HeroSection";
+import MissionSection from "../components/home/MissionSection";
+import MapSection from "../components/home/MapSection";
+
 function Home() {
-  return <h1>Home</h1>;
+  return (
+    <div>
+      <HeroSection />
+      <MissionSection />
+      <MapSection />
+    </div>
+  );
 }
 
 export default Home;
