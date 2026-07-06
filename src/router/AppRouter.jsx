@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import ProtectedRoute from "../components/ProtectedRoute";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
@@ -16,9 +17,30 @@ function AppRouter() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/activity/:id" element={<ActivityDetail />} />
-      <Route path="/profile" element={<Profile />} />
-      <Route path="/profile/business" element={<BusinessProfile />} />
-      <Route path="/admin" element={<AdminDashboard />} />
+      <Route
+        path="/profile"
+        element={
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/profile/business"
+        element={
+          <ProtectedRoute allowedRoles={["owner", "admin"]}>
+            <BusinessProfile />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin"
+        element={
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <AdminDashboard />
+          </ProtectedRoute>
+        }
+      />
       <Route path="/about" element={<About />} />
       <Route path="/cookie-policy" element={<CookiePolicy />} />
     </Routes>
