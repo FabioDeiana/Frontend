@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
@@ -6,13 +7,12 @@ function MapSection() {
   const [activities, setActivities] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchActivities() {
       try {
-        const response = await axios.get(
-          "http://localhost:5000/api/activities",
-        );
+        const response = await axios.get("http://localhost:5000/api/activities");
         setActivities(response.data);
       } catch (err) {
         setError("Errore nel recupero delle attività");
@@ -49,13 +49,10 @@ function MapSection() {
             <Marker
               key={activity._id}
               position={[activity.coordinates.lat, activity.coordinates.lng]}
-            >
-              <Popup>
-                <strong>{activity.name}</strong>
-                <br />
-                {activity.category}
-              </Popup>
-            </Marker>
+              eventHandlers={{
+                click: () => navigate(`/activity/${activity._id}`),
+              }}
+            />
           ))}
         </MapContainer>
       </div>
