@@ -26,6 +26,11 @@ function Navbar() {
 
         {user ? (
           <>
+            {user.role === "admin" && (
+              <Link to="/admin" className="hover:underline">
+                Admin
+              </Link>
+            )}
             <Link to="/profile" className="hover:underline">
               Profilo
             </Link>
