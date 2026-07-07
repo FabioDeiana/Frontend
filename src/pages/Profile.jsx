@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
+import { useTranslation } from "react-i18next";
 
 const DIET_OPTIONS = [
   "vegetariano",
@@ -37,6 +38,7 @@ const ALLERGEN_OPTIONS = [
 
 function Profile() {
   const { user, accessToken, login } = useAuth();
+  const { t } = useTranslation();
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -111,7 +113,7 @@ function Profile() {
         { headers: { Authorization: `Bearer ${accessToken}` } }
       );
       login(response.data.user, accessToken);
-      setSuccessMessage("Profilo aggiornato con successo!");
+      setSuccessMessage(t("profile.saveSuccess"));
     } catch (err) {
       setError("Errore durante il salvataggio");
     } finally {
@@ -133,8 +135,8 @@ function Profile() {
       login(response.data.user, accessToken);
       setNewsletterMessage(
         subscribed
-          ? "Iscritto alla newsletter con successo!"
-          : "Disiscrizione avvenuta con successo."
+          ? t("newsletter.successSubscribe")
+          : t("newsletter.successUnsubscribe")
       );
     } catch (err) {
       setNewsletterError("Errore durante l'aggiornamento della preferenza");
@@ -145,15 +147,15 @@ function Profile() {
 
   return (
     <div className="max-w-2xl mx-auto px-6 py-12">
-      <h1 className="text-3xl font-bold text-green-700 mb-8">Il mio profilo</h1>
+      <h1 className="text-3xl font-bold text-green-700 mb-8">{t("profile.title")}</h1>
 
       {/* Dati base */}
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
-        <h2 className="text-lg font-semibold mb-4">Dati personali</h2>
+        <h2 className="text-lg font-semibold mb-4">{t("profile.personalData")}</h2>
 
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Nome
+            {t("profile.name")}
           </label>
           <input
             type="text"
@@ -165,7 +167,7 @@ function Profile() {
 
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Email
+            {t("profile.email")}
           </label>
           <input
             type="email"
@@ -177,7 +179,7 @@ function Profile() {
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Ruolo
+            {t("profile.role")}
           </label>
           <span className="inline-block bg-green-100 text-green-700 text-sm font-medium px-3 py-1 rounded-full">
             {user?.role}
@@ -187,7 +189,7 @@ function Profile() {
 
       {/* Preferenze dietetiche */}
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
-        <h2 className="text-lg font-semibold mb-4">🥗 Preferenze dietetiche</h2>
+        <h2 className="text-lg font-semibold mb-4">🥗 {t("profile.dietPrefs")}</h2>
         <div className="flex flex-wrap gap-2">
           {DIET_OPTIONS.map((option) => (
             <button
@@ -207,7 +209,7 @@ function Profile() {
 
       {/* Allergie */}
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
-        <h2 className="text-lg font-semibold mb-4">⚠ Allergie</h2>
+        <h2 className="text-lg font-semibold mb-4">⚠ {t("profile.allergens")}</h2>
         <div className="flex flex-wrap gap-2">
           {ALLERGEN_OPTIONS.map((option) => (
             <button
@@ -227,7 +229,7 @@ function Profile() {
 
       {/* Accessibilità */}
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
-        <h2 className="text-lg font-semibold mb-4">♿ Accessibilità</h2>
+        <h2 className="text-lg font-semibold mb-4">♿ {t("profile.accessibility")}</h2>
         <div className="flex flex-wrap gap-2">
           {ACCESSIBILITY_OPTIONS.map((option) => (
             <button
@@ -247,11 +249,11 @@ function Profile() {
 
       {/* Newsletter */}
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
-        <h2 className="text-lg font-semibold mb-2">📧 Newsletter</h2>
+        <h2 className="text-lg font-semibold mb-2">📧 {t("profile.newsletter")}</h2>
         <p className="text-sm text-gray-500 mb-4">
           {user?.newsletter?.subscribed
-            ? "Sei attualmente iscritto alla newsletter."
-            : "Non sei iscritto alla newsletter."}
+            ? t("profile.newsletterSubscribed")
+            : t("profile.newsletterNotSubscribed")}
         </p>
 
         {newsletterMessage && (
@@ -272,7 +274,7 @@ function Profile() {
               disabled={newsletterLoading}
               className="bg-green-700 text-white font-semibold px-5 py-2 rounded-lg hover:bg-green-800 transition disabled:opacity-50"
             >
-              {newsletterLoading ? "Attendere..." : "Iscrivimi"}
+              {newsletterLoading ? "..." : t("newsletter.subscribe")}
             </button>
           ) : (
             <button
@@ -280,13 +282,13 @@ function Profile() {
               disabled={newsletterLoading}
               className="bg-red-100 text-red-600 font-semibold px-5 py-2 rounded-lg hover:bg-red-200 transition disabled:opacity-50"
             >
-              {newsletterLoading ? "Attendere..." : "Cancella iscrizione"}
+              {newsletterLoading ? "..." : t("newsletter.unsubscribe")}
             </button>
           )}
         </div>
 
         <p className="text-xs text-gray-400 mt-3">
-          Utilizziamo la tua email solo per aggiornarti sulle nuove attività di GreenMap. Nessuno spam.
+          {t("newsletter.privacy")}
         </p>
       </div>
 
@@ -308,16 +310,16 @@ function Profile() {
         disabled={saving}
         className="bg-green-700 text-white font-semibold px-6 py-3 rounded-lg hover:bg-green-800 transition disabled:opacity-50 mb-10"
       >
-        {saving ? "Salvataggio..." : "Salva modifiche"}
+        {saving ? t("profile.saving") : t("profile.save")}
       </button>
 
       {/* Recensioni */}
       <div>
-        <h2 className="text-lg font-semibold mb-4">Le mie recensioni</h2>
+        <h2 className="text-lg font-semibold mb-4">{t("profile.myReviews")}</h2>
         {loading ? (
           <p className="text-gray-500 text-sm">Caricamento...</p>
         ) : reviews.length === 0 ? (
-          <p className="text-gray-500 text-sm">Non hai ancora lasciato recensioni.</p>
+          <p className="text-gray-500 text-sm">{t("profile.noReviews")}</p>
         ) : (
           <div className="flex flex-col gap-4">
             {reviews.map((review) => (
@@ -325,8 +327,8 @@ function Profile() {
                 <p className="font-medium mb-1">{review.activity?.name}</p>
                 <div className="flex gap-4 text-sm text-gray-600 mb-2">
                   <span>🌿 Eco: {review.ratings?.ecoFriendliness}/5</span>
-                  <span>♿ Accessibilità: {review.ratings?.accessibility}/5</span>
-                  <span>🥗 Dieta: {review.ratings?.dietOptions}/5</span>
+                  <span>♿ {t("activity.accessibility")}: {review.ratings?.accessibility}/5</span>
+                  <span>🥗 {t("activity.diet")}: {review.ratings?.dietOptions}/5</span>
                 </div>
                 <p className="text-gray-700 text-sm">{review.comment}</p>
               </div>

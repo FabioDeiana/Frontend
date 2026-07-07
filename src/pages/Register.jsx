@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate, Link, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
+import { useTranslation } from "react-i18next";
 
 function Register() {
   const [searchParams] = useSearchParams();
@@ -18,6 +19,7 @@ function Register() {
 
   const { login } = useAuth();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -37,7 +39,6 @@ function Register() {
 
       login(response.data.user, response.data.accessToken);
 
-      // Se ha scelto la newsletter, la attiviamo subito dopo la registrazione
       if (newsletter) {
         await axios.put(
           "http://localhost:5000/api/newsletter/preference",
@@ -58,12 +59,10 @@ function Register() {
     <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
       <div className="bg-white rounded-2xl shadow-md w-full max-w-md p-8">
         <h1 className="text-2xl font-bold text-green-700 mb-2 text-center">
-          {isOwner ? "Registra la tua attività" : "Crea un account"}
+          {isOwner ? t("register.titleOwner") : t("register.title")}
         </h1>
         <p className="text-sm text-gray-500 text-center mb-6">
-          {isOwner
-            ? "Crea un account owner per gestire la tua attività su GreenMap"
-            : "Unisciti alla community di GreenMap"}
+          {isOwner ? t("register.subtitleOwner") : t("register.subtitle")}
         </p>
 
         {error && (
@@ -75,7 +74,7 @@ function Register() {
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Nome
+              {t("register.name")}
             </label>
             <input
               type="text"
@@ -89,7 +88,7 @@ function Register() {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Email
+              {t("register.email")}
             </label>
             <input
               type="email"
@@ -103,7 +102,7 @@ function Register() {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Password
+              {t("register.password")}
             </label>
             <input
               type="password"
@@ -115,7 +114,6 @@ function Register() {
             />
           </div>
 
-          {/* Newsletter */}
           <div className="bg-green-50 rounded-xl p-4">
             <label className="flex items-start gap-3 cursor-pointer">
               <input
@@ -126,10 +124,10 @@ function Register() {
               />
               <div>
                 <p className="text-sm font-medium text-gray-700">
-                  Iscrivimi alla newsletter
+                  {t("register.newsletterLabel")}
                 </p>
                 <p className="text-xs text-gray-400 mt-0.5">
-                  Ricevi aggiornamenti sulle nuove attività eco-friendly. Nessuno spam — puoi cancellarti in qualsiasi momento dal tuo profilo.
+                  {t("register.newsletterDesc")}
                 </p>
               </div>
             </label>
@@ -140,21 +138,21 @@ function Register() {
             disabled={loading}
             className="bg-green-700 text-white font-semibold py-2 rounded-lg hover:bg-green-800 transition disabled:opacity-50"
           >
-            {loading ? "Registrazione in corso..." : "Registrati"}
+            {loading ? t("register.loading") : t("register.submit")}
           </button>
         </form>
 
         <p className="text-xs text-gray-400 text-center mt-4">
-          Registrandoti accetti i nostri termini di servizio. I tuoi dati non saranno condivisi con terze parti.{" "}
+          {t("register.terms")}{" "}
           <Link to="/cookie-policy" className="underline">
             Cookie Policy
           </Link>
         </p>
 
         <p className="text-sm text-center text-gray-600 mt-4">
-          Hai già un account?{" "}
+          {t("register.hasAccount")}{" "}
           <Link to="/login" className="text-green-700 font-medium hover:underline">
-            Accedi
+            {t("register.login")}
           </Link>
         </p>
       </div>

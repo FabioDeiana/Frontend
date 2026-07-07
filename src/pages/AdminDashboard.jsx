@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
+import { useTranslation } from "react-i18next";
 
 function AdminDashboard() {
   const { accessToken } = useAuth();
+  const { t } = useTranslation();
   const [users, setUsers] = useState([]);
   const [activities, setActivities] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -93,18 +95,18 @@ function AdminDashboard() {
   return (
     <div className="max-w-5xl mx-auto px-6 py-12">
       <h1 className="text-3xl font-bold text-green-700 mb-8">
-        Dashboard Admin
+        {t("admin.title")}
       </h1>
 
       {/* Stats */}
       <div className="grid grid-cols-2 gap-4 mb-8">
         <div className="bg-green-50 rounded-2xl p-6 text-center">
           <p className="text-4xl font-bold text-green-700">{users.length}</p>
-          <p className="text-gray-600 mt-1">Utenti registrati</p>
+          <p className="text-gray-600 mt-1">{t("admin.registeredUsers")}</p>
         </div>
         <div className="bg-green-50 rounded-2xl p-6 text-center">
           <p className="text-4xl font-bold text-green-700">{activities.length}</p>
-          <p className="text-gray-600 mt-1">Attività</p>
+          <p className="text-gray-600 mt-1">{t("admin.activities")}</p>
         </div>
       </div>
 
@@ -118,7 +120,7 @@ function AdminDashboard() {
               : "bg-gray-100 text-gray-600 hover:bg-gray-200"
           }`}
         >
-          Utenti
+          {t("admin.users")}
         </button>
         <button
           onClick={() => setActiveTab("activities")}
@@ -128,7 +130,7 @@ function AdminDashboard() {
               : "bg-gray-100 text-gray-600 hover:bg-gray-200"
           }`}
         >
-          Attività
+          {t("admin.activities")}
         </button>
       </div>
 
@@ -150,7 +152,7 @@ function AdminDashboard() {
                       : "bg-red-100 text-red-600"
                   }`}
                 >
-                  {u.isActive ? "Attivo" : "Disabilitato"}
+                  {u.isActive ? t("admin.active") : t("admin.disabled")}
                 </span>
               </div>
 
@@ -173,14 +175,14 @@ function AdminDashboard() {
                       : "bg-green-100 text-green-700 hover:bg-green-200"
                   }`}
                 >
-                  {u.isActive ? "Disabilita" : "Abilita"}
+                  {u.isActive ? t("admin.disable") : t("admin.enable")}
                 </button>
 
                 <button
                   onClick={() => handleDeleteUser(u._id)}
                   className="text-sm px-3 py-1 rounded-lg font-medium bg-red-100 text-red-600 hover:bg-red-200 transition"
                 >
-                  Elimina
+                  {t("admin.delete")}
                 </button>
               </div>
             </div>
@@ -206,7 +208,7 @@ function AdminDashboard() {
                       : "bg-gray-100 text-gray-500"
                   }`}
                 >
-                  {a.verified ? "Verificata" : "Non verificata"}
+                  {a.verified ? t("admin.verified") : t("admin.notVerified")}
                 </span>
               </div>
 
@@ -215,7 +217,7 @@ function AdminDashboard() {
                   onClick={() => handleDeleteActivity(a._id)}
                   className="text-sm px-3 py-1 rounded-lg font-medium bg-red-100 text-red-600 hover:bg-red-200 transition"
                 >
-                  Elimina
+                  {t("admin.delete")}
                 </button>
               </div>
             </div>

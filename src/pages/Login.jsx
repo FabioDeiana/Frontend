@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
+import { useTranslation } from "react-i18next";
 
 function Login() {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -10,6 +11,7 @@ function Login() {
 
   const { login } = useAuth();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -26,7 +28,6 @@ function Login() {
         formData,
         { withCredentials: true }
       );
-
       login(response.data.user, response.data.accessToken);
       navigate("/");
     } catch (err) {
@@ -40,7 +41,7 @@ function Login() {
     <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
       <div className="bg-white rounded-2xl shadow-md w-full max-w-md p-8">
         <h1 className="text-2xl font-bold text-green-700 mb-6 text-center">
-          Accedi a GreenMap
+          {t("login.title")}
         </h1>
 
         {error && (
@@ -52,7 +53,7 @@ function Login() {
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Email
+              {t("login.email")}
             </label>
             <input
               type="email"
@@ -66,7 +67,7 @@ function Login() {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Password
+              {t("login.password")}
             </label>
             <input
               type="password"
@@ -83,14 +84,14 @@ function Login() {
             disabled={loading}
             className="bg-green-700 text-white font-semibold py-2 rounded-lg hover:bg-green-800 transition disabled:opacity-50"
           >
-            {loading ? "Accesso in corso..." : "Accedi"}
+            {loading ? t("login.loading") : t("login.submit")}
           </button>
         </form>
 
         <p className="text-sm text-center text-gray-600 mt-6">
-          Non hai un account?{" "}
+          {t("login.noAccount")}{" "}
           <Link to="/register" className="text-green-700 font-medium hover:underline">
-            Registrati
+            {t("login.register")}
           </Link>
         </p>
       </div>

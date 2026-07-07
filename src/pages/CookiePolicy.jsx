@@ -1,7 +1,11 @@
+import { useTranslation } from "react-i18next";
+
 function CookiePolicy() {
+  const { t } = useTranslation();
+
   return (
     <div className="max-w-3xl mx-auto px-6 py-12">
-      <h1 className="text-3xl font-bold text-green-700 mb-6">Cookie Policy</h1>
+      <h1 className="text-3xl font-bold text-green-700 mb-6">{t("cookie.title")}</h1>
 
       <p className="text-gray-700 leading-relaxed mb-6">
         GreenMap utilizza cookie tecnici essenziali per il funzionamento del
