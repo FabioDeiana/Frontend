@@ -40,8 +40,11 @@ function Profile() {
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [newsletterLoading, setNewsletterLoading] = useState(false);
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
+  const [newsletterMessage, setNewsletterMessage] = useState(null);
+  const [newsletterError, setNewsletterError] = useState(null);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -113,6 +116,30 @@ function Profile() {
       setError("Errore durante il salvataggio");
     } finally {
       setSaving(false);
+    }
+  };
+
+  const handleNewsletter = async (subscribed) => {
+    setNewsletterLoading(true);
+    setNewsletterMessage(null);
+    setNewsletterError(null);
+
+    try {
+      const response = await axios.put(
+        "http://localhost:5000/api/newsletter/preference",
+        { subscribed },
+        { headers: { Authorization: `Bearer ${accessToken}` } }
+      );
+      login(response.data.user, accessToken);
+      setNewsletterMessage(
+        subscribed
+          ? "Iscritto alla newsletter con successo!"
+          : "Disiscrizione avvenuta con successo."
+      );
+    } catch (err) {
+      setNewsletterError("Errore durante l'aggiornamento della preferenza");
+    } finally {
+      setNewsletterLoading(false);
     }
   };
 
@@ -218,7 +245,52 @@ function Profile() {
         </div>
       </div>
 
-      {/* Messaggi */}
+      {/* Newsletter */}
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
+        <h2 className="text-lg font-semibold mb-2">📧 Newsletter</h2>
+        <p className="text-sm text-gray-500 mb-4">
+          {user?.newsletter?.subscribed
+            ? "Sei attualmente iscritto alla newsletter."
+            : "Non sei iscritto alla newsletter."}
+        </p>
+
+        {newsletterMessage && (
+          <p className="bg-green-100 text-green-700 text-sm px-4 py-2 rounded-lg mb-4">
+            {newsletterMessage}
+          </p>
+        )}
+        {newsletterError && (
+          <p className="bg-red-100 text-red-700 text-sm px-4 py-2 rounded-lg mb-4">
+            {newsletterError}
+          </p>
+        )}
+
+        <div className="flex gap-3">
+          {!user?.newsletter?.subscribed ? (
+            <button
+              onClick={() => handleNewsletter(true)}
+              disabled={newsletterLoading}
+              className="bg-green-700 text-white font-semibold px-5 py-2 rounded-lg hover:bg-green-800 transition disabled:opacity-50"
+            >
+              {newsletterLoading ? "Attendere..." : "Iscrivimi"}
+            </button>
+          ) : (
+            <button
+              onClick={() => handleNewsletter(false)}
+              disabled={newsletterLoading}
+              className="bg-red-100 text-red-600 font-semibold px-5 py-2 rounded-lg hover:bg-red-200 transition disabled:opacity-50"
+            >
+              {newsletterLoading ? "Attendere..." : "Cancella iscrizione"}
+            </button>
+          )}
+        </div>
+
+        <p className="text-xs text-gray-400 mt-3">
+          Utilizziamo la tua email solo per aggiornarti sulle nuove attività di GreenMap. Nessuno spam.
+        </p>
+      </div>
+
+      {/* Messaggi salvataggio */}
       {error && (
         <p className="bg-red-100 text-red-700 text-sm px-4 py-2 rounded-lg mb-4">
           {error}

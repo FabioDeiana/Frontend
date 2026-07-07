@@ -12,6 +12,7 @@ function Register() {
     email: "",
     password: "",
   });
+  const [newsletter, setNewsletter] = useState(false);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -35,6 +36,16 @@ function Register() {
       );
 
       login(response.data.user, response.data.accessToken);
+
+      // Se ha scelto la newsletter, la attiviamo subito dopo la registrazione
+      if (newsletter) {
+        await axios.put(
+          "http://localhost:5000/api/newsletter/preference",
+          { subscribed: true },
+          { headers: { Authorization: `Bearer ${response.data.accessToken}` } }
+        );
+      }
+
       navigate("/");
     } catch (err) {
       setError(err.response?.data?.message || "Errore durante la registrazione");
@@ -104,6 +115,26 @@ function Register() {
             />
           </div>
 
+          {/* Newsletter */}
+          <div className="bg-green-50 rounded-xl p-4">
+            <label className="flex items-start gap-3 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={newsletter}
+                onChange={(e) => setNewsletter(e.target.checked)}
+                className="mt-0.5 accent-green-600"
+              />
+              <div>
+                <p className="text-sm font-medium text-gray-700">
+                  Iscrivimi alla newsletter
+                </p>
+                <p className="text-xs text-gray-400 mt-0.5">
+                  Ricevi aggiornamenti sulle nuove attività eco-friendly. Nessuno spam — puoi cancellarti in qualsiasi momento dal tuo profilo.
+                </p>
+              </div>
+            </label>
+          </div>
+
           <button
             type="submit"
             disabled={loading}
@@ -113,7 +144,14 @@ function Register() {
           </button>
         </form>
 
-        <p className="text-sm text-center text-gray-600 mt-6">
+        <p className="text-xs text-gray-400 text-center mt-4">
+          Registrandoti accetti i nostri termini di servizio. I tuoi dati non saranno condivisi con terze parti.{" "}
+          <Link to="/cookie-policy" className="underline">
+            Cookie Policy
+          </Link>
+        </p>
+
+        <p className="text-sm text-center text-gray-600 mt-4">
           Hai già un account?{" "}
           <Link to="/login" className="text-green-700 font-medium hover:underline">
             Accedi
