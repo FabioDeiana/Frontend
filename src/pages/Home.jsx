@@ -3,6 +3,7 @@ import MissionSection from "../components/home/MissionSection";
 import MapSection from "../components/home/MapSection";
 import HowItWorksSection from "../components/home/HowItWorksSection";
 import CTASection from "../components/home/CTASection";
+import NewsletterSection from "../components/home/NewsletterSection";
 
 function Home() {
   return (
@@ -11,6 +12,7 @@ function Home() {
       <MissionSection />
       <MapSection />
       <HowItWorksSection />
+      <NewsletterSection />
       <CTASection />
     </div>
   );
