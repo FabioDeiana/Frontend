@@ -1,0 +1,135 @@
+{
+  "navbar": {
+    "home": "Home",
+    "about": "Chi siamo",
+    "login": "Accedi",
+    "register": "Registrati",
+    "profile": "Profilo",
+    "admin": "Admin",
+    "logout": "Esci"
+  },
+  "hero": {
+    "title": "Scopri le attività eco-sostenibili vicino a te",
+    "subtitle": "GreenMap ti aiuta a trovare ristoranti, negozi e servizi che hanno a cuore l'ambiente quanto te.",
+    "cta": "Esplora la mappa"
+  },
+  "mission": {
+    "title": "La nostra missione",
+    "text": "Trovare attività davvero sostenibili non dovrebbe essere difficile. GreenMap nasce per mettere in luce ristoranti, negozi e servizi che rispettano l'ambiente, rendendoli facili da scoprire e da valutare grazie alle recensioni della community. Niente promesse vuote: solo esperienze reali, raccontate da chi le vive ogni giorno."
+  },
+  "map": {
+    "title": "Esplora le attività sulla mappa",
+    "loading": "Caricamento attività...",
+    "error": "Errore nel recupero delle attività",
+    "filter": "Filtra",
+    "city": "Città",
+    "category": "Categoria",
+    "diet": "Opzioni dietetiche",
+    "accessibility": "Accessibilità",
+    "applyFilters": "Applica filtri",
+    "reset": "Azzera"
+  },
+  "howItWorks": {
+    "title": "Come funziona",
+    "step1Title": "Esplora la mappa",
+    "step1Desc": "Trova attività eco-sostenibili vicino a te: ristoranti, negozi, mercati e molto altro.",
+    "step2Title": "Leggi le recensioni",
+    "step2Desc": "Scopri cosa pensa la community su sostenibilità, accessibilità e opzioni alimentari.",
+    "step3Title": "Contribuisci",
+    "step3Desc": "Registrati per lasciare recensioni o candida la tua attività se la gestisci tu."
+  },
+  "newsletter": {
+    "title": "Resta aggiornato",
+    "subtitle": "Iscriviti alla newsletter per ricevere aggiornamenti sulle nuove attività eco-friendly nella tua zona.",
+    "privacy": "Utilizziamo la tua email solo per inviarti aggiornamenti di GreenMap. Nessuno spam, puoi cancellarti in qualsiasi momento.",
+    "placeholder": "La tua email",
+    "subscribe": "Iscriviti",
+    "unsubscribe": "Cancella iscrizione",
+    "successSubscribe": "Iscrizione avvenuta con successo! Grazie.",
+    "successUnsubscribe": "Disiscrizione avvenuta con successo.",
+    "error": "Errore durante l'iscrizione",
+    "cancel": "Per cancellarti in qualsiasi momento scrivi a privacy@greenmap.it oppure usa il bottone Cancella iscrizione qui sopra."
+  },
+  "cta": {
+    "title": "Unisciti a GreenMap",
+    "subtitle": "Sei un utente curioso o gestisci un'attività eco-sostenibile? Registrati e diventa parte della community.",
+    "registerUser": "Registrati come utente",
+    "registerBusiness": "Registra la tua attività"
+  },
+  "login": {
+    "title": "Accedi a GreenMap",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Accedi",
+    "loading": "Accesso in corso...",
+    "noAccount": "Non hai un account?",
+    "register": "Registrati"
+  },
+  "register": {
+    "title": "Crea un account",
+    "titleOwner": "Registra la tua attività",
+    "subtitle": "Unisciti alla community di GreenMap",
+    "subtitleOwner": "Crea un account owner per gestire la tua attività su GreenMap",
+    "name": "Nome",
+    "email": "Email",
+    "password": "Password",
+    "newsletterLabel": "Iscrivimi alla newsletter",
+    "newsletterDesc": "Ricevi aggiornamenti sulle nuove attività eco-friendly. Nessuno spam — puoi cancellarti in qualsiasi momento dal tuo profilo.",
+    "submit": "Registrati",
+    "loading": "Registrazione in corso...",
+    "hasAccount": "Hai già un account?",
+    "login": "Accedi",
+    "terms": "Registrandoti accetti i nostri termini di servizio. I tuoi dati non saranno condivisi con terze parti."
+  },
+  "activity": {
+    "verified": "Verificata",
+    "reviews": "Recensioni",
+    "noReviews": "Nessuna recensione ancora. Sii il primo a recensire!",
+    "menu": "Menu",
+    "noMenu": "Nessuna voce nel menu.",
+    "leaveReview": "Lascia una recensione",
+    "eco": "Eco-friendliness",
+    "accessibility": "Accessibilità",
+    "diet": "Opzioni dietetiche",
+    "comment": "Commento",
+    "submitReview": "Invia recensione",
+    "submitting": "Invio in corso..."
+  },
+  "profile": {
+    "title": "Il mio profilo",
+    "personalData": "Dati personali",
+    "name": "Nome",
+    "email": "Email",
+    "role": "Ruolo",
+    "dietPrefs": "Preferenze dietetiche",
+    "allergens": "Allergie",
+    "accessibility": "Accessibilità",
+    "newsletter": "Newsletter",
+    "newsletterSubscribed": "Sei attualmente iscritto alla newsletter.",
+    "newsletterNotSubscribed": "Non sei iscritto alla newsletter.",
+    "save": "Salva modifiche",
+    "saving": "Salvataggio...",
+    "saveSuccess": "Profilo aggiornato con successo!",
+    "myReviews": "Le mie recensioni",
+    "noReviews": "Non hai ancora lasciato recensioni."
+  },
+  "about": {
+    "title": "Chi siamo"
+  },
+  "cookie": {
+    "title": "Cookie Policy"
+  },
+  "admin": {
+    "title": "Dashboard Admin",
+    "users": "Utenti",
+    "activities": "Attività",
+    "registeredUsers": "Utenti registrati",
+    "active": "Attivo",
+    "disabled": "Disabilitato",
+    "disable": "Disabilita",
+    "enable": "Abilita",
+    "delete": "Elimina",
+    "verified": "Verificata",
+    "notVerified": "Non verificata"
+  }
+}

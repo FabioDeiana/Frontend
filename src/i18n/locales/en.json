@@ -1,0 +1,135 @@
+{
+  "navbar": {
+    "home": "Home",
+    "about": "About",
+    "login": "Login",
+    "register": "Sign up",
+    "profile": "Profile",
+    "admin": "Admin",
+    "logout": "Logout"
+  },
+  "hero": {
+    "title": "Discover eco-friendly activities near you",
+    "subtitle": "GreenMap helps you find restaurants, shops and services that care about the environment as much as you do.",
+    "cta": "Explore the map"
+  },
+  "mission": {
+    "title": "Our mission",
+    "text": "Finding truly sustainable activities shouldn't be hard. GreenMap was created to spotlight restaurants, shops and services that respect the environment, making them easy to discover and review through community feedback. No empty promises — just real experiences, told by those who live them every day."
+  },
+  "map": {
+    "title": "Explore activities on the map",
+    "loading": "Loading activities...",
+    "error": "Error loading activities",
+    "filter": "Filter",
+    "city": "City",
+    "category": "Category",
+    "diet": "Dietary options",
+    "accessibility": "Accessibility",
+    "applyFilters": "Apply filters",
+    "reset": "Reset"
+  },
+  "howItWorks": {
+    "title": "How it works",
+    "step1Title": "Explore the map",
+    "step1Desc": "Find eco-friendly activities near you: restaurants, shops, markets and more.",
+    "step2Title": "Read reviews",
+    "step2Desc": "See what the community thinks about sustainability, accessibility and dietary options.",
+    "step3Title": "Contribute",
+    "step3Desc": "Sign up to leave reviews or list your business if you run one."
+  },
+  "newsletter": {
+    "title": "Stay updated",
+    "subtitle": "Subscribe to our newsletter to receive updates on new eco-friendly activities in your area.",
+    "privacy": "We only use your email to send you GreenMap updates. No spam, unsubscribe anytime.",
+    "placeholder": "Your email",
+    "subscribe": "Subscribe",
+    "unsubscribe": "Unsubscribe",
+    "successSubscribe": "Successfully subscribed! Thank you.",
+    "successUnsubscribe": "Successfully unsubscribed.",
+    "error": "Error during subscription",
+    "cancel": "To unsubscribe at any time, email privacy@greenmap.it or use the Unsubscribe button above."
+  },
+  "cta": {
+    "title": "Join GreenMap",
+    "subtitle": "Are you a curious user or do you run an eco-friendly business? Sign up and become part of the community.",
+    "registerUser": "Sign up as a user",
+    "registerBusiness": "List your business"
+  },
+  "login": {
+    "title": "Log in to GreenMap",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Log in",
+    "loading": "Logging in...",
+    "noAccount": "Don't have an account?",
+    "register": "Sign up"
+  },
+  "register": {
+    "title": "Create an account",
+    "titleOwner": "List your business",
+    "subtitle": "Join the GreenMap community",
+    "subtitleOwner": "Create an owner account to manage your business on GreenMap",
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "newsletterLabel": "Subscribe to newsletter",
+    "newsletterDesc": "Get updates on new eco-friendly activities. No spam — unsubscribe anytime from your profile.",
+    "submit": "Sign up",
+    "loading": "Signing up...",
+    "hasAccount": "Already have an account?",
+    "login": "Log in",
+    "terms": "By signing up you agree to our terms of service. Your data will not be shared with third parties."
+  },
+  "activity": {
+    "verified": "Verified",
+    "reviews": "Reviews",
+    "noReviews": "No reviews yet. Be the first to review!",
+    "menu": "Menu",
+    "noMenu": "No menu items available.",
+    "leaveReview": "Leave a review",
+    "eco": "Eco-friendliness",
+    "accessibility": "Accessibility",
+    "diet": "Dietary options",
+    "comment": "Comment",
+    "submitReview": "Submit review",
+    "submitting": "Submitting..."
+  },
+  "profile": {
+    "title": "My profile",
+    "personalData": "Personal data",
+    "name": "Name",
+    "email": "Email",
+    "role": "Role",
+    "dietPrefs": "Dietary preferences",
+    "allergens": "Allergies",
+    "accessibility": "Accessibility",
+    "newsletter": "Newsletter",
+    "newsletterSubscribed": "You are currently subscribed to the newsletter.",
+    "newsletterNotSubscribed": "You are not subscribed to the newsletter.",
+    "save": "Save changes",
+    "saving": "Saving...",
+    "saveSuccess": "Profile updated successfully!",
+    "myReviews": "My reviews",
+    "noReviews": "You haven't left any reviews yet."
+  },
+  "about": {
+    "title": "About us"
+  },
+  "cookie": {
+    "title": "Cookie Policy"
+  },
+  "admin": {
+    "title": "Admin Dashboard",
+    "users": "Users",
+    "activities": "Activities",
+    "registeredUsers": "Registered users",
+    "active": "Active",
+    "disabled": "Disabled",
+    "disable": "Disable",
+    "enable": "Enable",
+    "delete": "Delete",
+    "verified": "Verified",
+    "notVerified": "Not verified"
+  }
+}

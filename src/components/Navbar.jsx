@@ -1,13 +1,19 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { useTranslation } from "react-i18next";
 
 function Navbar() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
 
   const handleLogout = async () => {
     await logout();
     navigate("/");
+  };
+
+  const toggleLanguage = () => {
+    i18n.changeLanguage(i18n.language.startsWith("it") ? "en" : "it");
   };
 
   return (
@@ -18,42 +24,50 @@ function Navbar() {
 
       <div className="flex gap-4 items-center">
         <Link to="/" className="hover:underline">
-          Home
+          {t("navbar.home")}
         </Link>
         <Link to="/about" className="hover:underline">
-          About
+          {t("navbar.about")}
         </Link>
 
         {user ? (
           <>
             {user.role === "admin" && (
               <Link to="/admin" className="hover:underline">
-                Admin
+                {t("navbar.admin")}
               </Link>
             )}
             <Link to="/profile" className="hover:underline">
-              Profilo
+              {t("navbar.profile")}
             </Link>
             <button
               onClick={handleLogout}
               className="bg-white text-green-700 font-semibold px-4 py-1 rounded-full hover:bg-green-100 transition"
             >
-              Logout
+              {t("navbar.logout")}
             </button>
           </>
         ) : (
           <>
             <Link to="/login" className="hover:underline">
-              Login
+              {t("navbar.login")}
             </Link>
             <Link
               to="/register"
               className="bg-white text-green-700 font-semibold px-4 py-1 rounded-full hover:bg-green-100 transition"
             >
-              Registrati
+              {t("navbar.register")}
             </Link>
           </>
         )}
+
+        {/* Switch lingua */}
+        <button
+          onClick={toggleLanguage}
+          className="text-sm font-medium bg-green-600 hover:bg-green-500 px-3 py-1 rounded-full transition"
+        >
+          {i18n.language.startsWith("it") ? "🇮🇹 IT" : "🇬🇧 EN"}
+        </button>
       </div>
     </nav>
   );

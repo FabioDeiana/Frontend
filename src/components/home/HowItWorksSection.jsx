@@ -1,26 +1,30 @@
+import { useTranslation } from "react-i18next";
+
 function HowItWorksSection() {
+  const { t } = useTranslation();
+
   const steps = [
     {
       number: "1",
-      title: "Esplora la mappa",
-      description: "Trova attività eco-sostenibili vicino a te: ristoranti, negozi, mercati e molto altro.",
+      title: t("howItWorks.step1Title"),
+      description: t("howItWorks.step1Desc"),
     },
     {
       number: "2",
-      title: "Leggi le recensioni",
-      description: "Scopri cosa pensa la community su sostenibilità, accessibilità e opzioni alimentari.",
+      title: t("howItWorks.step2Title"),
+      description: t("howItWorks.step2Desc"),
     },
     {
       number: "3",
-      title: "Contribuisci",
-      description: "Registrati per lasciare recensioni o candida la tua attività se la gestisci tu.",
+      title: t("howItWorks.step3Title"),
+      description: t("howItWorks.step3Desc"),
     },
   ];
 
   return (
     <section className="py-16 px-6 bg-gray-50">
       <h2 className="text-3xl font-bold mb-12 text-center text-green-700">
-        Come funziona
+        {t("howItWorks.title")}
       </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
