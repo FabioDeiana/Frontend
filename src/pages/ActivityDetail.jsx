@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+import api from "../services/api";
 import { useAuth } from "../context/AuthContext";
 import { useTranslation } from "react-i18next";
 
 function ActivityDetail() {
   const { id } = useParams();
-  const { user, accessToken } = useAuth();
+  const { user } = useAuth();
   const { t } = useTranslation();
   const [activity, setActivity] = useState(null);
   const [reviews, setReviews] = useState([]);
@@ -25,9 +25,9 @@ function ActivityDetail() {
     async function fetchData() {
       try {
         const [activityRes, reviewsRes, menuRes] = await Promise.all([
-          axios.get(`http://localhost:5000/api/activities/${id}`),
-          axios.get(`http://localhost:5000/api/activities/${id}/reviews`),
-          axios.get(`http://localhost:5000/api/activities/${id}/menu`),
+          api.get(`/activities/${id}`),
+          api.get(`/activities/${id}/reviews`),
+          api.get(`/activities/${id}/menu`),
         ]);
         setActivity(activityRes.data);
         setReviews(reviewsRes.data);
@@ -60,11 +60,7 @@ function ActivityDetail() {
     setReviewLoading(true);
 
     try {
-      const response = await axios.post(
-        `http://localhost:5000/api/activities/${id}/reviews`,
-        reviewForm,
-        { headers: { Authorization: `Bearer ${accessToken}` } }
-      );
+      const response = await api.post(`/activities/${id}/reviews`, reviewForm);
       setReviews((prev) => [...prev, response.data.review]);
       setReviewForm({
         comment: "",
@@ -240,7 +236,7 @@ function ActivityDetail() {
                 <div className="flex justify-between items-center mb-2">
                   <span className="font-medium">{review.user?.name}</span>
                   <span className="text-xs text-gray-400">
-                    {new Date(review.createdAt).toLocaleDateString("it-IT")}
+                    {new Date(review.createdAt).toLocaleDateString()}
                   </span>
                 </div>
                 <div className="flex gap-4 text-sm text-gray-600 mb-2">

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import axios from "axios";
+import api from "../services/api";
 import { useAuth } from "../context/AuthContext";
 import { useTranslation } from "react-i18next";
 
@@ -23,11 +23,7 @@ function Login() {
     setLoading(true);
 
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/auth/login",
-        formData,
-        { withCredentials: true }
-      );
+      const response = await api.post("/auth/login", formData);
       login(response.data.user, response.data.accessToken);
       navigate("/");
     } catch (err) {

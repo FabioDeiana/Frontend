@@ -1,10 +1,10 @@
 import { useState } from "react";
-import axios from "axios";
+import api from "../../services/api";
 import { useAuth } from "../../context/AuthContext";
 import { useTranslation } from "react-i18next";
 
 function NewsletterSection() {
-  const { user, accessToken } = useAuth();
+  const { user } = useAuth();
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState(null);
   const [message, setMessage] = useState("");
@@ -17,7 +17,7 @@ function NewsletterSection() {
     setStatus(null);
 
     try {
-      await axios.post("http://localhost:5000/api/newsletter/subscribe", { email });
+      await api.post("/newsletter/subscribe", { email });
       setStatus("success");
       setMessage(t("newsletter.successSubscribe"));
       setEmail("");
@@ -34,11 +34,7 @@ function NewsletterSection() {
     setStatus(null);
 
     try {
-      await axios.put(
-        "http://localhost:5000/api/newsletter/preference",
-        { subscribed },
-        { headers: { Authorization: `Bearer ${accessToken}` } }
-      );
+      await api.put("/newsletter/preference", { subscribed });
       setStatus("success");
       setMessage(subscribed ? t("newsletter.successSubscribe") : t("newsletter.successUnsubscribe"));
     } catch (err) {

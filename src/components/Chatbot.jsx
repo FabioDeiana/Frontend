@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import api from "../services/api";
 import { useAuth } from "../context/AuthContext";
 import { useTranslation } from "react-i18next";
 
@@ -20,14 +20,11 @@ function Chatbot() {
     setLoading(true);
 
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/chat",
-        {
-          message: input,
-          preferences: user?.preferences || null,
-          language: i18n.language.startsWith("it") ? "italiano" : "english",
-        }
-      );
+      const response = await api.post("/chat", {
+        message: input,
+        preferences: user?.preferences || null,
+        language: i18n.language.startsWith("it") ? "italiano" : "english",
+      });
 
       setMessages((prev) => [
         ...prev,

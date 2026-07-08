@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import api from "../services/api";
 import { useAuth } from "../context/AuthContext";
 import { useTranslation } from "react-i18next";
 
@@ -37,7 +37,7 @@ const ALLERGEN_OPTIONS = [
 ];
 
 function Profile() {
-  const { user, accessToken, login } = useAuth();
+  const { user, updateUser } = useAuth();
   const { t } = useTranslation();
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -73,10 +73,7 @@ function Profile() {
   useEffect(() => {
     async function fetchReviews() {
       try {
-        const response = await axios.get(
-          "http://localhost:5000/api/auth/me/reviews",
-          { headers: { Authorization: `Bearer ${accessToken}` } }
-        );
+        const response = await api.get("/auth/me/reviews");
         setReviews(response.data);
       } catch (err) {
         // recensioni non disponibili, non blocchiamo la pagina
@@ -86,7 +83,7 @@ function Profile() {
     }
 
     fetchReviews();
-  }, [accessToken]);
+  }, []);
 
   const toggleOption = (field, value) => {
     setFormData((prev) => {
@@ -107,12 +104,11 @@ function Profile() {
     setSuccessMessage(null);
 
     try {
-      const response = await axios.put(
-        "http://localhost:5000/api/auth/me",
-        { name: formData.name, preferences: formData.preferences },
-        { headers: { Authorization: `Bearer ${accessToken}` } }
-      );
-      login(response.data.user, accessToken);
+      const response = await api.put("/auth/me", {
+        name: formData.name,
+        preferences: formData.preferences,
+      });
+      updateUser(response.data.user);
       setSuccessMessage(t("profile.saveSuccess"));
     } catch (err) {
       setError("Errore durante il salvataggio");
@@ -127,12 +123,8 @@ function Profile() {
     setNewsletterError(null);
 
     try {
-      const response = await axios.put(
-        "http://localhost:5000/api/newsletter/preference",
-        { subscribed },
-        { headers: { Authorization: `Bearer ${accessToken}` } }
-      );
-      login(response.data.user, accessToken);
+      const response = await api.put("/newsletter/preference", { subscribed });
+      updateUser(response.data.user);
       setNewsletterMessage(
         subscribed
           ? t("newsletter.successSubscribe")

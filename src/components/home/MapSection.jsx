@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../../services/api";
 import { MapContainer, TileLayer, Marker } from "react-leaflet";
+import { useTranslation } from "react-i18next";
 
 const CATEGORIES = [
   "ristorante",
@@ -35,6 +36,7 @@ function MapSection() {
   const [error, setError] = useState(null);
   const [showFilters, setShowFilters] = useState(false);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const [filters, setFilters] = useState({
     category: "",
@@ -59,17 +61,17 @@ function MapSection() {
         if (appliedFilters.diet.length > 0) params.diet = appliedFilters.diet.join(",");
         if (appliedFilters.accessibility.length > 0) params.accessibility = appliedFilters.accessibility.join(",");
 
-        const response = await axios.get("http://localhost:5000/api/activities", { params });
+        const response = await api.get("/activities", { params });
         setActivities(response.data);
       } catch (err) {
-        setError("Errore nel recupero delle attività");
+        setError(t("map.error"));
       } finally {
         setLoading(false);
       }
     }
 
     fetchActivities();
-  }, [appliedFilters]);
+  }, [appliedFilters, t]);
 
   const toggleOption = (field, value) => {
     setFilters((prev) => {
@@ -102,7 +104,7 @@ function MapSection() {
   return (
     <section id="map" className="py-16 px-6">
       <h2 className="text-3xl font-bold mb-6 text-center text-green-700">
-        Esplora le attività sulla mappa
+        {t("map.title")}
       </h2>
 
       {/* Bottone filtri */}
@@ -111,7 +113,7 @@ function MapSection() {
           onClick={() => setShowFilters((prev) => !prev)}
           className="flex items-center gap-2 bg-green-700 text-white px-5 py-2 rounded-full font-medium hover:bg-green-800 transition"
         >
-          Filtra
+          {t("map.filter")}
           {activeFiltersCount > 0 && (
             <span className="bg-white text-green-700 text-xs font-bold px-2 py-0.5 rounded-full">
               {activeFiltersCount}
@@ -127,7 +129,7 @@ function MapSection() {
           {/* Città */}
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Città
+              {t("map.city")}
             </label>
             <input
               type="text"
@@ -141,7 +143,7 @@ function MapSection() {
           {/* Categoria */}
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Categoria
+              {t("map.category")}
             </label>
             <div className="flex flex-wrap gap-2">
               {CATEGORIES.map((cat) => (
@@ -168,7 +170,7 @@ function MapSection() {
           {/* Dieta */}
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Opzioni dietetiche
+              {t("map.diet")}
             </label>
             <div className="flex flex-wrap gap-2">
               {DIET_OPTIONS.map((option) => (
@@ -190,7 +192,7 @@ function MapSection() {
           {/* Accessibilità */}
           <div className="mb-6">
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Accessibilità
+              {t("map.accessibility")}
             </label>
             <div className="flex flex-wrap gap-2">
               {ACCESSIBILITY_OPTIONS.map((option) => (
@@ -215,19 +217,19 @@ function MapSection() {
               onClick={handleApply}
               className="bg-green-700 text-white font-semibold px-5 py-2 rounded-lg hover:bg-green-800 transition"
             >
-              Applica filtri
+              {t("map.applyFilters")}
             </button>
             <button
               onClick={handleReset}
               className="bg-gray-100 text-gray-600 font-semibold px-5 py-2 rounded-lg hover:bg-gray-200 transition"
             >
-              Azzera
+              {t("map.reset")}
             </button>
           </div>
         </div>
       )}
 
-      {loading && <p className="text-center">Caricamento attività...</p>}
+      {loading && <p className="text-center">{t("map.loading")}</p>}
       {error && <p className="text-center text-red-600">{error}</p>}
 
       <div className="h-[500px] w-full max-w-5xl mx-auto rounded-xl overflow-hidden shadow-lg">

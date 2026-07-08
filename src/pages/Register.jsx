@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link, useSearchParams } from "react-router-dom";
-import axios from "axios";
+import api from "../services/api";
 import { useAuth } from "../context/AuthContext";
 import { useTranslation } from "react-i18next";
 
@@ -31,20 +31,12 @@ function Register() {
     setLoading(true);
 
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/auth/register",
-        formData,
-        { withCredentials: true }
-      );
+      const response = await api.post("/auth/register", formData);
 
       login(response.data.user, response.data.accessToken);
 
       if (newsletter) {
-        await axios.put(
-          "http://localhost:5000/api/newsletter/preference",
-          { subscribed: true },
-          { headers: { Authorization: `Bearer ${response.data.accessToken}` } }
-        );
+        await api.put("/newsletter/preference", { subscribed: true });
       }
 
       navigate("/");

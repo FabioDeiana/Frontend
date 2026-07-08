@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
-import { useAuth } from "../context/AuthContext";
+import api from "../services/api";
 import { useTranslation } from "react-i18next";
 
 function AdminDashboard() {
-  const { accessToken } = useAuth();
   const { t } = useTranslation();
   const [users, setUsers] = useState([]);
   const [activities, setActivities] = useState([]);
@@ -16,12 +14,8 @@ function AdminDashboard() {
     async function fetchData() {
       try {
         const [usersRes, activitiesRes] = await Promise.all([
-          axios.get("http://localhost:5000/api/admin/users", {
-            headers: { Authorization: `Bearer ${accessToken}` },
-          }),
-          axios.get("http://localhost:5000/api/activities", {
-            headers: { Authorization: `Bearer ${accessToken}` },
-          }),
+          api.get("/admin/users"),
+          api.get("/activities"),
         ]);
         setUsers(usersRes.data);
         setActivities(activitiesRes.data);
@@ -33,15 +27,11 @@ function AdminDashboard() {
     }
 
     fetchData();
-  }, [accessToken]);
+  }, []);
 
   const handleRoleChange = async (userId, newRole) => {
     try {
-      const response = await axios.put(
-        `http://localhost:5000/api/admin/users/${userId}`,
-        { role: newRole },
-        { headers: { Authorization: `Bearer ${accessToken}` } }
-      );
+      const response = await api.put(`/admin/users/${userId}`, { role: newRole });
       setUsers((prev) =>
         prev.map((u) => (u._id === userId ? response.data.user : u))
       );
@@ -52,11 +42,9 @@ function AdminDashboard() {
 
   const handleToggleActive = async (userId, currentStatus) => {
     try {
-      const response = await axios.put(
-        `http://localhost:5000/api/admin/users/${userId}`,
-        { isActive: !currentStatus },
-        { headers: { Authorization: `Bearer ${accessToken}` } }
-      );
+      const response = await api.put(`/admin/users/${userId}`, {
+        isActive: !currentStatus,
+      });
       setUsers((prev) =>
         prev.map((u) => (u._id === userId ? response.data.user : u))
       );
@@ -68,9 +56,7 @@ function AdminDashboard() {
   const handleDeleteUser = async (userId) => {
     if (!confirm("Sei sicuro di voler eliminare questo utente?")) return;
     try {
-      await axios.delete(`http://localhost:5000/api/admin/users/${userId}`, {
-        headers: { Authorization: `Bearer ${accessToken}` },
-      });
+      await api.delete(`/admin/users/${userId}`);
       setUsers((prev) => prev.filter((u) => u._id !== userId));
     } catch (err) {
       alert(err.response?.data?.message || "Errore durante l'eliminazione");
@@ -80,9 +66,7 @@ function AdminDashboard() {
   const handleDeleteActivity = async (activityId) => {
     if (!confirm("Sei sicuro di voler eliminare questa attività?")) return;
     try {
-      await axios.delete(`http://localhost:5000/api/activities/${activityId}`, {
-        headers: { Authorization: `Bearer ${accessToken}` },
-      });
+      await api.delete(`/activities/${activityId}`);
       setActivities((prev) => prev.filter((a) => a._id !== activityId));
     } catch (err) {
       alert("Errore durante l'eliminazione dell'attività");
