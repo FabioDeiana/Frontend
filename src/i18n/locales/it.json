@@ -119,6 +119,11 @@
   "cookie": {
     "title": "Cookie Policy"
   },
+  "notFound": {
+  "title": "Pagina non trovata",
+  "text": "La pagina che cerchi non esiste o è stata spostata.",
+  "backHome": "Torna alla Home"
+},
   "admin": {
     "title": "Dashboard Admin",
     "users": "Utenti",
@@ -131,5 +136,14 @@
     "delete": "Elimina",
     "verified": "Verificata",
     "notVerified": "Non verificata"
-  }
+  },
+  "categories": {
+  "ristorante": "Ristorante",
+  "negozio": "Negozio",
+  "mercato": "Mercato",
+  "alloggio": "Alloggio",
+  "punto_riciclo": "Punto riciclo",
+  "servizio": "Servizio",
+  "altro": "Altro"
+}
 }

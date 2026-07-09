@@ -10,6 +10,7 @@ import BusinessProfile from "../pages/BusinessProfile";
 import AdminDashboard from "../pages/AdminDashboard";
 import About from "../pages/About";
 import CookiePolicy from "../pages/CookiePolicy";
+import NotFound from "../pages/NotFound";
 
 function AppRouter() {
   return (
@@ -58,6 +59,8 @@ function AppRouter() {
       />
       <Route path="/about" element={<About />} />
       <Route path="/cookie-policy" element={<CookiePolicy />} />
+
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }

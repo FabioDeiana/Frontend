@@ -2,39 +2,9 @@ import { useState, useEffect } from "react";
 import api from "../services/api";
 import { useAuth } from "../context/AuthContext";
 import { useTranslation } from "react-i18next";
+import { DIET_OPTIONS, ACCESSIBILITY_OPTIONS, ALLERGEN_OPTIONS } from "../utils/constants";
 
-const DIET_OPTIONS = [
-  "vegetariano",
-  "vegano",
-  "senza glutine",
-  "senza lattosio",
-  "halal",
-  "kosher",
-];
 
-const ACCESSIBILITY_OPTIONS = [
-  "sedia a rotelle",
-  "ipovedente",
-  "ipoudente",
-  "difficolta motorie",
-];
-
-const ALLERGEN_OPTIONS = [
-  "glutine",
-  "lattosio",
-  "uova",
-  "pesce",
-  "crostacei",
-  "arachidi",
-  "soia",
-  "frutta a guscio",
-  "sedano",
-  "senape",
-  "sesamo",
-  "anidride solforosa",
-  "lupini",
-  "molluschi",
-];
 
 function Profile() {
   const { user, updateUser } = useAuth();

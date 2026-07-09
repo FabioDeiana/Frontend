@@ -119,6 +119,11 @@
   "cookie": {
     "title": "Cookie Policy"
   },
+  "notFound": {
+  "title": "Page not found",
+  "text": "The page you're looking for doesn't exist or has been moved.",
+  "backHome": "Back to Home"
+},
   "admin": {
     "title": "Admin Dashboard",
     "users": "Users",
@@ -131,5 +136,14 @@
     "delete": "Delete",
     "verified": "Verified",
     "notVerified": "Not verified"
-  }
+  },
+  "categories": {
+  "ristorante": "Restaurant",
+  "negozio": "Shop",
+  "mercato": "Market",
+  "alloggio": "Accommodation",
+  "punto_riciclo": "Recycling point",
+  "servizio": "Service",
+  "altro": "Other"
+}
 }

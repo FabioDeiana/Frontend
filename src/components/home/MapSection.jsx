@@ -4,31 +4,20 @@ import api from "../../services/api";
 import { MapContainer, TileLayer, Marker } from "react-leaflet";
 import { useTranslation } from "react-i18next";
 
-const CATEGORIES = [
-  "ristorante",
-  "negozio",
-  "mercato",
-  "alloggio",
-  "punto_riciclo",
-  "servizio",
-  "altro",
-];
+import L from "leaflet";
+import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
+import markerIcon from "leaflet/dist/images/marker-icon.png";
+import markerShadow from "leaflet/dist/images/marker-shadow.png";
+import { CATEGORIES, DIET_OPTIONS, ACCESSIBILITY_OPTIONS } from "../../utils/constants";
 
-const DIET_OPTIONS = [
-  "vegetariano",
-  "vegano",
-  "senza glutine",
-  "senza lattosio",
-  "halal",
-  "kosher",
-];
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: markerIcon2x,
+  iconUrl: markerIcon,
+  shadowUrl: markerShadow,
+});
 
-const ACCESSIBILITY_OPTIONS = [
-  "sedia a rotelle",
-  "ipovedente",
-  "ipoudente",
-  "difficolta motorie",
-];
+
 
 function MapSection() {
   const [activities, setActivities] = useState([]);
@@ -161,7 +150,7 @@ function MapSection() {
                       : "bg-white text-gray-600 border-gray-300 hover:border-green-400"
                   }`}
                 >
-                  {cat}
+                  {t(`categories.${cat}`)}
                 </button>
               ))}
             </div>

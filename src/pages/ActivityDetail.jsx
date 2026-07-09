@@ -90,7 +90,7 @@ function ActivityDetail() {
 
       <div className="mb-6">
         <span className="text-sm bg-green-100 text-green-700 font-medium px-3 py-1 rounded-full">
-          {activity.category}
+          {t(`categories.${activity.category}`)}
         </span>
         {activity.verified && (
           <span className="ml-2 text-sm bg-blue-100 text-blue-700 font-medium px-3 py-1 rounded-full">

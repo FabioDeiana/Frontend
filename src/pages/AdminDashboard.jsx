@@ -184,7 +184,7 @@ function AdminDashboard() {
             >
               <div>
                 <p className="font-medium">{a.name}</p>
-                <p className="text-sm text-gray-500">{a.city} — {a.category}</p>
+                <p className="text-sm text-gray-500">{a.city} — {t(`categories.${a.category}`)}</p>
                 <span
                   className={`inline-block text-xs font-medium px-2 py-0.5 rounded-full mt-1 ${
                     a.verified
