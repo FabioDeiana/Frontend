@@ -27,7 +27,8 @@
     "diet": "Dietary options",
     "accessibility": "Accessibility",
     "applyFilters": "Apply filters",
-    "reset": "Reset"
+    "reset": "Reset",
+    "addActivity": "Add activity"
   },
   "howItWorks": {
     "title": "How it works",
@@ -145,5 +146,25 @@
   "punto_riciclo": "Recycling point",
   "servizio": "Service",
   "altro": "Other"
+},
+"addActivity": {
+  "title": "Suggest a new activity",
+  "subtitle": "Know an eco-friendly business that's not on GreenMap yet? Add it! It will be visible after our team's approval.",
+  "name": "Activity name",
+  "description": "Description",
+  "category": "Category",
+  "address": "Address",
+  "city": "City",
+  "findOnMap": "Find on map",
+  "searching": "Searching...",
+  "notFound": "Address not found. Try being more specific or move the marker manually.",
+  "dragHint": "Drag the marker to adjust the position",
+  "dietTags": "Dietary options",
+  "accessibilityTags": "Accessibility",
+  "submit": "Suggest activity",
+  "submitting": "Submitting...",
+  "success": "Activity suggested successfully! It will be visible after approval.",
+  "error": "Error during submission. Please try again.",
+  "missingCoordinates": "Before submitting, find the location on the map."
 }
 }

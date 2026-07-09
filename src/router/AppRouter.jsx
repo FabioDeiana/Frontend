@@ -11,6 +11,7 @@ import AdminDashboard from "../pages/AdminDashboard";
 import About from "../pages/About";
 import CookiePolicy from "../pages/CookiePolicy";
 import NotFound from "../pages/NotFound";
+import AddActivity from "../pages/AddActivity";
 
 function AppRouter() {
   return (
@@ -57,6 +58,16 @@ function AppRouter() {
           </ProtectedRoute>
         }
       />
+
+      <Route
+        path="/add-activity"
+        element={
+          <ProtectedRoute>
+            <AddActivity />
+          </ProtectedRoute>
+        }
+      />
+
       <Route path="/about" element={<About />} />
       <Route path="/cookie-policy" element={<CookiePolicy />} />
 

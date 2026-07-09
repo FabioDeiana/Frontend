@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
 import { MapContainer, TileLayer, Marker, Tooltip } from "react-leaflet";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 import L from "leaflet";
 import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
@@ -28,6 +30,7 @@ function MapSection() {
   const [showFilters, setShowFilters] = useState(false);
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { user } = useAuth();
 
   const [filters, setFilters] = useState({
     category: "",
@@ -101,7 +104,7 @@ function MapSection() {
       </h2>
 
       {/* Bottone filtri */}
-      <div className="flex justify-center mb-6">
+      <div className="flex justify-center gap-3 mb-6">
         <button
           onClick={() => setShowFilters((prev) => !prev)}
           className="flex items-center gap-2 bg-green-700 text-white px-5 py-2 rounded-full font-medium hover:bg-green-800 transition"
@@ -113,6 +116,15 @@ function MapSection() {
             </span>
           )}
         </button>
+
+        {user && (
+          <Link
+            to="/add-activity"
+            className="flex items-center gap-2 bg-white text-green-700 border border-green-700 px-5 py-2 rounded-full font-medium hover:bg-green-50 transition"
+          >
+            + {t("map.addActivity")}
+          </Link>
+        )}
       </div>
 
       {/* Pannello filtri */}

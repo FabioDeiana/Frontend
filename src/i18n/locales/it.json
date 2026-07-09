@@ -27,7 +27,8 @@
     "diet": "Opzioni dietetiche",
     "accessibility": "Accessibilità",
     "applyFilters": "Applica filtri",
-    "reset": "Azzera"
+    "reset": "Azzera",
+    "addActivity": "Aggiungi attività"
   },
   "howItWorks": {
     "title": "Come funziona",
@@ -145,5 +146,25 @@
   "punto_riciclo": "Punto riciclo",
   "servizio": "Servizio",
   "altro": "Altro"
+},
+"addActivity": {
+  "title": "Proponi una nuova attività",
+  "subtitle": "Conosci un'attività eco-friendly che non è ancora su GreenMap? Aggiungila! Sarà visibile dopo l'approvazione del nostro team.",
+  "name": "Nome attività",
+  "description": "Descrizione",
+  "category": "Categoria",
+  "address": "Indirizzo",
+  "city": "Città",
+  "findOnMap": "Trova sulla mappa",
+  "searching": "Ricerca in corso...",
+  "notFound": "Indirizzo non trovato. Prova ad essere più specifico o sposta manualmente il marker.",
+  "dragHint": "Trascina il marker per aggiustare la posizione",
+  "dietTags": "Opzioni dietetiche",
+  "accessibilityTags": "Accessibilità",
+  "submit": "Proponi attività",
+  "submitting": "Invio in corso...",
+  "success": "Attività proposta con successo! Sarà visibile dopo l'approvazione.",
+  "error": "Errore durante l'invio. Riprova.",
+  "missingCoordinates": "Prima di inviare, trova la posizione sulla mappa."
 }
 }
