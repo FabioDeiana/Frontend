@@ -1,14 +1,18 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
-import { MapContainer, TileLayer, Marker } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Tooltip } from "react-leaflet";
 import { useTranslation } from "react-i18next";
 
 import L from "leaflet";
 import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
-import { CATEGORIES, DIET_OPTIONS, ACCESSIBILITY_OPTIONS } from "../../utils/constants";
+import {
+  CATEGORIES,
+  DIET_OPTIONS,
+  ACCESSIBILITY_OPTIONS,
+} from "../../utils/constants";
 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -16,8 +20,6 @@ L.Icon.Default.mergeOptions({
   iconUrl: markerIcon,
   shadowUrl: markerShadow,
 });
-
-
 
 function MapSection() {
   const [activities, setActivities] = useState([]);
@@ -47,8 +49,10 @@ function MapSection() {
         const params = {};
         if (appliedFilters.category) params.category = appliedFilters.category;
         if (appliedFilters.city) params.city = appliedFilters.city;
-        if (appliedFilters.diet.length > 0) params.diet = appliedFilters.diet.join(",");
-        if (appliedFilters.accessibility.length > 0) params.accessibility = appliedFilters.accessibility.join(",");
+        if (appliedFilters.diet.length > 0)
+          params.diet = appliedFilters.diet.join(",");
+        if (appliedFilters.accessibility.length > 0)
+          params.accessibility = appliedFilters.accessibility.join(",");
 
         const response = await api.get("/activities", { params });
         setActivities(response.data);
@@ -114,7 +118,6 @@ function MapSection() {
       {/* Pannello filtri */}
       {showFilters && (
         <div className="max-w-2xl mx-auto bg-white border border-gray-200 rounded-2xl p-6 mb-6 shadow-sm">
-
           {/* Città */}
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -240,7 +243,31 @@ function MapSection() {
               eventHandlers={{
                 click: () => navigate(`/activity/${activity._id}`),
               }}
-            />
+            >
+              <Tooltip direction="top" offset={[-15, -10]} opacity={1}>
+                <div className="w-48">
+                  <p className="font-semibold text-green-700">
+                    {activity.name}
+                  </p>
+                  <p className="text-xs text-gray-500 mb-1">
+                    {t(`categories.${activity.category}`)} · {activity.city}
+                  </p>
+                  <p className="text-xs text-gray-600 line-clamp-2">
+                    {activity.description}
+                  </p>
+                  <div className="flex flex-wrap gap-1 mt-1">
+                    {activity.tags?.diet?.slice(0, 3).map((tag) => (
+                      <span
+                        key={tag}
+                        className="bg-green-50 text-green-700 text-[10px] px-1.5 py-0.5 rounded-full"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </Tooltip>
+            </Marker>
           ))}
         </MapContainer>
       </div>
