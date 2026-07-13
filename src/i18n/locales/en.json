@@ -156,6 +156,23 @@
     "servizio": "Service",
     "altro": "Other"
   },
+  "footer": {
+    "tagline": "The collaborative map of eco-friendly, accessible businesses that care about everyone's needs.",
+    "explore": "Explore",
+    "account": "Account",
+    "info": "Info",
+    "rights": "All rights reserved",
+    "madeWith": "Made with 💚 by Fabio Deiana"
+  },
+  "chatbot": {
+    "title": "GreenMap Assistant",
+    "subtitle": "Powered by AI",
+    "welcome": "Hi! How can I help you find eco-friendly activities?",
+    "placeholder": "Type a message...",
+    "button": "Ask GreenMap",
+    "hint": "Looking for a place? Ask me! 👋",
+    "error": "Error in response. Please try again."
+  },
   "addActivity": {
     "title": "Suggest a new activity",
     "subtitle": "Know an eco-friendly business that's not on GreenMap yet? Add it! It will be visible after our team's approval.",

@@ -156,6 +156,23 @@
     "servizio": "Servizio",
     "altro": "Altro"
   },
+  "footer": {
+    "tagline": "La mappa collaborativa delle attività eco-friendly, accessibili e attente alle esigenze di tutti.",
+    "explore": "Esplora",
+    "account": "Account",
+    "info": "Informazioni",
+    "rights": "Tutti i diritti riservati",
+    "madeWith": "Fatto con 💚 da Fabio Deiana"
+  },
+  "chatbot": {
+    "title": "GreenMap Assistant",
+    "subtitle": "Powered by AI",
+    "welcome": "Ciao! Come posso aiutarti a trovare attività eco-friendly?",
+    "placeholder": "Scrivi un messaggio...",
+    "button": "Chiedi a GreenMap",
+    "hint": "Cerchi un posto? Chiedimi! 👋",
+    "error": "Errore nella risposta. Riprova."
+  },
   "addActivity": {
     "title": "Proponi una nuova attività",
     "subtitle": "Conosci un'attività eco-friendly che non è ancora su GreenMap? Aggiungila! Sarà visibile dopo l'approvazione del nostro team.",
