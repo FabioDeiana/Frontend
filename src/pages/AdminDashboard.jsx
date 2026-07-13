@@ -6,6 +6,7 @@ function AdminDashboard() {
   const { t } = useTranslation();
   const [users, setUsers] = useState([]);
   const [activities, setActivities] = useState([]);
+  const [pendingActivities, setPendingActivities] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [activeTab, setActiveTab] = useState("users");
@@ -13,12 +14,14 @@ function AdminDashboard() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const [usersRes, activitiesRes] = await Promise.all([
+        const [usersRes, activitiesRes, pendingRes] = await Promise.all([
           api.get("/admin/users"),
           api.get("/activities"),
+          api.get("/activities/pending"),
         ]);
         setUsers(usersRes.data);
         setActivities(activitiesRes.data);
+        setPendingActivities(pendingRes.data);
       } catch (err) {
         setError("Errore nel caricamento dei dati");
       } finally {
@@ -73,6 +76,18 @@ function AdminDashboard() {
     }
   };
 
+  const handleModerate = async (activityId, status) => {
+    try {
+      const response = await api.put(`/activities/${activityId}/moderate`, { status });
+      setPendingActivities((prev) => prev.filter((a) => a._id !== activityId));
+      if (status === "approved") {
+        setActivities((prev) => [...prev, response.data.activity]);
+      }
+    } catch (err) {
+      alert("Errore durante la moderazione");
+    }
+  };
+
   if (loading) return <p className="text-center py-20">Caricamento...</p>;
   if (error) return <p className="text-center py-20 text-red-600">{error}</p>;
 
@@ -115,6 +130,21 @@ function AdminDashboard() {
           }`}
         >
           {t("admin.activities")}
+        </button>
+        <button
+          onClick={() => setActiveTab("pending")}
+          className={`px-5 py-2 rounded-full font-medium transition ${
+            activeTab === "pending"
+              ? "bg-green-700 text-white"
+              : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+          }`}
+        >
+          {t("admin.pending")}
+          {pendingActivities.length > 0 && (
+            <span className="ml-2 bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">
+              {pendingActivities.length}
+            </span>
+          )}
         </button>
       </div>
 
@@ -206,6 +236,63 @@ function AdminDashboard() {
               </div>
             </div>
           ))}
+        </div>
+      )}
+
+      {/* Tab In attesa */}
+      {activeTab === "pending" && (
+        <div className="flex flex-col gap-4">
+          {pendingActivities.length === 0 ? (
+            <p className="text-gray-500 text-sm">{t("admin.noPending")}</p>
+          ) : (
+            pendingActivities.map((a) => (
+              <div
+                key={a._id}
+                className="bg-white border border-gray-100 rounded-2xl p-4"
+              >
+                <div className="mb-3">
+                  <p className="font-medium">{a.name}</p>
+                  <p className="text-sm text-gray-500">
+                    {a.city} — {t(`categories.${a.category}`)}
+                  </p>
+                  <p className="text-sm text-gray-600 mt-1">{a.description}</p>
+                  <p className="text-xs text-gray-400 mt-1">{a.address}</p>
+                  {a.createdBy && (
+                    <p className="text-xs text-gray-400 mt-1">
+                      {t("admin.proposedBy")}: {a.createdBy.name} ({a.createdBy.email})
+                    </p>
+                  )}
+                  <div className="flex flex-wrap gap-1 mt-2">
+                    {a.tags?.diet?.map((tag) => (
+                      <span key={tag} className="bg-green-50 text-green-700 text-xs px-2 py-0.5 rounded-full">
+                        {tag}
+                      </span>
+                    ))}
+                    {a.tags?.accessibility?.map((tag) => (
+                      <span key={tag} className="bg-blue-50 text-blue-700 text-xs px-2 py-0.5 rounded-full">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => handleModerate(a._id, "approved")}
+                    className="text-sm px-4 py-1.5 rounded-lg font-medium bg-green-100 text-green-700 hover:bg-green-200 transition"
+                  >
+                    ✓ {t("admin.approve")}
+                  </button>
+                  <button
+                    onClick={() => handleModerate(a._id, "rejected")}
+                    className="text-sm px-4 py-1.5 rounded-lg font-medium bg-red-100 text-red-600 hover:bg-red-200 transition"
+                  >
+                    ✕ {t("admin.reject")}
+                  </button>
+                </div>
+              </div>
+            ))
+          )}
         </div>
       )}
     </div>

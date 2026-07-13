@@ -121,10 +121,10 @@
     "title": "Cookie Policy"
   },
   "notFound": {
-  "title": "Page not found",
-  "text": "The page you're looking for doesn't exist or has been moved.",
-  "backHome": "Back to Home"
-},
+    "title": "Page not found",
+    "text": "The page you're looking for doesn't exist or has been moved.",
+    "backHome": "Back to Home"
+  },
   "admin": {
     "title": "Admin Dashboard",
     "users": "Users",
@@ -136,35 +136,41 @@
     "enable": "Enable",
     "delete": "Delete",
     "verified": "Verified",
-    "notVerified": "Not verified"
+    "notVerified": "Not verified",
+    "pending": "Pending",
+    "approve": "Approve",
+    "reject": "Reject",
+    "proposedBy": "Proposed by",
+    "noPending": "No activities awaiting approval."
   },
   "categories": {
-  "ristorante": "Restaurant",
-  "negozio": "Shop",
-  "mercato": "Market",
-  "alloggio": "Accommodation",
-  "punto_riciclo": "Recycling point",
-  "servizio": "Service",
-  "altro": "Other"
-},
-"addActivity": {
-  "title": "Suggest a new activity",
-  "subtitle": "Know an eco-friendly business that's not on GreenMap yet? Add it! It will be visible after our team's approval.",
-  "name": "Activity name",
-  "description": "Description",
-  "category": "Category",
-  "address": "Address",
-  "city": "City",
-  "findOnMap": "Find on map",
-  "searching": "Searching...",
-  "notFound": "Address not found. Try being more specific or move the marker manually.",
-  "dragHint": "Drag the marker to adjust the position",
-  "dietTags": "Dietary options",
-  "accessibilityTags": "Accessibility",
-  "submit": "Suggest activity",
-  "submitting": "Submitting...",
-  "success": "Activity suggested successfully! It will be visible after approval.",
-  "error": "Error during submission. Please try again.",
-  "missingCoordinates": "Before submitting, find the location on the map."
-}
+    "ristorante": "Restaurant",
+    "negozio": "Shop",
+    "mercato": "Market",
+    "alloggio": "Accommodation",
+    "punto_riciclo": "Recycling point",
+    "servizio": "Service",
+    "altro": "Other"
+  },
+  "addActivity": {
+    "title": "Suggest a new activity",
+    "subtitle": "Know an eco-friendly business that's not on GreenMap yet? Add it! It will be visible after our team's approval.",
+    "name": "Activity name",
+    "description": "Description",
+    "category": "Category",
+    "address": "Address",
+    "city": "City",
+    "findOnMap": "Find on map",
+    "searching": "Searching...",
+    "notFound": "Address not found. Try being more specific or move the marker manually.",
+    "dragHint": "Drag the marker to adjust the position",
+    "dietTags": "Dietary options",
+    "accessibilityTags": "Accessibility",
+    "submit": "Suggest activity",
+    "submitting": "Submitting...",
+    "success": "Activity suggested successfully! It will be visible after approval.",
+    "error": "Error during submission. Please try again.",
+    "missingCoordinates": "Before submitting, find the location on the map.",
+    "missingCategory": "Please select a category."
+  }
 }
