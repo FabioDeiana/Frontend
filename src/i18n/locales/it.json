@@ -94,7 +94,11 @@
     "diet": "Opzioni dietetiche",
     "comment": "Commento",
     "submitReview": "Invia recensione",
-    "submitting": "Invio in corso..."
+    "submitting": "Invio in corso...",
+    "editReview": "Modifica la tua recensione",
+    "updateReview": "Aggiorna recensione",
+    "reviewCreated": "Recensione pubblicata!",
+    "reviewUpdated": "Recensione aggiornata!"
   },
   "profile": {
     "title": "Il mio profilo",

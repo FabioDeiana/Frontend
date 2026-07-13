@@ -94,7 +94,11 @@
     "diet": "Dietary options",
     "comment": "Comment",
     "submitReview": "Submit review",
-    "submitting": "Submitting..."
+    "submitting": "Submitting...",
+    "editReview": "Edit your review",
+    "updateReview": "Update review",
+    "reviewCreated": "Review published!",
+    "reviewUpdated": "Review updated!"
   },
   "profile": {
     "title": "My profile",

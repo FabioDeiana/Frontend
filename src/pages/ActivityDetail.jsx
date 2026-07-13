@@ -19,7 +19,23 @@ function ActivityDetail() {
     ratings: { ecoFriendliness: 5, accessibility: 5, dietOptions: 5 },
   });
   const [reviewError, setReviewError] = useState(null);
+  const [reviewSuccess, setReviewSuccess] = useState(null);
   const [reviewLoading, setReviewLoading] = useState(false);
+
+  // Cerca la recensione già lasciata dall'utente loggato (se esiste)
+  const userId = user?.id || user?._id;
+  const myReview = user
+    ? reviews.find((r) => (r.user?._id || r.user) === userId)
+    : null;
+
+  const averages =
+    reviews.length > 0
+      ? {
+          eco: (reviews.reduce((sum, r) => sum + (r.ratings?.ecoFriendliness || 0), 0) / reviews.length).toFixed(1),
+          accessibility: (reviews.reduce((sum, r) => sum + (r.ratings?.accessibility || 0), 0) / reviews.length).toFixed(1),
+          diet: (reviews.reduce((sum, r) => sum + (r.ratings?.dietOptions || 0), 0) / reviews.length).toFixed(1),
+        }
+      : null;
 
   useEffect(() => {
     async function fetchData() {
@@ -42,6 +58,20 @@ function ActivityDetail() {
     fetchData();
   }, [id]);
 
+  // Se l'utente ha già una recensione, precarica i suoi valori nel form
+  useEffect(() => {
+    if (myReview) {
+      setReviewForm({
+        comment: myReview.comment || "",
+        ratings: {
+          ecoFriendliness: myReview.ratings?.ecoFriendliness || 5,
+          accessibility: myReview.ratings?.accessibility || 5,
+          dietOptions: myReview.ratings?.dietOptions || 5,
+        },
+      });
+    }
+  }, [myReview?._id]);
+
   const handleReviewChange = (e) => {
     const { name, value } = e.target;
     if (["ecoFriendliness", "accessibility", "dietOptions"].includes(name)) {
@@ -57,15 +87,30 @@ function ActivityDetail() {
   const handleReviewSubmit = async (e) => {
     e.preventDefault();
     setReviewError(null);
+    setReviewSuccess(null);
     setReviewLoading(true);
 
     try {
-      const response = await api.post(`/activities/${id}/reviews`, reviewForm);
-      setReviews((prev) => [...prev, response.data.review]);
-      setReviewForm({
-        comment: "",
-        ratings: { ecoFriendliness: 5, accessibility: 5, dietOptions: 5 },
-      });
+      if (myReview) {
+        // Modifica recensione esistente
+        const response = await api.put(
+          `/activities/${id}/reviews/${myReview._id}`,
+          reviewForm
+        );
+        setReviews((prev) =>
+          prev.map((r) =>
+            r._id === myReview._id
+              ? { ...response.data.review, user: myReview.user }
+              : r
+          )
+        );
+        setReviewSuccess(t("activity.reviewUpdated"));
+      } else {
+        // Nuova recensione
+        const response = await api.post(`/activities/${id}/reviews`, reviewForm);
+        setReviews((prev) => [...prev, response.data.review]);
+        setReviewSuccess(t("activity.reviewCreated"));
+      }
     } catch (err) {
       setReviewError(err.response?.data?.message || "Errore nell'invio della recensione");
     } finally {
@@ -99,6 +144,17 @@ function ActivityDetail() {
         )}
         <h1 className="text-3xl font-bold mt-3 mb-1">{activity.name}</h1>
         <p className="text-gray-500">{activity.address}, {activity.city}</p>
+
+        {averages && (
+          <div className="flex flex-wrap gap-4 mt-3 bg-green-50 rounded-xl px-4 py-3 text-sm">
+            <span className="font-medium">🌿 {averages.eco}/5</span>
+            <span className="font-medium">♿ {averages.accessibility}/5</span>
+            <span className="font-medium">🥗 {averages.diet}/5</span>
+            <span className="text-gray-400">
+              ({reviews.length} {t("activity.reviews").toLowerCase()})
+            </span>
+          </div>
+        )}
       </div>
 
       <p className="text-gray-700 mb-8">{activity.description}</p>
@@ -167,11 +223,18 @@ function ActivityDetail() {
 
       {user && (
         <div className="mb-8 bg-green-50 rounded-2xl p-6">
-          <h2 className="text-lg font-semibold mb-4">{t("activity.leaveReview")}</h2>
+          <h2 className="text-lg font-semibold mb-4">
+            {myReview ? t("activity.editReview") : t("activity.leaveReview")}
+          </h2>
 
           {reviewError && (
             <p className="bg-red-100 text-red-700 text-sm px-4 py-2 rounded-lg mb-4">
               {reviewError}
+            </p>
+          )}
+          {reviewSuccess && (
+            <p className="bg-green-100 text-green-700 text-sm px-4 py-2 rounded-lg mb-4">
+              {reviewSuccess}
             </p>
           )}
 
@@ -216,7 +279,11 @@ function ActivityDetail() {
               disabled={reviewLoading}
               className="bg-green-700 text-white font-semibold py-2 rounded-lg hover:bg-green-800 transition disabled:opacity-50"
             >
-              {reviewLoading ? t("activity.submitting") : t("activity.submitReview")}
+              {reviewLoading
+                ? t("activity.submitting")
+                : myReview
+                ? t("activity.updateReview")
+                : t("activity.submitReview")}
             </button>
           </form>
         </div>
