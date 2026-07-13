@@ -1,1 +1,40 @@
 @import "tailwindcss";
+
+@theme {
+  /* Palette GreenMap - Mediterranea */
+  --color-ocean-50: #EEF4FB;
+  --color-ocean-100: #D9E6F5;
+  --color-ocean-200: #B0CCE9;
+  --color-ocean-400: #4A7BB0;
+  --color-ocean-600: #2C5580;
+  --color-ocean-700: #1E3A5F;
+  --color-ocean-800: #162B47;
+
+  --color-coral-100: #FFE8E0;
+  --color-coral-300: #FFB59E;
+  --color-coral-500: #FF7A55;
+  --color-coral-600: #F05A32;
+
+  --color-sun-100: #FFF6D6;
+  --color-sun-300: #FFE58A;
+  --color-sun-400: #FFD54D;
+
+  --color-mint-100: #E0F5EC;
+  --color-mint-500: #34C48E;
+  --color-mint-700: #1F8A62;
+
+  /* Font */
+  --font-display: "Plus Jakarta Sans", sans-serif;
+  --font-sans: "Inter", sans-serif;
+}
+
+body {
+  background-color: #FFFFFF;
+  color: var(--color-ocean-800);
+  font-family: var(--font-sans);
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+}

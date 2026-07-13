@@ -99,19 +99,19 @@ function MapSection() {
 
   return (
     <section id="map" className="py-16 px-6">
-      <h2 className="text-3xl font-bold mb-6 text-center text-green-700">
-        {t("map.title")}
+      <h2 className="text-3xl font-bold mb-6 text-center text-ocean-700">
+        🗺️ {t("map.title")}
       </h2>
 
       {/* Bottone filtri */}
       <div className="flex justify-center gap-3 mb-6">
         <button
           onClick={() => setShowFilters((prev) => !prev)}
-          className="flex items-center gap-2 bg-green-700 text-white px-5 py-2 rounded-full font-medium hover:bg-green-800 transition"
+          className="flex items-center gap-2 bg-ocean-700 text-white px-5 py-2 rounded-full font-medium hover:bg-ocean-800 transition"
         >
           {t("map.filter")}
           {activeFiltersCount > 0 && (
-            <span className="bg-white text-green-700 text-xs font-bold px-2 py-0.5 rounded-full">
+            <span className="bg-white text-ocean-700 text-xs font-bold px-2 py-0.5 rounded-full">
               {activeFiltersCount}
             </span>
           )}
@@ -120,7 +120,7 @@ function MapSection() {
         {user && (
           <Link
             to="/add-activity"
-            className="flex items-center gap-2 bg-white text-green-700 border border-green-700 px-5 py-2 rounded-full font-medium hover:bg-green-50 transition"
+            className="flex items-center gap-2 bg-white text-ocean-700 border border-ocean-700 px-5 py-2 rounded-full font-medium hover:bg-ocean-50 transition"
           >
             + {t("map.addActivity")}
           </Link>
@@ -140,7 +140,7 @@ function MapSection() {
               value={filters.city}
               onChange={(e) => setFilters({ ...filters, city: e.target.value })}
               placeholder="es. Roma"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-ocean-400"
             />
           </div>
 
@@ -161,8 +161,8 @@ function MapSection() {
                   }
                   className={`px-3 py-1 rounded-full text-sm font-medium border transition ${
                     filters.category === cat
-                      ? "bg-green-700 text-white border-green-700"
-                      : "bg-white text-gray-600 border-gray-300 hover:border-green-400"
+                      ? "bg-ocean-700 text-white border-ocean-700"
+                      : "bg-white text-gray-600 border-gray-300 hover:border-ocean-200"
                   }`}
                 >
                   {t(`categories.${cat}`)}
@@ -183,8 +183,8 @@ function MapSection() {
                   onClick={() => toggleOption("diet", option)}
                   className={`px-3 py-1 rounded-full text-sm font-medium border transition ${
                     filters.diet.includes(option)
-                      ? "bg-green-700 text-white border-green-700"
-                      : "bg-white text-gray-600 border-gray-300 hover:border-green-400"
+                      ? "bg-ocean-700 text-white border-ocean-700"
+                      : "bg-white text-gray-600 border-gray-300 hover:border-ocean-200"
                   }`}
                 >
                   {option}
@@ -205,8 +205,8 @@ function MapSection() {
                   onClick={() => toggleOption("accessibility", option)}
                   className={`px-3 py-1 rounded-full text-sm font-medium border transition ${
                     filters.accessibility.includes(option)
-                      ? "bg-blue-600 text-white border-blue-600"
-                      : "bg-white text-gray-600 border-gray-300 hover:border-blue-400"
+                      ? "bg-ocean-600 text-white border-ocean-600"
+                      : "bg-white text-gray-600 border-gray-300 hover:border-ocean-400"
                   }`}
                 >
                   {option}
@@ -219,13 +219,13 @@ function MapSection() {
           <div className="flex gap-3">
             <button
               onClick={handleApply}
-              className="bg-green-700 text-white font-semibold px-5 py-2 rounded-lg hover:bg-green-800 transition"
+              className="bg-ocean-700 text-white font-semibold px-5 py-2 rounded-lg hover:bg-ocean-800 transition"
             >
               {t("map.applyFilters")}
             </button>
             <button
               onClick={handleReset}
-              className="bg-gray-100 text-gray-600 font-semibold px-5 py-2 rounded-lg hover:bg-gray-200 transition"
+              className="bg-ocean-50 text-gray-600 font-semibold px-5 py-2 rounded-lg hover:bg-gray-200 transition"
             >
               {t("map.reset")}
             </button>
@@ -258,7 +258,7 @@ function MapSection() {
             >
               <Tooltip direction="top" offset={[-15, -10]} opacity={1}>
                 <div className="w-48">
-                  <p className="font-semibold text-green-700">
+                  <p className="font-semibold text-ocean-700">
                     {activity.name}
                   </p>
                   <p className="text-xs text-gray-500 mb-1">
@@ -271,7 +271,7 @@ function MapSection() {
                     {activity.tags?.diet?.slice(0, 3).map((tag) => (
                       <span
                         key={tag}
-                        className="bg-green-50 text-green-700 text-[10px] px-1.5 py-0.5 rounded-full"
+                        className="bg-ocean-50 text-ocean-700 text-[10px] px-1.5 py-0.5 rounded-full"
                       >
                         {tag}
                       </span>

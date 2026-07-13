@@ -48,9 +48,9 @@ function Register() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-ocean-50 flex items-center justify-center px-4">
       <div className="bg-white rounded-2xl shadow-md w-full max-w-md p-8">
-        <h1 className="text-2xl font-bold text-green-700 mb-2 text-center">
+        <h1 className="text-2xl font-bold text-ocean-700 mb-2 text-center">
           {isOwner ? t("register.titleOwner") : t("register.title")}
         </h1>
         <p className="text-sm text-gray-500 text-center mb-6">
@@ -74,7 +74,7 @@ function Register() {
               value={formData.name}
               onChange={handleChange}
               required
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-ocean-400"
             />
           </div>
 
@@ -88,7 +88,7 @@ function Register() {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-ocean-400"
             />
           </div>
 
@@ -102,17 +102,17 @@ function Register() {
               value={formData.password}
               onChange={handleChange}
               required
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-ocean-400"
             />
           </div>
 
-          <div className="bg-green-50 rounded-xl p-4">
+          <div className="bg-ocean-50 rounded-xl p-4">
             <label className="flex items-start gap-3 cursor-pointer">
               <input
                 type="checkbox"
                 checked={newsletter}
                 onChange={(e) => setNewsletter(e.target.checked)}
-                className="mt-0.5 accent-green-600"
+                className="mt-0.5 accent-ocean-600"
               />
               <div>
                 <p className="text-sm font-medium text-gray-700">
@@ -128,7 +128,7 @@ function Register() {
           <button
             type="submit"
             disabled={loading}
-            className="bg-green-700 text-white font-semibold py-2 rounded-lg hover:bg-green-800 transition disabled:opacity-50"
+            className="bg-coral-500 hover:bg-coral-600"
           >
             {loading ? t("register.loading") : t("register.submit")}
           </button>
@@ -143,7 +143,7 @@ function Register() {
 
         <p className="text-sm text-center text-gray-600 mt-4">
           {t("register.hasAccount")}{" "}
-          <Link to="/login" className="text-green-700 font-medium hover:underline">
+          <Link to="/login" className="text-ocean-700 font-medium hover:underline">
             {t("register.login")}
           </Link>
         </p>

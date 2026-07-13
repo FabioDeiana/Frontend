@@ -93,18 +93,18 @@ function AdminDashboard() {
 
   return (
     <div className="max-w-5xl mx-auto px-6 py-12">
-      <h1 className="text-3xl font-bold text-green-700 mb-8">
+      <h1 className="text-3xl font-bold text-ocean-700 mb-8">
         {t("admin.title")}
       </h1>
 
       {/* Stats */}
       <div className="grid grid-cols-2 gap-4 mb-8">
-        <div className="bg-green-50 rounded-2xl p-6 text-center">
-          <p className="text-4xl font-bold text-green-700">{users.length}</p>
+        <div className="bg-ocean-50 rounded-2xl p-6 text-center">
+          <p className="text-4xl font-bold text-ocean-700">{users.length}</p>
           <p className="text-gray-600 mt-1">{t("admin.registeredUsers")}</p>
         </div>
-        <div className="bg-green-50 rounded-2xl p-6 text-center">
-          <p className="text-4xl font-bold text-green-700">{activities.length}</p>
+        <div className="bg-ocean-50 rounded-2xl p-6 text-center">
+          <p className="text-4xl font-bold text-ocean-700">{activities.length}</p>
           <p className="text-gray-600 mt-1">{t("admin.activities")}</p>
         </div>
       </div>
@@ -115,8 +115,8 @@ function AdminDashboard() {
           onClick={() => setActiveTab("users")}
           className={`px-5 py-2 rounded-full font-medium transition ${
             activeTab === "users"
-              ? "bg-green-700 text-white"
-              : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+              ? "bg-ocean-700 text-white"
+              : "bg-ocean-50 text-gray-600 hover:bg-gray-200"
           }`}
         >
           {t("admin.users")}
@@ -125,8 +125,8 @@ function AdminDashboard() {
           onClick={() => setActiveTab("activities")}
           className={`px-5 py-2 rounded-full font-medium transition ${
             activeTab === "activities"
-              ? "bg-green-700 text-white"
-              : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+              ? "bg-ocean-700 text-white"
+              : "bg-ocean-50 text-gray-600 hover:bg-gray-200"
           }`}
         >
           {t("admin.activities")}
@@ -135,8 +135,8 @@ function AdminDashboard() {
           onClick={() => setActiveTab("pending")}
           className={`px-5 py-2 rounded-full font-medium transition ${
             activeTab === "pending"
-              ? "bg-green-700 text-white"
-              : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+              ? "bg-ocean-700 text-white"
+              : "bg-ocean-50 text-gray-600 hover:bg-gray-200"
           }`}
         >
           {t("admin.pending")}
@@ -162,7 +162,7 @@ function AdminDashboard() {
                 <span
                   className={`inline-block text-xs font-medium px-2 py-0.5 rounded-full mt-1 ${
                     u.isActive
-                      ? "bg-green-100 text-green-700"
+                      ? "bg-ocean-100 text-ocean-700"
                       : "bg-red-100 text-red-600"
                   }`}
                 >
@@ -174,7 +174,7 @@ function AdminDashboard() {
                 <select
                   value={u.role}
                   onChange={(e) => handleRoleChange(u._id, e.target.value)}
-                  className="border border-gray-300 rounded-lg px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+                  className="border border-gray-300 rounded-lg px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-ocean-400"
                 >
                   <option value="user">user</option>
                   <option value="owner">owner</option>
@@ -186,7 +186,7 @@ function AdminDashboard() {
                   className={`text-sm px-3 py-1 rounded-lg font-medium transition ${
                     u.isActive
                       ? "bg-yellow-100 text-yellow-700 hover:bg-yellow-200"
-                      : "bg-green-100 text-green-700 hover:bg-green-200"
+                      : "bg-ocean-100 text-ocean-700 hover:bg-ocean-100"
                   }`}
                 >
                   {u.isActive ? t("admin.disable") : t("admin.enable")}
@@ -218,8 +218,8 @@ function AdminDashboard() {
                 <span
                   className={`inline-block text-xs font-medium px-2 py-0.5 rounded-full mt-1 ${
                     a.verified
-                      ? "bg-blue-100 text-blue-700"
-                      : "bg-gray-100 text-gray-500"
+                      ? "bg-sun-100 text-ocean-700"
+                      : "bg-ocean-50 text-gray-500"
                   }`}
                 >
                   {a.verified ? t("admin.verified") : t("admin.notVerified")}
@@ -264,12 +264,12 @@ function AdminDashboard() {
                   )}
                   <div className="flex flex-wrap gap-1 mt-2">
                     {a.tags?.diet?.map((tag) => (
-                      <span key={tag} className="bg-green-50 text-green-700 text-xs px-2 py-0.5 rounded-full">
+                      <span key={tag} className="bg-ocean-50 text-ocean-700 text-xs px-2 py-0.5 rounded-full">
                         {tag}
                       </span>
                     ))}
                     {a.tags?.accessibility?.map((tag) => (
-                      <span key={tag} className="bg-blue-50 text-blue-700 text-xs px-2 py-0.5 rounded-full">
+                      <span key={tag} className="bg-ocean-100 text-ocean-700 text-xs px-2 py-0.5 rounded-full">
                         {tag}
                       </span>
                     ))}
@@ -279,7 +279,7 @@ function AdminDashboard() {
                 <div className="flex gap-2">
                   <button
                     onClick={() => handleModerate(a._id, "approved")}
-                    className="text-sm px-4 py-1.5 rounded-lg font-medium bg-green-100 text-green-700 hover:bg-green-200 transition"
+                    className="text-sm px-4 py-1.5 rounded-lg font-medium bg-ocean-100 text-ocean-700 hover:bg-ocean-100 transition"
                   >
                     ✓ {t("admin.approve")}
                   </button>

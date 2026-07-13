@@ -34,9 +34,9 @@ function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-ocean-50 flex items-center justify-center px-4">
       <div className="bg-white rounded-2xl shadow-md w-full max-w-md p-8">
-        <h1 className="text-2xl font-bold text-green-700 mb-6 text-center">
+        <h1 className="text-2xl font-bold text-ocean-700 mb-6 text-center">
           {t("login.title")}
         </h1>
 
@@ -57,7 +57,7 @@ function Login() {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-ocean-400"
             />
           </div>
 
@@ -71,14 +71,14 @@ function Login() {
               value={formData.password}
               onChange={handleChange}
               required
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-ocean-400"
             />
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="bg-green-700 text-white font-semibold py-2 rounded-lg hover:bg-green-800 transition disabled:opacity-50"
+            className="bg-ocean-700 text-white font-semibold py-2 rounded-lg hover:bg-ocean-800 transition disabled:opacity-50"
           >
             {loading ? t("login.loading") : t("login.submit")}
           </button>
@@ -86,7 +86,7 @@ function Login() {
 
         <p className="text-sm text-center text-gray-600 mt-6">
           {t("login.noAccount")}{" "}
-          <Link to="/register" className="text-green-700 font-medium hover:underline">
+          <Link to="/register" className="text-ocean-700 font-medium hover:underline">
             {t("login.register")}
           </Link>
         </p>

@@ -46,9 +46,9 @@ function NewsletterSection() {
   };
 
   return (
-    <section className="py-16 px-6 bg-green-50">
+    <section className="py-16 px-6 bg-ocean-50">
       <div className="max-w-2xl mx-auto text-center">
-        <h2 className="text-3xl font-bold text-green-700 mb-3">
+        <h2 className="text-3xl font-bold text-ocean-700 mb-3">
           {t("newsletter.title")}
         </h2>
         <p className="text-gray-600 mb-2">
@@ -61,7 +61,7 @@ function NewsletterSection() {
         {status && (
           <p className={`text-sm px-4 py-2 rounded-lg mb-4 ${
             status === "success"
-              ? "bg-green-100 text-green-700"
+              ? "bg-mint-100 text-mint-700"
               : "bg-red-100 text-red-700"
           }`}>
             {message}
@@ -73,14 +73,14 @@ function NewsletterSection() {
             <button
               onClick={() => handleToggle(true)}
               disabled={loading}
-              className="bg-green-700 text-white font-semibold px-6 py-3 rounded-full hover:bg-green-800 transition disabled:opacity-50"
+              className="bg-coral-500 text-white font-semibold px-6 py-3 rounded-full hover:bg-coral-600 transition disabled:opacity-50 shadow-lg shadow-coral-500/30"
             >
               {t("newsletter.subscribe")}
             </button>
             <button
               onClick={() => handleToggle(false)}
               disabled={loading}
-              className="bg-white text-green-700 font-semibold px-6 py-3 rounded-full border border-green-700 hover:bg-green-50 transition disabled:opacity-50"
+              className="bg-white text-ocean-700 font-semibold px-6 py-3 rounded-full border border-ocean-200 hover:bg-ocean-50 transition disabled:opacity-50"
             >
               {t("newsletter.unsubscribe")}
             </button>
@@ -92,12 +92,12 @@ function NewsletterSection() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder={t("newsletter.placeholder")}
-              className="border border-gray-300 rounded-full px-5 py-3 focus:outline-none focus:ring-2 focus:ring-green-500 sm:w-72"
+              className="border border-ocean-200 bg-white rounded-full px-5 py-3 focus:outline-none focus:ring-2 focus:ring-ocean-400 sm:w-72"
             />
             <button
               onClick={handleSubscribe}
               disabled={loading}
-              className="bg-green-700 text-white font-semibold px-6 py-3 rounded-full hover:bg-green-800 transition disabled:opacity-50"
+              className="bg-coral-500 text-white font-semibold px-6 py-3 rounded-full hover:bg-coral-600 transition disabled:opacity-50 shadow-lg shadow-coral-500/30"
             >
               {loading ? "..." : t("newsletter.subscribe")}
             </button>

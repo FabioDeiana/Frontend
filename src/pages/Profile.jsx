@@ -109,7 +109,7 @@ function Profile() {
 
   return (
     <div className="max-w-2xl mx-auto px-6 py-12">
-      <h1 className="text-3xl font-bold text-green-700 mb-8">{t("profile.title")}</h1>
+      <h1 className="text-3xl font-bold text-ocean-700 mb-8">{t("profile.title")}</h1>
 
       {/* Dati base */}
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
@@ -123,7 +123,7 @@ function Profile() {
             type="text"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-ocean-400"
           />
         </div>
 
@@ -135,7 +135,7 @@ function Profile() {
             type="email"
             value={user?.email || ""}
             disabled
-            className="w-full border border-gray-200 rounded-lg px-4 py-2 bg-gray-50 text-gray-400"
+            className="w-full border border-gray-200 rounded-lg px-4 py-2 bg-ocean-50 text-gray-400"
           />
         </div>
 
@@ -143,7 +143,7 @@ function Profile() {
           <label className="block text-sm font-medium text-gray-700 mb-1">
             {t("profile.role")}
           </label>
-          <span className="inline-block bg-green-100 text-green-700 text-sm font-medium px-3 py-1 rounded-full">
+          <span className="inline-block bg-ocean-100 text-ocean-700 text-sm font-medium px-3 py-1 rounded-full">
             {user?.role}
           </span>
         </div>
@@ -159,8 +159,8 @@ function Profile() {
               onClick={() => toggleOption("diet", option)}
               className={`px-4 py-2 rounded-full text-sm font-medium border transition ${
                 formData.preferences.diet.includes(option)
-                  ? "bg-green-700 text-white border-green-700"
-                  : "bg-white text-gray-600 border-gray-300 hover:border-green-400"
+                  ? "bg-ocean-700 text-white border-ocean-700"
+                  : "bg-white text-gray-600 border-gray-300 hover:border-ocean-200"
               }`}
             >
               {option}
@@ -199,8 +199,8 @@ function Profile() {
               onClick={() => toggleOption("accessibility", option)}
               className={`px-4 py-2 rounded-full text-sm font-medium border transition ${
                 formData.preferences.accessibility.includes(option)
-                  ? "bg-blue-600 text-white border-blue-600"
-                  : "bg-white text-gray-600 border-gray-300 hover:border-blue-400"
+                  ? "bg-ocean-600 text-white border-ocean-600"
+                  : "bg-white text-gray-600 border-gray-300 hover:border-ocean-400"
               }`}
             >
               {option}
@@ -219,7 +219,7 @@ function Profile() {
         </p>
 
         {newsletterMessage && (
-          <p className="bg-green-100 text-green-700 text-sm px-4 py-2 rounded-lg mb-4">
+          <p className="bg-ocean-100 text-ocean-700 text-sm px-4 py-2 rounded-lg mb-4">
             {newsletterMessage}
           </p>
         )}
@@ -234,7 +234,7 @@ function Profile() {
             <button
               onClick={() => handleNewsletter(true)}
               disabled={newsletterLoading}
-              className="bg-green-700 text-white font-semibold px-5 py-2 rounded-lg hover:bg-green-800 transition disabled:opacity-50"
+              className="bg-ocean-700 text-white font-semibold px-5 py-2 rounded-lg hover:bg-ocean-800 transition disabled:opacity-50"
             >
               {newsletterLoading ? "..." : t("newsletter.subscribe")}
             </button>
@@ -261,7 +261,7 @@ function Profile() {
         </p>
       )}
       {successMessage && (
-        <p className="bg-green-100 text-green-700 text-sm px-4 py-2 rounded-lg mb-4">
+        <p className="bg-ocean-100 text-ocean-700 text-sm px-4 py-2 rounded-lg mb-4">
           {successMessage}
         </p>
       )}
@@ -270,7 +270,7 @@ function Profile() {
       <button
         onClick={handleSave}
         disabled={saving}
-        className="bg-green-700 text-white font-semibold px-6 py-3 rounded-lg hover:bg-green-800 transition disabled:opacity-50 mb-10"
+        className="bg-ocean-700 text-white font-semibold px-6 py-3 rounded-lg hover:bg-ocean-800 transition disabled:opacity-50 mb-10"
       >
         {saving ? t("profile.saving") : t("profile.save")}
       </button>
@@ -285,7 +285,7 @@ function Profile() {
         ) : (
           <div className="flex flex-col gap-4">
             {reviews.map((review) => (
-              <div key={review._id} className="bg-gray-50 rounded-xl p-4">
+              <div key={review._id} className="bg-ocean-50 rounded-xl p-4">
                 <p className="font-medium mb-1">{review.activity?.name}</p>
                 <div className="flex gap-4 text-sm text-gray-600 mb-2">
                   <span>🌿 Eco: {review.ratings?.ecoFriendliness}/5</span>

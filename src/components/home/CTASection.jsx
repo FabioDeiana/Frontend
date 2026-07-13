@@ -5,22 +5,22 @@ function CTASection() {
   const { t } = useTranslation();
 
   return (
-    <section className="py-16 px-6 bg-green-700 text-white text-center">
+    <section className="py-16 px-6 bg-ocean-700 text-white text-center">
       <h2 className="text-3xl font-bold mb-4">{t("cta.title")}</h2>
-      <p className="text-lg mb-8 max-w-xl mx-auto">
+      <p className="text-lg mb-8 max-w-xl mx-auto text-ocean-100">
         {t("cta.subtitle")}
       </p>
 
       <div className="flex flex-col sm:flex-row gap-4 justify-center">
         <Link
           to="/register"
-          className="bg-white text-green-700 font-semibold px-6 py-3 rounded-full hover:bg-green-100 transition"
+          className="bg-coral-500 text-white font-semibold px-6 py-3 rounded-full hover:bg-coral-600 transition shadow-lg shadow-coral-500/30"
         >
           {t("cta.registerUser")}
         </Link>
         <Link
           to="/register?type=owner"
-          className="bg-green-900 text-white font-semibold px-6 py-3 rounded-full hover:bg-green-800 transition border border-white"
+          className="bg-transparent text-white font-semibold px-6 py-3 rounded-full hover:bg-ocean-600 transition border-2 border-white"
         >
           {t("cta.registerBusiness")}
         </Link>

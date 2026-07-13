@@ -108,7 +108,7 @@ function AddActivity() {
 
   return (
     <div className="max-w-2xl mx-auto px-6 py-12">
-      <h1 className="text-3xl font-bold text-green-700 mb-2">
+      <h1 className="text-3xl font-bold text-ocean-700 mb-2">
         {t("addActivity.title")}
       </h1>
       <p className="text-gray-500 mb-8">{t("addActivity.subtitle")}</p>
@@ -125,7 +125,7 @@ function AddActivity() {
             value={formData.name}
             onChange={handleChange}
             required
-            className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-ocean-400"
           />
         </div>
 
@@ -140,7 +140,7 @@ function AddActivity() {
             onChange={handleChange}
             required
             rows={3}
-            className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-ocean-400"
           />
         </div>
 
@@ -157,8 +157,8 @@ function AddActivity() {
                 onClick={() => setFormData({ ...formData, category: cat })}
                 className={`px-3 py-1 rounded-full text-sm font-medium border transition ${
                   formData.category === cat
-                    ? "bg-green-700 text-white border-green-700"
-                    : "bg-white text-gray-600 border-gray-300 hover:border-green-400"
+                    ? "bg-ocean-700 text-white border-ocean-700"
+                    : "bg-white text-gray-600 border-gray-300 hover:border-ocean-200"
                 }`}
               >
                 {t(`categories.${cat}`)}
@@ -180,7 +180,7 @@ function AddActivity() {
               onChange={handleChange}
               required
               placeholder="Via Roma 12"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-ocean-400"
             />
           </div>
           <div>
@@ -194,7 +194,7 @@ function AddActivity() {
               onChange={handleChange}
               required
               placeholder="Roma"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-ocean-400"
             />
           </div>
         </div>
@@ -203,7 +203,7 @@ function AddActivity() {
           type="button"
           onClick={handleGeocode}
           disabled={geoLoading || !formData.address || !formData.city}
-          className="bg-green-100 text-green-700 font-semibold py-2 rounded-lg hover:bg-green-200 transition disabled:opacity-50"
+          className="bg-ocean-100 text-ocean-700 font-semibold py-2 rounded-lg hover:bg-ocean-100 transition disabled:opacity-50"
         >
           {geoLoading
             ? t("addActivity.searching")
@@ -257,8 +257,8 @@ function AddActivity() {
                 onClick={() => toggleTag("diet", option)}
                 className={`px-3 py-1 rounded-full text-sm font-medium border transition ${
                   tags.diet.includes(option)
-                    ? "bg-green-700 text-white border-green-700"
-                    : "bg-white text-gray-600 border-gray-300 hover:border-green-400"
+                    ? "bg-ocean-700 text-white border-ocean-700"
+                    : "bg-white text-gray-600 border-gray-300 hover:border-ocean-200"
                 }`}
               >
                 {option}
@@ -280,8 +280,8 @@ function AddActivity() {
                 onClick={() => toggleTag("accessibility", option)}
                 className={`px-3 py-1 rounded-full text-sm font-medium border transition ${
                   tags.accessibility.includes(option)
-                    ? "bg-blue-600 text-white border-blue-600"
-                    : "bg-white text-gray-600 border-gray-300 hover:border-blue-400"
+                    ? "bg-ocean-600 text-white border-ocean-600"
+                    : "bg-white text-gray-600 border-gray-300 hover:border-ocean-400"
                 }`}
               >
                 {option}
@@ -299,7 +299,7 @@ function AddActivity() {
         <button
           type="submit"
           disabled={submitting}
-          className="bg-green-700 text-white font-semibold py-3 rounded-lg hover:bg-green-800 transition disabled:opacity-50"
+          className="bg-coral-500 hover:bg-coral-600"
         >
           {submitting ? t("addActivity.submitting") : t("addActivity.submit")}
         </button>

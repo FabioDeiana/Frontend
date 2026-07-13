@@ -134,11 +134,11 @@ function ActivityDetail() {
       )}
 
       <div className="mb-6">
-        <span className="text-sm bg-green-100 text-green-700 font-medium px-3 py-1 rounded-full">
+        <span className="text-sm bg-ocean-100 text-ocean-700 font-medium px-3 py-1 rounded-full">
           {t(`categories.${activity.category}`)}
         </span>
         {activity.verified && (
-          <span className="ml-2 text-sm bg-blue-100 text-blue-700 font-medium px-3 py-1 rounded-full">
+          <span className="ml-2 text-sm bg-sun-100 text-ocean-700 font-medium px-3 py-1 rounded-full">
             ✓ {t("activity.verified")}
           </span>
         )}
@@ -146,7 +146,7 @@ function ActivityDetail() {
         <p className="text-gray-500">{activity.address}, {activity.city}</p>
 
         {averages && (
-          <div className="flex flex-wrap gap-4 mt-3 bg-green-50 rounded-xl px-4 py-3 text-sm">
+          <div className="flex flex-wrap gap-4 mt-3 bg-ocean-50 rounded-xl px-4 py-3 text-sm">
             <span className="font-medium">🌿 {averages.eco}/5</span>
             <span className="font-medium">♿ {averages.accessibility}/5</span>
             <span className="font-medium">🥗 {averages.diet}/5</span>
@@ -166,17 +166,17 @@ function ActivityDetail() {
           <h2 className="text-lg font-semibold mb-3">Caratteristiche</h2>
           <div className="flex flex-wrap gap-2">
             {activity.tags.diet.map((tag) => (
-              <span key={tag} className="bg-green-50 text-green-700 text-sm px-3 py-1 rounded-full">
+              <span key={tag} className="bg-ocean-50 text-ocean-700 text-sm px-3 py-1 rounded-full">
                 {tag}
               </span>
             ))}
             {activity.tags.accessibility.map((tag) => (
-              <span key={tag} className="bg-blue-50 text-blue-700 text-sm px-3 py-1 rounded-full">
+              <span key={tag} className="bg-ocean-100 text-ocean-700 text-sm px-3 py-1 rounded-full">
                 {tag}
               </span>
             ))}
             {activity.tags.other.map((tag) => (
-              <span key={tag} className="bg-gray-100 text-gray-600 text-sm px-3 py-1 rounded-full">
+              <span key={tag} className="bg-ocean-50 text-gray-600 text-sm px-3 py-1 rounded-full">
                 {tag}
               </span>
             ))}
@@ -192,7 +192,7 @@ function ActivityDetail() {
           ) : (
             <div className="flex flex-col gap-3">
               {menuItems.map((item) => (
-                <div key={item._id} className="bg-gray-50 rounded-xl p-4 flex justify-between items-start">
+                <div key={item._id} className="bg-ocean-50 rounded-xl p-4 flex justify-between items-start">
                   <div>
                     <p className="font-medium">{item.name}</p>
                     {item.description && (
@@ -200,7 +200,7 @@ function ActivityDetail() {
                     )}
                     <div className="flex flex-wrap gap-1 mt-2">
                       {item.dietTags.map((tag) => (
-                        <span key={tag} className="bg-green-50 text-green-700 text-xs px-2 py-0.5 rounded-full">
+                        <span key={tag} className="bg-ocean-50 text-ocean-700 text-xs px-2 py-0.5 rounded-full">
                           {tag}
                         </span>
                       ))}
@@ -211,7 +211,7 @@ function ActivityDetail() {
                       ))}
                     </div>
                   </div>
-                  <span className="font-semibold text-green-700 ml-4 whitespace-nowrap">
+                  <span className="font-semibold text-ocean-700 ml-4 whitespace-nowrap">
                     €{item.price.toFixed(2)}
                   </span>
                 </div>
@@ -222,7 +222,7 @@ function ActivityDetail() {
       )}
 
       {user && (
-        <div className="mb-8 bg-green-50 rounded-2xl p-6">
+        <div className="mb-8 bg-ocean-50 rounded-2xl p-6">
           <h2 className="text-lg font-semibold mb-4">
             {myReview ? t("activity.editReview") : t("activity.leaveReview")}
           </h2>
@@ -233,7 +233,7 @@ function ActivityDetail() {
             </p>
           )}
           {reviewSuccess && (
-            <p className="bg-green-100 text-green-700 text-sm px-4 py-2 rounded-lg mb-4">
+            <p className="bg-ocean-100 text-ocean-700 text-sm px-4 py-2 rounded-lg mb-4">
               {reviewSuccess}
             </p>
           )}
@@ -255,7 +255,7 @@ function ActivityDetail() {
                   max="5"
                   value={reviewForm.ratings[name]}
                   onChange={handleReviewChange}
-                  className="w-full accent-green-600"
+                  className="w-full accent-ocean-600"
                 />
               </div>
             ))}
@@ -270,14 +270,14 @@ function ActivityDetail() {
                 onChange={handleReviewChange}
                 required
                 rows={3}
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-ocean-400"
               />
             </div>
 
             <button
               type="submit"
               disabled={reviewLoading}
-              className="bg-green-700 text-white font-semibold py-2 rounded-lg hover:bg-green-800 transition disabled:opacity-50"
+              className="bg-ocean-700 text-white font-semibold py-2 rounded-lg hover:bg-ocean-800 transition disabled:opacity-50"
             >
               {reviewLoading
                 ? t("activity.submitting")
@@ -299,7 +299,7 @@ function ActivityDetail() {
         ) : (
           <div className="flex flex-col gap-4">
             {reviews.map((review) => (
-              <div key={review._id} className="bg-gray-50 rounded-xl p-4">
+              <div key={review._id} className="bg-ocean-50 rounded-xl p-4">
                 <div className="flex justify-between items-center mb-2">
                   <span className="font-medium">{review.user?.name}</span>
                   <span className="text-xs text-gray-400">

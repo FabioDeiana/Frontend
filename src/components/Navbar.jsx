@@ -17,7 +17,7 @@ function Navbar() {
   };
 
   return (
-    <nav className="flex items-center justify-between px-6 py-4 bg-green-700 text-white">
+    <nav className="flex items-center justify-between px-6 py-4 bg-ocean-700 text-white">
       <Link to="/" className="text-xl font-bold">
         GreenMap
       </Link>
@@ -42,7 +42,7 @@ function Navbar() {
             </Link>
             <button
               onClick={handleLogout}
-              className="bg-white text-green-700 font-semibold px-4 py-1 rounded-full hover:bg-green-100 transition"
+              className="bg-white text-ocean-700 font-semibold px-4 py-1 rounded-full hover:bg-ocean-100 transition"
             >
               {t("navbar.logout")}
             </button>
@@ -54,7 +54,7 @@ function Navbar() {
             </Link>
             <Link
               to="/register"
-              className="bg-white text-green-700 font-semibold px-4 py-1 rounded-full hover:bg-green-100 transition"
+              className="bg-white text-ocean-700 font-semibold px-4 py-1 rounded-full hover:bg-ocean-100 transition"
             >
               {t("navbar.register")}
             </Link>
@@ -64,7 +64,7 @@ function Navbar() {
         {/* Switch lingua */}
         <button
           onClick={toggleLanguage}
-          className="text-sm font-medium bg-green-600 hover:bg-green-500 px-3 py-1 rounded-full transition"
+          className="text-sm font-medium bg-ocean-600 hover:bg-ocean-400 px-3 py-1 rounded-full transition"
         >
           {i18n.language.startsWith("it") ? "🇮🇹 IT" : "🇬🇧 EN"}
         </button>

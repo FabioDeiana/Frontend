@@ -53,14 +53,14 @@ function Chatbot() {
       {open && (
         <div className="bg-white rounded-2xl shadow-xl w-80 mb-4 flex flex-col overflow-hidden border border-gray-200">
           {/* Header */}
-          <div className="bg-green-700 text-white px-4 py-3 flex justify-between items-center">
+          <div className="bg-ocean-700 text-white px-4 py-3 flex justify-between items-center">
             <div>
               <p className="font-semibold text-sm">GreenMap Assistant</p>
-              <p className="text-xs text-green-200">Powered by AI</p>
+              <p className="text-xs text-ocean-200">Powered by AI</p>
             </div>
             <button
               onClick={() => setOpen(false)}
-              className="text-white hover:text-green-200 text-lg font-bold"
+              className="text-white hover:text-ocean-200 text-lg font-bold"
             >
               ✕
             </button>
@@ -78,15 +78,15 @@ function Chatbot() {
                 key={index}
                 className={`text-sm px-3 py-2 rounded-xl max-w-[90%] ${
                   msg.role === "user"
-                    ? "bg-green-700 text-white self-end"
-                    : "bg-gray-100 text-gray-800 self-start"
+                    ? "bg-ocean-700 text-white self-end"
+                    : "bg-ocean-50 text-gray-800 self-start"
                 }`}
               >
                 {msg.content}
               </div>
             ))}
             {loading && (
-              <div className="bg-gray-100 text-gray-500 text-sm px-3 py-2 rounded-xl self-start">
+              <div className="bg-ocean-50 text-gray-500 text-sm px-3 py-2 rounded-xl self-start">
                 ...
               </div>
             )}
@@ -100,12 +100,12 @@ function Chatbot() {
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Scrivi un messaggio..."
-              className="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ocean-400"
             />
             <button
               onClick={handleSend}
               disabled={loading || !input.trim()}
-              className="bg-green-700 text-white px-3 py-2 rounded-lg hover:bg-green-800 transition disabled:opacity-50 text-sm font-medium"
+              className="bg-ocean-700 text-white px-3 py-2 rounded-lg hover:bg-ocean-800 transition disabled:opacity-50 text-sm font-medium"
             >
               →
             </button>
@@ -116,7 +116,7 @@ function Chatbot() {
       {/* Bottone flottante */}
       <button
         onClick={() => setOpen((prev) => !prev)}
-        className="bg-green-700 text-white w-14 h-14 rounded-full shadow-lg flex items-center justify-center hover:bg-green-800 transition text-2xl"
+        className="bg-ocean-700 text-white w-14 h-14 rounded-full shadow-lg flex items-center justify-center hover:bg-ocean-800 transition text-2xl"
       >
         {open ? "✕" : "💬"}
       </button>
