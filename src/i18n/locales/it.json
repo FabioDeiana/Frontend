@@ -9,13 +9,14 @@
     "logout": "Esci"
   },
   "hero": {
-    "title": "Scopri le attività eco-sostenibili vicino a te",
-    "subtitle": "GreenMap ti aiuta a trovare ristoranti, negozi e servizi che hanno a cuore l'ambiente quanto te.",
-    "cta": "Esplora la mappa"
+    "title": "Ogni luogo dovrebbe essere aperto a tutti",
+    "subtitle": "OpenPlaces è la mappa collaborativa per scoprire attività eco-sostenibili, accessibili e attente a ogni esigenza alimentare. Trovate, recensite e proposte dalla community.",
+    "cta": "Esplora la mappa",
+    "secondary": "Come funziona"
   },
   "mission": {
     "title": "La nostra missione",
-    "text": "Trovare attività davvero sostenibili non dovrebbe essere difficile. GreenMap nasce per mettere in luce ristoranti, negozi e servizi che rispettano l'ambiente, rendendoli facili da scoprire e da valutare grazie alle recensioni della community. Niente promesse vuote: solo esperienze reali, raccontate da chi le vive ogni giorno."
+    "text": "Trovare un ristorante accessibile in sedia a rotelle, un locale attento alle allergie o un negozio davvero sostenibile non dovrebbe essere una caccia al tesoro. OpenPlaces nasce per rendere visibili i luoghi che si prendono cura delle persone e dell'ambiente — raccontati e valutati da chi li vive ogni giorno, non dalle pubblicità."
   },
   "map": {
     "title": "Esplora le attività sulla mappa",
@@ -42,23 +43,23 @@
   "newsletter": {
     "title": "Resta aggiornato",
     "subtitle": "Iscriviti alla newsletter per ricevere aggiornamenti sulle nuove attività eco-friendly nella tua zona.",
-    "privacy": "Utilizziamo la tua email solo per inviarti aggiornamenti di GreenMap. Nessuno spam, puoi cancellarti in qualsiasi momento.",
+    "privacy": "Utilizziamo la tua email solo per inviarti aggiornamenti di OpenPlaces. Nessuno spam, puoi cancellarti in qualsiasi momento.",
     "placeholder": "La tua email",
     "subscribe": "Iscriviti",
     "unsubscribe": "Cancella iscrizione",
     "successSubscribe": "Iscrizione avvenuta con successo! Grazie.",
     "successUnsubscribe": "Disiscrizione avvenuta con successo.",
     "error": "Errore durante l'iscrizione",
-    "cancel": "Per cancellarti in qualsiasi momento scrivi a privacy@greenmap.it oppure usa il bottone Cancella iscrizione qui sopra."
+    "cancel": "Per cancellarti in qualsiasi momento scrivi a privacy@OpenPlaces.it oppure usa il bottone Cancella iscrizione qui sopra."
   },
   "cta": {
-    "title": "Unisciti a GreenMap",
+    "title": "Unisciti a OpenPlaces",
     "subtitle": "Sei un utente curioso o gestisci un'attività eco-sostenibile? Registrati e diventa parte della community.",
     "registerUser": "Registrati come utente",
     "registerBusiness": "Registra la tua attività"
   },
   "login": {
-    "title": "Accedi a GreenMap",
+    "title": "Accedi a OpenPlaces",
     "email": "Email",
     "password": "Password",
     "submit": "Accedi",
@@ -69,8 +70,8 @@
   "register": {
     "title": "Crea un account",
     "titleOwner": "Registra la tua attività",
-    "subtitle": "Unisciti alla community di GreenMap",
-    "subtitleOwner": "Crea un account owner per gestire la tua attività su GreenMap",
+    "subtitle": "Unisciti alla community di OpenPlaces",
+    "subtitleOwner": "Crea un account owner per gestire la tua attività su OpenPlaces",
     "name": "Nome",
     "email": "Email",
     "password": "Password",
@@ -157,7 +158,7 @@
     "altro": "Altro"
   },
   "footer": {
-    "tagline": "La mappa collaborativa delle attività eco-friendly, accessibili e attente alle esigenze di tutti.",
+    "tagline": "La mappa collaborativa dei luoghi aperti a tutti: eco-sostenibili, accessibili e attenti alle esigenze di ognuno.",
     "explore": "Esplora",
     "account": "Account",
     "info": "Informazioni",
@@ -165,17 +166,17 @@
     "madeWith": "Fatto con 💚 da Fabio Deiana"
   },
   "chatbot": {
-    "title": "GreenMap Assistant",
+    "title": "OpenPlaces Assistant",
     "subtitle": "Powered by AI",
     "welcome": "Ciao! Come posso aiutarti a trovare attività eco-friendly?",
     "placeholder": "Scrivi un messaggio...",
-    "button": "Chiedi a GreenMap",
+    "button": "Chiedi a OpenPlaces",
     "hint": "Cerchi un posto? Chiedimi! 👋",
     "error": "Errore nella risposta. Riprova."
   },
   "addActivity": {
     "title": "Proponi una nuova attività",
-    "subtitle": "Conosci un'attività eco-friendly che non è ancora su GreenMap? Aggiungila! Sarà visibile dopo l'approvazione del nostro team.",
+    "subtitle": "Conosci un'attività eco-friendly che non è ancora su OpenPlaces? Aggiungila! Sarà visibile dopo l'approvazione del nostro team.",
     "name": "Nome attività",
     "description": "Descrizione",
     "category": "Categoria",

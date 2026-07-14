@@ -8,7 +8,7 @@ function CookiePolicy() {
       <h1 className="text-3xl font-bold text-ocean-700 mb-6">{t("cookie.title")}</h1>
 
       <p className="text-gray-700 leading-relaxed mb-6">
-        GreenMap utilizza cookie tecnici essenziali per il funzionamento del
+        OpenPlaces utilizza cookie tecnici essenziali per il funzionamento del
         sito. Non utilizziamo cookie di profilazione o di tracciamento per fini
         pubblicitari.
       </p>

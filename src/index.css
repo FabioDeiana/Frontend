@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  /* Palette GreenMap - Mediterranea */
+  /* Palette OpenPlaces - Mediterranea */
   --color-ocean-50: #EEF4FB;
   --color-ocean-100: #D9E6F5;
   --color-ocean-200: #B0CCE9;

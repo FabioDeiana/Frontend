@@ -11,7 +11,7 @@ function Footer() {
 
           {/* Logo + tagline */}
           <div>
-            <p className="text-xl font-bold mb-3">🌍 GreenMap</p>
+            <p className="text-xl font-bold mb-3">🌍 OpenPlaces</p>
             <p className="text-sm text-ocean-200 leading-relaxed">
               {t("footer.tagline")}
             </p>
@@ -43,8 +43,8 @@ function Footer() {
             <ul className="flex flex-col gap-2 text-sm text-ocean-200">
               <li><Link to="/cookie-policy" className="hover:text-white transition">Cookie Policy</Link></li>
               <li>
-                <a href="mailto:info@greenmap.it" className="hover:text-white transition">
-                  info@greenmap.it
+                <a href="mailto:info@OpenPlaces.it" className="hover:text-white transition">
+                  info@OpenPlaces.it
                 </a>
               </li>
             </ul>
@@ -53,7 +53,7 @@ function Footer() {
 
         {/* Riga finale */}
         <div className="border-t border-ocean-600 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-sm text-ocean-200">
-          <p>© {new Date().getFullYear()} GreenMap — {t("footer.rights")}</p>
+          <p>© {new Date().getFullYear()} OpenPlaces — {t("footer.rights")}</p>
           <p className="text-xs">{t("footer.madeWith")}</p>
         </div>
       </div>

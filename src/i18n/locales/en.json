@@ -9,13 +9,14 @@
     "logout": "Logout"
   },
   "hero": {
-    "title": "Discover eco-friendly activities near you",
-    "subtitle": "GreenMap helps you find restaurants, shops and services that care about the environment as much as you do.",
-    "cta": "Explore the map"
+    "title": "Every place should be open to everyone",
+    "subtitle": "OpenPlaces is the collaborative map for discovering eco-friendly, accessible businesses that care about every dietary need. Found, reviewed and suggested by the community.",
+    "cta": "Explore the map",
+    "secondary": "How it works"
   },
   "mission": {
     "title": "Our mission",
-    "text": "Finding truly sustainable activities shouldn't be hard. GreenMap was created to spotlight restaurants, shops and services that respect the environment, making them easy to discover and review through community feedback. No empty promises — just real experiences, told by those who live them every day."
+    "text": "Finding a wheelchair-accessible restaurant, an allergy-aware café or a truly sustainable shop shouldn't be a treasure hunt. OpenPlaces exists to make visible the places that care about people and the planet — told and rated by those who experience them every day, not by ads."
   },
   "map": {
     "title": "Explore activities on the map",
@@ -42,23 +43,23 @@
   "newsletter": {
     "title": "Stay updated",
     "subtitle": "Subscribe to our newsletter to receive updates on new eco-friendly activities in your area.",
-    "privacy": "We only use your email to send you GreenMap updates. No spam, unsubscribe anytime.",
+    "privacy": "We only use your email to send you OpenPlaces updates. No spam, unsubscribe anytime.",
     "placeholder": "Your email",
     "subscribe": "Subscribe",
     "unsubscribe": "Unsubscribe",
     "successSubscribe": "Successfully subscribed! Thank you.",
     "successUnsubscribe": "Successfully unsubscribed.",
     "error": "Error during subscription",
-    "cancel": "To unsubscribe at any time, email privacy@greenmap.it or use the Unsubscribe button above."
+    "cancel": "To unsubscribe at any time, email privacy@OpenPlaces.it or use the Unsubscribe button above."
   },
   "cta": {
-    "title": "Join GreenMap",
+    "title": "Join OpenPlaces",
     "subtitle": "Are you a curious user or do you run an eco-friendly business? Sign up and become part of the community.",
     "registerUser": "Sign up as a user",
     "registerBusiness": "List your business"
   },
   "login": {
-    "title": "Log in to GreenMap",
+    "title": "Log in to OpenPlaces",
     "email": "Email",
     "password": "Password",
     "submit": "Log in",
@@ -69,8 +70,8 @@
   "register": {
     "title": "Create an account",
     "titleOwner": "List your business",
-    "subtitle": "Join the GreenMap community",
-    "subtitleOwner": "Create an owner account to manage your business on GreenMap",
+    "subtitle": "Join the OpenPlaces community",
+    "subtitleOwner": "Create an owner account to manage your business on OpenPlaces",
     "name": "Name",
     "email": "Email",
     "password": "Password",
@@ -157,7 +158,7 @@
     "altro": "Other"
   },
   "footer": {
-    "tagline": "The collaborative map of eco-friendly, accessible businesses that care about everyone's needs.",
+    "tagline": "The collaborative map of places open to everyone: eco-friendly, accessible and mindful of everyone's needs.",
     "explore": "Explore",
     "account": "Account",
     "info": "Info",
@@ -165,17 +166,17 @@
     "madeWith": "Made with 💚 by Fabio Deiana"
   },
   "chatbot": {
-    "title": "GreenMap Assistant",
+    "title": "OpenPlaces Assistant",
     "subtitle": "Powered by AI",
     "welcome": "Hi! How can I help you find eco-friendly activities?",
     "placeholder": "Type a message...",
-    "button": "Ask GreenMap",
+    "button": "Ask OpenPlaces",
     "hint": "Looking for a place? Ask me! 👋",
     "error": "Error in response. Please try again."
   },
   "addActivity": {
     "title": "Suggest a new activity",
-    "subtitle": "Know an eco-friendly business that's not on GreenMap yet? Add it! It will be visible after our team's approval.",
+    "subtitle": "Know an eco-friendly business that's not on OpenPlaces yet? Add it! It will be visible after our team's approval.",
     "name": "Activity name",
     "description": "Description",
     "category": "Category",

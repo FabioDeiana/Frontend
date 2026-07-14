@@ -5,6 +5,7 @@ import { MapContainer, TileLayer, Marker, Tooltip } from "react-leaflet";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { motion } from "motion/react";
 
 import L from "leaflet";
 import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
@@ -99,9 +100,15 @@ function MapSection() {
 
   return (
     <section id="map" className="py-16 px-6">
-      <h2 className="text-3xl font-bold mb-6 text-center text-ocean-700">
-        🗺️ {t("map.title")}
-      </h2>
+      <motion.h2
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+        className="text-3xl md:text-4xl mb-6 text-center text-ocean-700"
+      >
+        {t("map.title")}
+      </motion.h2>
 
       {/* Bottone filtri */}
       <div className="flex justify-center gap-3 mb-6">
@@ -236,7 +243,13 @@ function MapSection() {
       {loading && <p className="text-center">{t("map.loading")}</p>}
       {error && <p className="text-center text-red-600">{error}</p>}
 
-      <div className="h-[500px] w-full max-w-5xl mx-auto rounded-xl overflow-hidden shadow-lg">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.97 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="h-[500px] w-full max-w-5xl mx-auto rounded-3xl overflow-hidden shadow-xl"
+      >
         <MapContainer
           center={[41.9028, 12.4964]}
           zoom={12}
@@ -282,7 +295,7 @@ function MapSection() {
             </Marker>
           ))}
         </MapContainer>
-      </div>
+      </motion.div>
     </section>
   );
 }

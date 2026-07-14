@@ -19,7 +19,7 @@ function Navbar() {
   return (
     <nav className="flex items-center justify-between px-6 py-4 bg-ocean-700 text-white">
       <Link to="/" className="text-xl font-bold">
-        GreenMap
+        OpenPlaces
       </Link>
 
       <div className="flex gap-4 items-center">
