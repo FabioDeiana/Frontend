@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import api from "../services/api";
 import { useAuth } from "../context/AuthContext";
 import { useTranslation } from "react-i18next";
+import { motion } from "motion/react";
 
 function Login() {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -34,21 +35,43 @@ function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-ocean-50 flex items-center justify-center px-4">
-      <div className="bg-white rounded-2xl shadow-md w-full max-w-md p-8">
-        <h1 className="text-2xl font-bold text-ocean-700 mb-6 text-center">
-          {t("login.title")}
-        </h1>
+    <div className="min-h-screen flex items-center justify-center px-4 py-12 relative overflow-hidden">
+      {/* Foto di sfondo con overlay */}
+      <div className="absolute inset-0">
+        <img
+          src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80"
+          alt=""
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-ocean-800/70" />
+      </div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="relative bg-white rounded-3xl shadow-2xl w-full max-w-md p-8"
+      >
+        <div className="text-center mb-6">
+          <span className="text-4xl">🌍</span>
+          <h1 className="text-2xl text-ocean-700 mt-2">
+            {t("login.title")}
+          </h1>
+        </div>
 
         {error && (
-          <p className="bg-red-100 text-red-700 text-sm px-4 py-2 rounded-lg mb-4">
+          <motion.p
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="bg-red-100 text-red-700 text-sm px-4 py-2 rounded-xl mb-4"
+          >
             {error}
-          </p>
+          </motion.p>
         )}
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-ocean-800 mb-1">
               {t("login.email")}
             </label>
             <input
@@ -57,12 +80,12 @@ function Login() {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-ocean-400"
+              className="w-full border border-ocean-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-ocean-400 transition"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-ocean-800 mb-1">
               {t("login.password")}
             </label>
             <input
@@ -71,26 +94,28 @@ function Login() {
               value={formData.password}
               onChange={handleChange}
               required
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-ocean-400"
+              className="w-full border border-ocean-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-ocean-400 transition"
             />
           </div>
 
-          <button
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             type="submit"
             disabled={loading}
-            className="bg-ocean-700 text-white font-semibold py-2 rounded-lg hover:bg-ocean-800 transition disabled:opacity-50"
+            className="bg-coral-500 text-white font-semibold py-3 rounded-xl hover:bg-coral-600 transition disabled:opacity-50 shadow-lg shadow-coral-500/30 mt-2"
           >
             {loading ? t("login.loading") : t("login.submit")}
-          </button>
+          </motion.button>
         </form>
 
-        <p className="text-sm text-center text-gray-600 mt-6">
+        <p className="text-sm text-center text-gray-500 mt-6">
           {t("login.noAccount")}{" "}
-          <Link to="/register" className="text-ocean-700 font-medium hover:underline">
+          <Link to="/register" className="text-coral-600 font-semibold hover:underline">
             {t("login.register")}
           </Link>
         </p>
-      </div>
+      </motion.div>
     </div>
   );
 }

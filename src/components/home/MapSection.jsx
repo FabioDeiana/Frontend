@@ -24,6 +24,41 @@ L.Icon.Default.mergeOptions({
   shadowUrl: markerShadow,
 });
 
+const CATEGORY_EMOJI = {
+  ristorante: "🍽️",
+  negozio: "🛍️",
+  mercato: "🥕",
+  alloggio: "🛏️",
+  punto_riciclo: "♻️",
+  servizio: "🔧",
+  altro: "📍",
+};
+
+function createMarkerIcon(category) {
+  const emoji = CATEGORY_EMOJI[category] || "📍";
+  return L.divIcon({
+    className: "",
+    html: `
+      <div style="
+        width: 40px;
+        height: 40px;
+        background: #FF7A55;
+        border: 3px solid white;
+        border-radius: 50% 50% 50% 0;
+        transform: rotate(-45deg);
+        box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      ">
+        <span style="transform: rotate(45deg); font-size: 18px;">${emoji}</span>
+      </div>
+    `,
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+  });
+}
+
 function MapSection() {
   const [activities, setActivities] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -265,6 +300,7 @@ function MapSection() {
             <Marker
               key={activity._id}
               position={[activity.coordinates.lat, activity.coordinates.lng]}
+              icon={createMarkerIcon(activity.category)}
               eventHandlers={{
                 click: () => navigate(`/activity/${activity._id}`),
               }}

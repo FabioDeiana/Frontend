@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import api from "../services/api";
 import { useAuth } from "../context/AuthContext";
 import { useTranslation } from "react-i18next";
+import { motion } from "motion/react";
 
 function ActivityDetail() {
   const { id } = useParams();
@@ -22,7 +23,6 @@ function ActivityDetail() {
   const [reviewSuccess, setReviewSuccess] = useState(null);
   const [reviewLoading, setReviewLoading] = useState(false);
 
-  // Cerca la recensione già lasciata dall'utente loggato (se esiste)
   const userId = user?.id || user?._id;
   const myReview = user
     ? reviews.find((r) => (r.user?._id || r.user) === userId)
@@ -58,7 +58,6 @@ function ActivityDetail() {
     fetchData();
   }, [id]);
 
-  // Se l'utente ha già una recensione, precarica i suoi valori nel form
   useEffect(() => {
     if (myReview) {
       setReviewForm({
@@ -92,7 +91,6 @@ function ActivityDetail() {
 
     try {
       if (myReview) {
-        // Modifica recensione esistente
         const response = await api.put(
           `/activities/${id}/reviews/${myReview._id}`,
           reviewForm
@@ -106,7 +104,6 @@ function ActivityDetail() {
         );
         setReviewSuccess(t("activity.reviewUpdated"));
       } else {
-        // Nuova recensione
         const response = await api.post(`/activities/${id}/reviews`, reviewForm);
         setReviews((prev) => [...prev, response.data.review]);
         setReviewSuccess(t("activity.reviewCreated"));
@@ -125,82 +122,125 @@ function ActivityDetail() {
   return (
     <div className="max-w-3xl mx-auto px-6 py-12">
 
+      {/* Immagine header */}
       {activity.image && (
-        <img
+        <motion.img
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
           src={activity.image}
           alt={activity.name}
-          className="w-full h-64 object-cover rounded-2xl mb-6"
+          className="w-full h-72 object-cover rounded-3xl mb-8 shadow-lg"
         />
       )}
 
-      <div className="mb-6">
-        <span className="text-sm bg-ocean-100 text-ocean-700 font-medium px-3 py-1 rounded-full">
-          {t(`categories.${activity.category}`)}
-        </span>
-        {activity.verified && (
-          <span className="ml-2 text-sm bg-sun-100 text-ocean-700 font-medium px-3 py-1 rounded-full">
-            ✓ {t("activity.verified")}
+      {/* Header */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="mb-8"
+      >
+        <div className="flex flex-wrap gap-2 mb-3">
+          <span className="text-sm bg-ocean-100 text-ocean-700 font-medium px-3 py-1 rounded-full">
+            {t(`categories.${activity.category}`)}
           </span>
-        )}
-        <h1 className="text-3xl font-bold mt-3 mb-1">{activity.name}</h1>
-        <p className="text-gray-500">{activity.address}, {activity.city}</p>
+          {activity.verified && (
+            <span className="text-sm bg-sun-100 text-ocean-700 font-medium px-3 py-1 rounded-full">
+              ✓ {t("activity.verified")}
+            </span>
+          )}
+        </div>
+        <h1 className="text-3xl md:text-4xl mb-2 text-ocean-800">{activity.name}</h1>
+        <p className="text-gray-500">📍 {activity.address}, {activity.city}</p>
 
         {averages && (
-          <div className="flex flex-wrap gap-4 mt-3 bg-ocean-50 rounded-xl px-4 py-3 text-sm">
-            <span className="font-medium">🌿 {averages.eco}/5</span>
-            <span className="font-medium">♿ {averages.accessibility}/5</span>
-            <span className="font-medium">🥗 {averages.diet}/5</span>
-            <span className="text-gray-400">
-              ({reviews.length} {t("activity.reviews").toLowerCase()})
-            </span>
+          <div className="flex flex-wrap gap-5 mt-4 bg-white border border-ocean-100 rounded-2xl px-5 py-4 shadow-sm">
+            <div className="text-center">
+              <p className="text-2xl font-bold text-ocean-700">🌿 {averages.eco}</p>
+              <p className="text-xs text-gray-400">{t("activity.eco")}</p>
+            </div>
+            <div className="text-center">
+              <p className="text-2xl font-bold text-ocean-700">♿ {averages.accessibility}</p>
+              <p className="text-xs text-gray-400">{t("activity.accessibility")}</p>
+            </div>
+            <div className="text-center">
+              <p className="text-2xl font-bold text-ocean-700">🥗 {averages.diet}</p>
+              <p className="text-xs text-gray-400">{t("activity.diet")}</p>
+            </div>
+            <div className="flex items-center text-sm text-gray-400 ml-auto">
+              {reviews.length} {t("activity.reviews").toLowerCase()}
+            </div>
           </div>
         )}
-      </div>
+      </motion.div>
 
-      <p className="text-gray-700 mb-8">{activity.description}</p>
+      <motion.p
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+        className="text-gray-600 text-lg leading-relaxed mb-10"
+      >
+        {activity.description}
+      </motion.p>
 
+      {/* Tags */}
       {(activity.tags?.diet?.length > 0 ||
         activity.tags?.accessibility?.length > 0 ||
         activity.tags?.other?.length > 0) && (
-        <div className="mb-8">
-          <h2 className="text-lg font-semibold mb-3">Caratteristiche</h2>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mb-10"
+        >
+          <h2 className="text-xl mb-4 text-ocean-800">Caratteristiche</h2>
           <div className="flex flex-wrap gap-2">
             {activity.tags.diet.map((tag) => (
-              <span key={tag} className="bg-ocean-50 text-ocean-700 text-sm px-3 py-1 rounded-full">
-                {tag}
+              <span key={tag} className="bg-mint-100 text-mint-700 text-sm font-medium px-3 py-1.5 rounded-full">
+                🥗 {tag}
               </span>
             ))}
             {activity.tags.accessibility.map((tag) => (
-              <span key={tag} className="bg-ocean-100 text-ocean-700 text-sm px-3 py-1 rounded-full">
-                {tag}
+              <span key={tag} className="bg-ocean-100 text-ocean-700 text-sm font-medium px-3 py-1.5 rounded-full">
+                ♿ {tag}
               </span>
             ))}
             {activity.tags.other.map((tag) => (
-              <span key={tag} className="bg-ocean-50 text-gray-600 text-sm px-3 py-1 rounded-full">
+              <span key={tag} className="bg-sun-100 text-ocean-700 text-sm font-medium px-3 py-1.5 rounded-full">
                 {tag}
               </span>
             ))}
           </div>
-        </div>
+        </motion.div>
       )}
 
+      {/* Menu — solo per ristoranti */}
       {activity.category === "ristorante" && (
-        <div className="mb-8">
-          <h2 className="text-lg font-semibold mb-4">{t("activity.menu")}</h2>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mb-10"
+        >
+          <h2 className="text-xl mb-4 text-ocean-800">{t("activity.menu")}</h2>
           {menuItems.length === 0 ? (
             <p className="text-gray-500 text-sm">{t("activity.noMenu")}</p>
           ) : (
             <div className="flex flex-col gap-3">
               {menuItems.map((item) => (
-                <div key={item._id} className="bg-ocean-50 rounded-xl p-4 flex justify-between items-start">
+                <div key={item._id} className="bg-white border border-ocean-100 rounded-2xl p-5 flex justify-between items-start shadow-sm hover:shadow-md transition-shadow">
                   <div>
-                    <p className="font-medium">{item.name}</p>
+                    <p className="font-semibold text-ocean-800">{item.name}</p>
                     {item.description && (
                       <p className="text-sm text-gray-500 mt-1">{item.description}</p>
                     )}
                     <div className="flex flex-wrap gap-1 mt-2">
                       {item.dietTags.map((tag) => (
-                        <span key={tag} className="bg-ocean-50 text-ocean-700 text-xs px-2 py-0.5 rounded-full">
+                        <span key={tag} className="bg-mint-100 text-mint-700 text-xs px-2 py-0.5 rounded-full">
                           {tag}
                         </span>
                       ))}
@@ -211,31 +251,42 @@ function ActivityDetail() {
                       ))}
                     </div>
                   </div>
-                  <span className="font-semibold text-ocean-700 ml-4 whitespace-nowrap">
+                  <span className="font-bold text-coral-600 ml-4 whitespace-nowrap">
                     €{item.price.toFixed(2)}
                   </span>
                 </div>
               ))}
             </div>
           )}
-        </div>
+        </motion.div>
       )}
 
+      {/* Form recensione */}
       {user && (
-        <div className="mb-8 bg-ocean-50 rounded-2xl p-6">
-          <h2 className="text-lg font-semibold mb-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mb-10 bg-ocean-50 rounded-3xl p-6 md:p-8"
+        >
+          <h2 className="text-xl mb-5 text-ocean-800">
             {myReview ? t("activity.editReview") : t("activity.leaveReview")}
           </h2>
 
           {reviewError && (
-            <p className="bg-red-100 text-red-700 text-sm px-4 py-2 rounded-lg mb-4">
+            <p className="bg-red-100 text-red-700 text-sm px-4 py-2 rounded-xl mb-4">
               {reviewError}
             </p>
           )}
           {reviewSuccess && (
-            <p className="bg-ocean-100 text-ocean-700 text-sm px-4 py-2 rounded-lg mb-4">
+            <motion.p
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="bg-mint-100 text-mint-700 text-sm px-4 py-2 rounded-xl mb-4"
+            >
               {reviewSuccess}
-            </p>
+            </motion.p>
           )}
 
           <form onSubmit={handleReviewSubmit} className="flex flex-col gap-4">
@@ -245,8 +296,8 @@ function ActivityDetail() {
               { name: "dietOptions", label: `🥗 ${t("activity.diet")}` },
             ].map(({ name, label }) => (
               <div key={name}>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  {label}: {reviewForm.ratings[name]}/5
+                <label className="block text-sm font-medium text-ocean-800 mb-1">
+                  {label}: <span className="font-bold">{reviewForm.ratings[name]}/5</span>
                 </label>
                 <input
                   type="range"
@@ -255,13 +306,13 @@ function ActivityDetail() {
                   max="5"
                   value={reviewForm.ratings[name]}
                   onChange={handleReviewChange}
-                  className="w-full accent-ocean-600"
+                  className="w-full accent-coral-500"
                 />
               </div>
             ))}
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-ocean-800 mb-1">
                 {t("activity.comment")}
               </label>
               <textarea
@@ -270,27 +321,35 @@ function ActivityDetail() {
                 onChange={handleReviewChange}
                 required
                 rows={3}
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-ocean-400"
+                className="w-full border border-ocean-200 bg-white rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-ocean-400 transition"
               />
             </div>
 
-            <button
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
               type="submit"
               disabled={reviewLoading}
-              className="bg-ocean-700 text-white font-semibold py-2 rounded-lg hover:bg-ocean-800 transition disabled:opacity-50"
+              className="bg-coral-500 text-white font-semibold py-3 rounded-xl hover:bg-coral-600 transition disabled:opacity-50 shadow-lg shadow-coral-500/30"
             >
               {reviewLoading
                 ? t("activity.submitting")
                 : myReview
                 ? t("activity.updateReview")
                 : t("activity.submitReview")}
-            </button>
+            </motion.button>
           </form>
-        </div>
+        </motion.div>
       )}
 
-      <div>
-        <h2 className="text-lg font-semibold mb-4">
+      {/* Recensioni */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+      >
+        <h2 className="text-xl mb-5 text-ocean-800">
           {t("activity.reviews")} ({reviews.length})
         </h2>
 
@@ -299,24 +358,29 @@ function ActivityDetail() {
         ) : (
           <div className="flex flex-col gap-4">
             {reviews.map((review) => (
-              <div key={review._id} className="bg-ocean-50 rounded-xl p-4">
+              <div key={review._id} className="bg-white border border-ocean-100 rounded-2xl p-5 shadow-sm">
                 <div className="flex justify-between items-center mb-2">
-                  <span className="font-medium">{review.user?.name}</span>
+                  <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 bg-ocean-100 text-ocean-700 rounded-full flex items-center justify-center font-bold text-sm">
+                      {review.user?.name?.charAt(0)?.toUpperCase() || "?"}
+                    </div>
+                    <span className="font-semibold text-ocean-800">{review.user?.name}</span>
+                  </div>
                   <span className="text-xs text-gray-400">
                     {new Date(review.createdAt).toLocaleDateString()}
                   </span>
                 </div>
-                <div className="flex gap-4 text-sm text-gray-600 mb-2">
-                  <span>🌿 Eco: {review.ratings?.ecoFriendliness}/5</span>
-                  <span>♿ {t("activity.accessibility")}: {review.ratings?.accessibility}/5</span>
-                  <span>🥗 {t("activity.diet")}: {review.ratings?.dietOptions}/5</span>
+                <div className="flex flex-wrap gap-3 text-sm text-gray-500 mb-2">
+                  <span>🌿 {review.ratings?.ecoFriendliness}/5</span>
+                  <span>♿ {review.ratings?.accessibility}/5</span>
+                  <span>🥗 {review.ratings?.dietOptions}/5</span>
                 </div>
-                <p className="text-gray-700 text-sm">{review.comment}</p>
+                <p className="text-gray-600 text-sm leading-relaxed">{review.comment}</p>
               </div>
             ))}
           </div>
         )}
-      </div>
+      </motion.div>
 
     </div>
   );
