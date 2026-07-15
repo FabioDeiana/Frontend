@@ -40,3 +40,15 @@ export const ALLERGEN_OPTIONS = [
   "lupini",
   "molluschi",
 ];
+
+export const FOOD_BASE_OPTIONS = [
+  "soia",
+  "avena",
+  "riso",
+  "cocco",
+  "mandorla",
+  "anacardi",
+  "lupini",
+  "piselli",
+  "grano saraceno",
+];

@@ -15,6 +15,7 @@ import {
   CATEGORIES,
   DIET_OPTIONS,
   ACCESSIBILITY_OPTIONS,
+  FOOD_BASE_OPTIONS,
 } from "../../utils/constants";
 
 delete L.Icon.Default.prototype._getIconUrl;
@@ -73,6 +74,7 @@ function MapSection() {
     city: "",
     diet: [],
     accessibility: [],
+    foodBases: [],
   });
 
   const [appliedFilters, setAppliedFilters] = useState({
@@ -80,6 +82,7 @@ function MapSection() {
     city: "",
     diet: [],
     accessibility: [],
+    foodBases: [],
   });
 
   useEffect(() => {
@@ -92,6 +95,8 @@ function MapSection() {
           params.diet = appliedFilters.diet.join(",");
         if (appliedFilters.accessibility.length > 0)
           params.accessibility = appliedFilters.accessibility.join(",");
+        if (appliedFilters.foodBases.length > 0)
+          params.foodBases = appliedFilters.foodBases.join(",");
 
         const response = await api.get("/activities", { params });
         setActivities(response.data);
@@ -121,7 +126,13 @@ function MapSection() {
   };
 
   const handleReset = () => {
-    const empty = { category: "", city: "", diet: [], accessibility: [] };
+    const empty = {
+      category: "",
+      city: "",
+      diet: [],
+      accessibility: [],
+      foodBases: [],
+    };
     setFilters(empty);
     setAppliedFilters(empty);
     setShowFilters(false);
@@ -131,7 +142,8 @@ function MapSection() {
     (appliedFilters.category ? 1 : 0) +
     (appliedFilters.city ? 1 : 0) +
     appliedFilters.diet.length +
-    appliedFilters.accessibility.length;
+    appliedFilters.accessibility.length +
+    appliedFilters.foodBases.length;
 
   return (
     <section id="map" className="py-16 px-6">
@@ -257,6 +269,28 @@ function MapSection() {
             </div>
           </div>
 
+          {/* Basi Alimentari */}
+          <div className="mb-6">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              🌾 {t("map.foodBases")}
+            </label>
+            <div className="flex flex-wrap gap-2">
+              {FOOD_BASE_OPTIONS.map((option) => (
+                <button
+                  key={option}
+                  onClick={() => toggleOption("foodBases", option)}
+                  className={`px-3 py-1 rounded-full text-sm font-medium border transition ${
+                    filters.foodBases.includes(option)
+                      ? "bg-sun-400 text-ocean-800 border-sun-400"
+                      : "bg-white text-gray-600 border-ocean-200 hover:border-sun-400"
+                  }`}
+                >
+                  {option}
+                </button>
+              ))}
+            </div>
+          </div>
+
           {/* Bottoni */}
           <div className="flex gap-3">
             <button
@@ -288,7 +322,7 @@ function MapSection() {
         <MapContainer
           center={[41.9028, 12.4964]}
           zoom={12}
-          scrollWheelZoom={false}
+          scrollWheelZoom={true}
           style={{ height: "100%", width: "100%" }}
         >
           <TileLayer

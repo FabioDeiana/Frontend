@@ -5,7 +5,12 @@ import api from "../services/api";
 import { MapContainer, TileLayer, Marker } from "react-leaflet";
 import { useTranslation } from "react-i18next";
 import { motion } from "motion/react";
-import { CATEGORIES, DIET_OPTIONS, ACCESSIBILITY_OPTIONS } from "../utils/constants";
+import {
+  CATEGORIES,
+  DIET_OPTIONS,
+  ACCESSIBILITY_OPTIONS,
+  FOOD_BASE_OPTIONS,
+} from "../utils/constants";
 
 function AddActivity() {
   const navigate = useNavigate();
@@ -18,7 +23,11 @@ function AddActivity() {
     address: "",
     city: "",
   });
-  const [tags, setTags] = useState({ diet: [], accessibility: [] });
+  const [tags, setTags] = useState({
+    diet: [],
+    accessibility: [],
+    foodBases: [],
+  });
   const [coordinates, setCoordinates] = useState(null);
   const [geoLoading, setGeoLoading] = useState(false);
   const [geoError, setGeoError] = useState(null);
@@ -54,7 +63,7 @@ function AddActivity() {
             format: "json",
             limit: 1,
           },
-        }
+        },
       );
 
       if (response.data.length === 0) {
@@ -105,7 +114,6 @@ function AddActivity() {
   return (
     <div className="bg-ocean-50 min-h-screen">
       <div className="max-w-2xl mx-auto px-6 py-12">
-
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -117,7 +125,9 @@ function AddActivity() {
           <h1 className="text-3xl text-ocean-700 mt-3 mb-2">
             {t("addActivity.title")}
           </h1>
-          <p className="text-gray-500 max-w-lg mx-auto">{t("addActivity.subtitle")}</p>
+          <p className="text-gray-500 max-w-lg mx-auto">
+            {t("addActivity.subtitle")}
+          </p>
         </motion.div>
 
         <motion.form
@@ -129,7 +139,9 @@ function AddActivity() {
         >
           {/* Card informazioni base */}
           <div className="bg-white rounded-3xl shadow-sm p-6 md:p-8 flex flex-col gap-5">
-            <h2 className="text-lg font-semibold text-ocean-800">📝 {t("addActivity.basicInfo")}</h2>
+            <h2 className="text-lg font-semibold text-ocean-800">
+              📝 {t("addActivity.basicInfo")}
+            </h2>
 
             <div>
               <label className="block text-sm font-medium text-ocean-800 mb-1">
@@ -184,7 +196,9 @@ function AddActivity() {
 
           {/* Card posizione */}
           <div className="bg-white rounded-3xl shadow-sm p-6 md:p-8 flex flex-col gap-5">
-            <h2 className="text-lg font-semibold text-ocean-800">🗺️ {t("addActivity.location")}</h2>
+            <h2 className="text-lg font-semibold text-ocean-800">
+              🗺️ {t("addActivity.location")}
+            </h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
@@ -225,7 +239,9 @@ function AddActivity() {
               disabled={geoLoading || !formData.address || !formData.city}
               className="bg-ocean-100 text-ocean-700 font-semibold py-3 rounded-xl hover:bg-ocean-200 transition disabled:opacity-50"
             >
-              {geoLoading ? t("addActivity.searching") : `📍 ${t("addActivity.findOnMap")}`}
+              {geoLoading
+                ? t("addActivity.searching")
+                : `📍 ${t("addActivity.findOnMap")}`}
             </motion.button>
 
             {geoError && (
@@ -268,7 +284,9 @@ function AddActivity() {
 
           {/* Card caratteristiche */}
           <div className="bg-white rounded-3xl shadow-sm p-6 md:p-8 flex flex-col gap-5">
-            <h2 className="text-lg font-semibold text-ocean-800">✨ {t("addActivity.features")}</h2>
+            <h2 className="text-lg font-semibold text-ocean-800">
+              ✨ {t("addActivity.features")}
+            </h2>
 
             <div>
               <label className="block text-sm font-medium text-ocean-800 mb-2">
@@ -306,6 +324,28 @@ function AddActivity() {
                       tags.accessibility.includes(option)
                         ? "bg-ocean-600 text-white border-ocean-600"
                         : "bg-white text-gray-600 border-ocean-200 hover:border-ocean-400"
+                    }`}
+                  >
+                    {option}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-ocean-800 mb-2">
+                🌾 {t("addActivity.foodBases")}
+              </label>
+              <div className="flex flex-wrap gap-2">
+                {FOOD_BASE_OPTIONS.map((option) => (
+                  <button
+                    key={option}
+                    type="button"
+                    onClick={() => toggleTag("foodBases", option)}
+                    className={`px-4 py-2 rounded-full text-sm font-medium border transition ${
+                      tags.foodBases.includes(option)
+                        ? "bg-sun-400 text-ocean-800 border-sun-400"
+                        : "bg-white text-gray-600 border-ocean-200 hover:border-sun-400"
                     }`}
                   >
                     {option}

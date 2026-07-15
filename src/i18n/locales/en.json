@@ -29,7 +29,8 @@
     "accessibility": "Accessibility",
     "applyFilters": "Apply filters",
     "reset": "Reset",
-    "addActivity": "Add activity"
+    "addActivity": "Add activity",
+    "foodBases": "Food bases"
   },
   "howItWorks": {
     "title": "How it works",
@@ -198,6 +199,7 @@
     "missingCategory": "Please select a category.",
     "basicInfo": "Basic info",
     "location": "Location",
-    "features": "Features"
+    "features": "Features",
+    "foodBases": "Food bases used"
   }
 }

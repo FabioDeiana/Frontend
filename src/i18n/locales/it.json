@@ -29,7 +29,8 @@
     "accessibility": "Accessibilità",
     "applyFilters": "Applica filtri",
     "reset": "Azzera",
-    "addActivity": "Aggiungi attività"
+    "addActivity": "Aggiungi attività",
+    "foodBases": "Basi alimentari"
   },
   "howItWorks": {
     "title": "Come funziona",
@@ -198,6 +199,7 @@
     "missingCategory": "Seleziona una categoria.",
     "basicInfo": "Informazioni",
     "location": "Posizione",
-    "features": "Caratteristiche"
+    "features": "Caratteristiche",
+    "foodBases": "Basi alimentari utilizzate"
   }
 }
