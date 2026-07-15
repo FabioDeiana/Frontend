@@ -99,7 +99,9 @@
     "editReview": "Edit your review",
     "updateReview": "Update review",
     "reviewCreated": "Review published!",
-    "reviewUpdated": "Review updated!"
+    "reviewUpdated": "Review updated!",
+    "ratings": "Ratings",
+    "features": "Features"
   },
   "profile": {
     "title": "My profile",
@@ -193,6 +195,9 @@
     "success": "Activity suggested successfully! It will be visible after approval.",
     "error": "Error during submission. Please try again.",
     "missingCoordinates": "Before submitting, find the location on the map.",
-    "missingCategory": "Please select a category."
+    "missingCategory": "Please select a category.",
+    "basicInfo": "Basic info",
+    "location": "Location",
+    "features": "Features"
   }
 }

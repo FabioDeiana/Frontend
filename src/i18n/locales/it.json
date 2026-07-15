@@ -99,7 +99,9 @@
     "editReview": "Modifica la tua recensione",
     "updateReview": "Aggiorna recensione",
     "reviewCreated": "Recensione pubblicata!",
-    "reviewUpdated": "Recensione aggiornata!"
+    "reviewUpdated": "Recensione aggiornata!",
+    "ratings": "Valutazioni",
+    "features": "Caratteristiche"
   },
   "profile": {
     "title": "Il mio profilo",
@@ -193,6 +195,9 @@
     "success": "Attività proposta con successo! Sarà visibile dopo l'approvazione.",
     "error": "Errore durante l'invio. Riprova.",
     "missingCoordinates": "Prima di inviare, trova la posizione sulla mappa.",
-    "missingCategory": "Seleziona una categoria."
+    "missingCategory": "Seleziona una categoria.",
+    "basicInfo": "Informazioni",
+    "location": "Posizione",
+    "features": "Caratteristiche"
   }
 }

@@ -2,9 +2,12 @@ import { useState, useEffect } from "react";
 import api from "../services/api";
 import { useAuth } from "../context/AuthContext";
 import { useTranslation } from "react-i18next";
-import { DIET_OPTIONS, ACCESSIBILITY_OPTIONS, ALLERGEN_OPTIONS } from "../utils/constants";
-
-
+import { motion } from "motion/react";
+import {
+  DIET_OPTIONS,
+  ACCESSIBILITY_OPTIONS,
+  ALLERGEN_OPTIONS,
+} from "../utils/constants";
 
 function Profile() {
   const { user, updateUser } = useAuth();
@@ -98,7 +101,7 @@ function Profile() {
       setNewsletterMessage(
         subscribed
           ? t("newsletter.successSubscribe")
-          : t("newsletter.successUnsubscribe")
+          : t("newsletter.successUnsubscribe"),
       );
     } catch (err) {
       setNewsletterError("Errore durante l'aggiornamento della preferenza");
@@ -107,196 +110,278 @@ function Profile() {
     }
   };
 
+  const cardAnimation = {
+    initial: { opacity: 0, y: 20 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true },
+    transition: { duration: 0.4 },
+  };
+
   return (
-    <div className="max-w-2xl mx-auto px-6 py-12">
-      <h1 className="text-3xl font-bold text-ocean-700 mb-8">{t("profile.title")}</h1>
+    <div className="bg-ocean-50 min-h-screen">
+      <div className="max-w-2xl mx-auto px-6 py-12">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="relative bg-ocean-700 rounded-3xl p-8 mb-8 overflow-hidden text-white"
+        >
+          {/* Decorazioni */}
+          <div className="absolute -top-10 -right-10 w-48 h-48 bg-ocean-600 rounded-full opacity-60" />
+          <div className="absolute -bottom-14 -left-8 w-40 h-40 bg-ocean-600 rounded-full opacity-40" />
 
-      {/* Dati base */}
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
-        <h2 className="text-lg font-semibold mb-4">{t("profile.personalData")}</h2>
-
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            {t("profile.name")}
-          </label>
-          <input
-            type="text"
-            value={formData.name}
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-ocean-400"
-          />
-        </div>
-
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            {t("profile.email")}
-          </label>
-          <input
-            type="email"
-            value={user?.email || ""}
-            disabled
-            className="w-full border border-gray-200 rounded-lg px-4 py-2 bg-ocean-50 text-gray-400"
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            {t("profile.role")}
-          </label>
-          <span className="inline-block bg-ocean-100 text-ocean-700 text-sm font-medium px-3 py-1 rounded-full">
-            {user?.role}
-          </span>
-        </div>
-      </div>
-
-      {/* Preferenze dietetiche */}
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
-        <h2 className="text-lg font-semibold mb-4">🥗 {t("profile.dietPrefs")}</h2>
-        <div className="flex flex-wrap gap-2">
-          {DIET_OPTIONS.map((option) => (
-            <button
-              key={option}
-              onClick={() => toggleOption("diet", option)}
-              className={`px-4 py-2 rounded-full text-sm font-medium border transition ${
-                formData.preferences.diet.includes(option)
-                  ? "bg-ocean-700 text-white border-ocean-700"
-                  : "bg-white text-gray-600 border-gray-300 hover:border-ocean-200"
-              }`}
-            >
-              {option}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Allergie */}
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
-        <h2 className="text-lg font-semibold mb-4">⚠ {t("profile.allergens")}</h2>
-        <div className="flex flex-wrap gap-2">
-          {ALLERGEN_OPTIONS.map((option) => (
-            <button
-              key={option}
-              onClick={() => toggleOption("allergens", option)}
-              className={`px-4 py-2 rounded-full text-sm font-medium border transition ${
-                formData.preferences.allergens.includes(option)
-                  ? "bg-red-600 text-white border-red-600"
-                  : "bg-white text-gray-600 border-gray-300 hover:border-red-400"
-              }`}
-            >
-              {option}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Accessibilità */}
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
-        <h2 className="text-lg font-semibold mb-4">♿ {t("profile.accessibility")}</h2>
-        <div className="flex flex-wrap gap-2">
-          {ACCESSIBILITY_OPTIONS.map((option) => (
-            <button
-              key={option}
-              onClick={() => toggleOption("accessibility", option)}
-              className={`px-4 py-2 rounded-full text-sm font-medium border transition ${
-                formData.preferences.accessibility.includes(option)
-                  ? "bg-ocean-600 text-white border-ocean-600"
-                  : "bg-white text-gray-600 border-gray-300 hover:border-ocean-400"
-              }`}
-            >
-              {option}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Newsletter */}
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
-        <h2 className="text-lg font-semibold mb-2">📧 {t("profile.newsletter")}</h2>
-        <p className="text-sm text-gray-500 mb-4">
-          {user?.newsletter?.subscribed
-            ? t("profile.newsletterSubscribed")
-            : t("profile.newsletterNotSubscribed")}
-        </p>
-
-        {newsletterMessage && (
-          <p className="bg-ocean-100 text-ocean-700 text-sm px-4 py-2 rounded-lg mb-4">
-            {newsletterMessage}
-          </p>
-        )}
-        {newsletterError && (
-          <p className="bg-red-100 text-red-700 text-sm px-4 py-2 rounded-lg mb-4">
-            {newsletterError}
-          </p>
-        )}
-
-        <div className="flex gap-3">
-          {!user?.newsletter?.subscribed ? (
-            <button
-              onClick={() => handleNewsletter(true)}
-              disabled={newsletterLoading}
-              className="bg-ocean-700 text-white font-semibold px-5 py-2 rounded-lg hover:bg-ocean-800 transition disabled:opacity-50"
-            >
-              {newsletterLoading ? "..." : t("newsletter.subscribe")}
-            </button>
-          ) : (
-            <button
-              onClick={() => handleNewsletter(false)}
-              disabled={newsletterLoading}
-              className="bg-red-100 text-red-600 font-semibold px-5 py-2 rounded-lg hover:bg-red-200 transition disabled:opacity-50"
-            >
-              {newsletterLoading ? "..." : t("newsletter.unsubscribe")}
-            </button>
-          )}
-        </div>
-
-        <p className="text-xs text-gray-400 mt-3">
-          {t("newsletter.privacy")}
-        </p>
-      </div>
-
-      {/* Messaggi salvataggio */}
-      {error && (
-        <p className="bg-red-100 text-red-700 text-sm px-4 py-2 rounded-lg mb-4">
-          {error}
-        </p>
-      )}
-      {successMessage && (
-        <p className="bg-ocean-100 text-ocean-700 text-sm px-4 py-2 rounded-lg mb-4">
-          {successMessage}
-        </p>
-      )}
-
-      {/* Salva */}
-      <button
-        onClick={handleSave}
-        disabled={saving}
-        className="bg-ocean-700 text-white font-semibold px-6 py-3 rounded-lg hover:bg-ocean-800 transition disabled:opacity-50 mb-10"
-      >
-        {saving ? t("profile.saving") : t("profile.save")}
-      </button>
-
-      {/* Recensioni */}
-      <div>
-        <h2 className="text-lg font-semibold mb-4">{t("profile.myReviews")}</h2>
-        {loading ? (
-          <p className="text-gray-500 text-sm">Caricamento...</p>
-        ) : reviews.length === 0 ? (
-          <p className="text-gray-500 text-sm">{t("profile.noReviews")}</p>
-        ) : (
-          <div className="flex flex-col gap-4">
-            {reviews.map((review) => (
-              <div key={review._id} className="bg-ocean-50 rounded-xl p-4">
-                <p className="font-medium mb-1">{review.activity?.name}</p>
-                <div className="flex gap-4 text-sm text-gray-600 mb-2">
-                  <span>🌿 Eco: {review.ratings?.ecoFriendliness}/5</span>
-                  <span>♿ {t("activity.accessibility")}: {review.ratings?.accessibility}/5</span>
-                  <span>🥗 {t("activity.diet")}: {review.ratings?.dietOptions}/5</span>
-                </div>
-                <p className="text-gray-700 text-sm">{review.comment}</p>
+          <div className="relative flex items-center gap-5">
+            {/* Avatar a iniziale */}
+            <div className="w-20 h-20 bg-coral-500 rounded-full flex items-center justify-center text-3xl font-bold shadow-lg shrink-0">
+              {user?.name?.charAt(0)?.toUpperCase() || "?"}
+            </div>
+            <div>
+              <h1 className="text-2xl md:text-3xl mb-1">{user?.name}</h1>
+              <p className="text-ocean-200 text-sm">{user?.email}</p>
+              <div className="flex gap-2 mt-2">
+                <span className="bg-white/20 backdrop-blur text-xs font-medium px-3 py-1 rounded-full">
+                  {user?.role}
+                </span>
+                {user?.newsletter?.subscribed && (
+                  <span className="bg-sun-300 text-ocean-800 text-xs font-medium px-3 py-1 rounded-full">
+                    📧 Newsletter
+                  </span>
+                )}
+                <span className="bg-white/20 backdrop-blur text-xs font-medium px-3 py-1 rounded-full">
+                  💬 {reviews.length} {t("activity.reviews").toLowerCase()}
+                </span>
               </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Dati base */}
+        <motion.div
+          {...cardAnimation}
+          className="bg-white rounded-3xl shadow-sm p-6 mb-6"
+        >
+          <h2 className="text-lg font-semibold mb-4 text-ocean-800">
+            {t("profile.personalData")}
+          </h2>
+
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-ocean-800 mb-1">
+              {t("profile.name")}
+            </label>
+            <input
+              type="text"
+              value={formData.name}
+              onChange={(e) =>
+                setFormData({ ...formData, name: e.target.value })
+              }
+              className="w-full border border-ocean-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-ocean-400 transition"
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-ocean-800 mb-1">
+              {t("profile.email")}
+            </label>
+            <input
+              type="email"
+              value={user?.email || ""}
+              disabled
+              className="w-full border border-ocean-100 rounded-xl px-4 py-3 bg-ocean-50 text-gray-400"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-ocean-800 mb-1">
+              {t("profile.role")}
+            </label>
+            <span className="inline-block bg-ocean-100 text-ocean-700 text-sm font-medium px-3 py-1 rounded-full">
+              {user?.role}
+            </span>
+          </div>
+        </motion.div>
+
+        {/* Preferenze dietetiche */}
+        <motion.div
+          {...cardAnimation}
+          className="bg-white rounded-3xl shadow-sm p-6 mb-6"
+        >
+          <h2 className="text-lg font-semibold mb-4 text-ocean-800">
+            🥗 {t("profile.dietPrefs")}
+          </h2>
+          <div className="flex flex-wrap gap-2">
+            {DIET_OPTIONS.map((option) => (
+              <button
+                key={option}
+                onClick={() => toggleOption("diet", option)}
+                className={`px-4 py-2 rounded-full text-sm font-medium border transition ${
+                  formData.preferences.diet.includes(option)
+                    ? "bg-mint-500 text-white border-mint-500"
+                    : "bg-white text-gray-600 border-ocean-200 hover:border-mint-500"
+                }`}
+              >
+                {option}
+              </button>
             ))}
           </div>
+        </motion.div>
+
+        {/* Allergie */}
+        <motion.div
+          {...cardAnimation}
+          className="bg-white rounded-3xl shadow-sm p-6 mb-6"
+        >
+          <h2 className="text-lg font-semibold mb-4 text-ocean-800">
+            ⚠ {t("profile.allergens")}
+          </h2>
+          <div className="flex flex-wrap gap-2">
+            {ALLERGEN_OPTIONS.map((option) => (
+              <button
+                key={option}
+                onClick={() => toggleOption("allergens", option)}
+                className={`px-4 py-2 rounded-full text-sm font-medium border transition ${
+                  formData.preferences.allergens.includes(option)
+                    ? "bg-coral-500 text-white border-coral-500"
+                    : "bg-white text-gray-600 border-ocean-200 hover:border-coral-500"
+                }`}
+              >
+                {option}
+              </button>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Accessibilità */}
+        <motion.div
+          {...cardAnimation}
+          className="bg-white rounded-3xl shadow-sm p-6 mb-6"
+        >
+          <h2 className="text-lg font-semibold mb-4 text-ocean-800">
+            ♿ {t("profile.accessibility")}
+          </h2>
+          <div className="flex flex-wrap gap-2">
+            {ACCESSIBILITY_OPTIONS.map((option) => (
+              <button
+                key={option}
+                onClick={() => toggleOption("accessibility", option)}
+                className={`px-4 py-2 rounded-full text-sm font-medium border transition ${
+                  formData.preferences.accessibility.includes(option)
+                    ? "bg-ocean-600 text-white border-ocean-600"
+                    : "bg-white text-gray-600 border-ocean-200 hover:border-ocean-400"
+                }`}
+              >
+                {option}
+              </button>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Newsletter */}
+        <motion.div
+          {...cardAnimation}
+          className="bg-white rounded-3xl shadow-sm p-6 mb-6"
+        >
+          <h2 className="text-lg font-semibold mb-2 text-ocean-800">
+            📧 {t("profile.newsletter")}
+          </h2>
+          <p className="text-sm text-gray-500 mb-4">
+            {user?.newsletter?.subscribed
+              ? t("profile.newsletterSubscribed")
+              : t("profile.newsletterNotSubscribed")}
+          </p>
+
+          {newsletterMessage && (
+            <p className="bg-mint-100 text-mint-700 text-sm px-4 py-2 rounded-xl mb-4">
+              {newsletterMessage}
+            </p>
+          )}
+          {newsletterError && (
+            <p className="bg-red-100 text-red-700 text-sm px-4 py-2 rounded-xl mb-4">
+              {newsletterError}
+            </p>
+          )}
+
+          <div className="flex gap-3">
+            {!user?.newsletter?.subscribed ? (
+              <button
+                onClick={() => handleNewsletter(true)}
+                disabled={newsletterLoading}
+                className="bg-coral-500 text-white font-semibold px-5 py-2 rounded-xl hover:bg-coral-600 transition disabled:opacity-50"
+              >
+                {newsletterLoading ? "..." : t("newsletter.subscribe")}
+              </button>
+            ) : (
+              <button
+                onClick={() => handleNewsletter(false)}
+                disabled={newsletterLoading}
+                className="bg-red-100 text-red-600 font-semibold px-5 py-2 rounded-xl hover:bg-red-200 transition disabled:opacity-50"
+              >
+                {newsletterLoading ? "..." : t("newsletter.unsubscribe")}
+              </button>
+            )}
+          </div>
+
+          <p className="text-xs text-gray-400 mt-3">
+            {t("newsletter.privacy")}
+          </p>
+        </motion.div>
+
+        {/* Messaggi salvataggio */}
+        {error && (
+          <p className="bg-red-100 text-red-700 text-sm px-4 py-2 rounded-xl mb-4">
+            {error}
+          </p>
         )}
+        {successMessage && (
+          <motion.p
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="bg-mint-100 text-mint-700 text-sm px-4 py-2 rounded-xl mb-4"
+          >
+            {successMessage}
+          </motion.p>
+        )}
+
+        {/* Salva */}
+        <motion.button
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          onClick={handleSave}
+          disabled={saving}
+          className="bg-coral-500 text-white font-semibold px-6 py-3 rounded-xl hover:bg-coral-600 transition disabled:opacity-50 mb-10 shadow-lg shadow-coral-500/30"
+        >
+          {saving ? t("profile.saving") : t("profile.save")}
+        </motion.button>
+
+        {/* Recensioni */}
+        <motion.div
+          {...cardAnimation}
+          className="bg-white rounded-3xl shadow-sm p-6"
+        >
+          <h2 className="text-lg font-semibold mb-4 text-ocean-800">
+            💬 {t("profile.myReviews")}
+          </h2>
+          {loading ? (
+            <p className="text-gray-500 text-sm">Caricamento...</p>
+          ) : reviews.length === 0 ? (
+            <p className="text-gray-500 text-sm">{t("profile.noReviews")}</p>
+          ) : (
+            <div className="flex flex-col gap-4">
+              {reviews.map((review) => (
+                <div key={review._id} className="bg-ocean-50 rounded-2xl p-5">
+                  <p className="font-semibold mb-1 text-ocean-800">
+                    {review.activity?.name}
+                  </p>
+                  <div className="flex flex-wrap gap-3 text-sm text-gray-500 mb-2">
+                    <span>🌿 {review.ratings?.ecoFriendliness}/5</span>
+                    <span>♿ {review.ratings?.accessibility}/5</span>
+                    <span>🥗 {review.ratings?.dietOptions}/5</span>
+                  </div>
+                  <p className="text-gray-600 text-sm">{review.comment}</p>
+                </div>
+              ))}
+            </div>
+          )}
+        </motion.div>
       </div>
     </div>
   );
