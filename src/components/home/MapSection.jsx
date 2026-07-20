@@ -1,22 +1,15 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import api from "../../services/api";
 import { MapContainer, TileLayer, Marker, Tooltip } from "react-leaflet";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
 import { motion } from "motion/react";
-
+import { useAuth } from "../../context/AuthContext";
+import { CATEGORIES, DIET_OPTIONS, ACCESSIBILITY_OPTIONS, FOOD_BASE_OPTIONS } from "../../utils/constants";
 import L from "leaflet";
 import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
-import {
-  CATEGORIES,
-  DIET_OPTIONS,
-  ACCESSIBILITY_OPTIONS,
-  FOOD_BASE_OPTIONS,
-} from "../../utils/constants";
 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -91,16 +84,13 @@ function MapSection() {
         const params = {};
         if (appliedFilters.category) params.category = appliedFilters.category;
         if (appliedFilters.city) params.city = appliedFilters.city;
-        if (appliedFilters.diet.length > 0)
-          params.diet = appliedFilters.diet.join(",");
-        if (appliedFilters.accessibility.length > 0)
-          params.accessibility = appliedFilters.accessibility.join(",");
-        if (appliedFilters.foodBases.length > 0)
-          params.foodBases = appliedFilters.foodBases.join(",");
+        if (appliedFilters.diet.length > 0) params.diet = appliedFilters.diet.join(",");
+        if (appliedFilters.accessibility.length > 0) params.accessibility = appliedFilters.accessibility.join(",");
+        if (appliedFilters.foodBases.length > 0) params.foodBases = appliedFilters.foodBases.join(",");
 
         const response = await api.get("/activities", { params });
         setActivities(response.data);
-      } catch (err) {
+      } catch {
         setError(t("map.error"));
       } finally {
         setLoading(false);
@@ -126,13 +116,7 @@ function MapSection() {
   };
 
   const handleReset = () => {
-    const empty = {
-      category: "",
-      city: "",
-      diet: [],
-      accessibility: [],
-      foodBases: [],
-    };
+    const empty = { category: "", city: "", diet: [], accessibility: [], foodBases: [] };
     setFilters(empty);
     setAppliedFilters(empty);
     setShowFilters(false);
@@ -157,8 +141,8 @@ function MapSection() {
         {t("map.title")}
       </motion.h2>
 
-      {/* Bottone filtri */}
-      <div className="flex justify-center gap-3 mb-6">
+      {/* Bottoni filtri + aggiungi */}
+      <div className="flex justify-center gap-3 mb-6 flex-wrap">
         <button
           onClick={() => setShowFilters((prev) => !prev)}
           className="flex items-center gap-2 bg-ocean-700 text-white px-5 py-2 rounded-full font-medium hover:bg-ocean-800 transition"
@@ -183,7 +167,8 @@ function MapSection() {
 
       {/* Pannello filtri */}
       {showFilters && (
-        <div className="max-w-2xl mx-auto bg-white border border-gray-200 rounded-2xl p-6 mb-6 shadow-sm">
+        <div className="max-w-2xl mx-auto bg-white border border-ocean-100 rounded-2xl p-6 mb-6 shadow-sm">
+
           {/* Città */}
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -194,7 +179,7 @@ function MapSection() {
               value={filters.city}
               onChange={(e) => setFilters({ ...filters, city: e.target.value })}
               placeholder="es. Roma"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-ocean-400"
+              className="w-full border border-ocean-200 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-ocean-400"
             />
           </div>
 
@@ -216,7 +201,7 @@ function MapSection() {
                   className={`px-3 py-1 rounded-full text-sm font-medium border transition ${
                     filters.category === cat
                       ? "bg-ocean-700 text-white border-ocean-700"
-                      : "bg-white text-gray-600 border-gray-300 hover:border-ocean-200"
+                      : "bg-white text-gray-600 border-ocean-200 hover:border-ocean-400"
                   }`}
                 >
                   {t(`categories.${cat}`)}
@@ -237,18 +222,18 @@ function MapSection() {
                   onClick={() => toggleOption("diet", option)}
                   className={`px-3 py-1 rounded-full text-sm font-medium border transition ${
                     filters.diet.includes(option)
-                      ? "bg-ocean-700 text-white border-ocean-700"
-                      : "bg-white text-gray-600 border-gray-300 hover:border-ocean-200"
+                      ? "bg-mint-500 text-white border-mint-500"
+                      : "bg-white text-gray-600 border-ocean-200 hover:border-mint-500"
                   }`}
                 >
-                  {option}
+                  {t(`options.${option}`)}
                 </button>
               ))}
             </div>
           </div>
 
           {/* Accessibilità */}
-          <div className="mb-6">
+          <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700 mb-2">
               {t("map.accessibility")}
             </label>
@@ -260,16 +245,16 @@ function MapSection() {
                   className={`px-3 py-1 rounded-full text-sm font-medium border transition ${
                     filters.accessibility.includes(option)
                       ? "bg-ocean-600 text-white border-ocean-600"
-                      : "bg-white text-gray-600 border-gray-300 hover:border-ocean-400"
+                      : "bg-white text-gray-600 border-ocean-200 hover:border-ocean-400"
                   }`}
                 >
-                  {option}
+                  {t(`options.${option}`)}
                 </button>
               ))}
             </div>
           </div>
 
-          {/* Basi Alimentari */}
+          {/* Basi alimentari */}
           <div className="mb-6">
             <label className="block text-sm font-medium text-gray-700 mb-2">
               🌾 {t("map.foodBases")}
@@ -285,7 +270,7 @@ function MapSection() {
                       : "bg-white text-gray-600 border-ocean-200 hover:border-sun-400"
                   }`}
                 >
-                  {option}
+                  {t(`options.${option}`)}
                 </button>
               ))}
             </div>
@@ -295,13 +280,13 @@ function MapSection() {
           <div className="flex gap-3">
             <button
               onClick={handleApply}
-              className="bg-ocean-700 text-white font-semibold px-5 py-2 rounded-lg hover:bg-ocean-800 transition"
+              className="bg-coral-500 text-white font-semibold px-5 py-2 rounded-lg hover:bg-coral-600 transition"
             >
               {t("map.applyFilters")}
             </button>
             <button
               onClick={handleReset}
-              className="bg-ocean-50 text-gray-600 font-semibold px-5 py-2 rounded-lg hover:bg-gray-200 transition"
+              className="bg-ocean-50 text-gray-600 font-semibold px-5 py-2 rounded-lg hover:bg-ocean-100 transition"
             >
               {t("map.reset")}
             </button>
@@ -341,9 +326,7 @@ function MapSection() {
             >
               <Tooltip direction="top" offset={[-15, -10]} opacity={1}>
                 <div className="w-48">
-                  <p className="font-semibold text-ocean-700">
-                    {activity.name}
-                  </p>
+                  <p className="font-semibold text-ocean-700">{activity.name}</p>
                   <p className="text-xs text-gray-500 mb-1">
                     {t(`categories.${activity.category}`)} · {activity.city}
                   </p>
@@ -352,11 +335,8 @@ function MapSection() {
                   </p>
                   <div className="flex flex-wrap gap-1 mt-1">
                     {activity.tags?.diet?.slice(0, 3).map((tag) => (
-                      <span
-                        key={tag}
-                        className="bg-ocean-50 text-ocean-700 text-[10px] px-1.5 py-0.5 rounded-full"
-                      >
-                        {tag}
+                      <span key={tag} className="bg-mint-100 text-mint-700 text-[10px] px-1.5 py-0.5 rounded-full">
+                        {t(`options.${tag}`)}
                       </span>
                     ))}
                   </div>

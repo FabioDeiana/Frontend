@@ -122,11 +122,56 @@
     "myReviews": "My reviews",
     "noReviews": "You haven't left any reviews yet."
   },
+  "options": {
+    "vegetariano": "vegetarian",
+    "vegano": "vegan",
+    "senza glutine": "gluten-free",
+    "senza lattosio": "lactose-free",
+    "halal": "halal",
+    "kosher": "kosher",
+    "sedia a rotelle": "wheelchair accessible",
+    "ipovedente": "visually impaired friendly",
+    "ipoudente": "hearing impaired friendly",
+    "difficolta motorie": "mobility support",
+    "glutine": "gluten",
+    "lattosio": "lactose",
+    "uova": "eggs",
+    "pesce": "fish",
+    "crostacei": "shellfish",
+    "arachidi": "peanuts",
+    "soia": "soy",
+    "frutta a guscio": "tree nuts",
+    "sedano": "celery",
+    "senape": "mustard",
+    "sesamo": "sesame",
+    "anidride solforosa": "sulphites",
+    "lupini": "lupins",
+    "molluschi": "molluscs",
+    "avena": "oat",
+    "riso": "rice",
+    "cocco": "coconut",
+    "mandorla": "almond",
+    "anacardi": "cashew",
+    "piselli": "pea",
+    "grano saraceno": "buckwheat",
+    "biologico": "organic",
+    "accesso disabili": "disabled access"
+  },
   "about": {
-    "title": "About us"
+    "title": "About us",
+    "p1": "OpenPlaces was born from the belief that every daily choice can make a difference. We are a community of people who believe in sustainability, accessibility and transparency — and we want to make it easier to find local businesses that share these values.",
+    "p2": "Whether you're looking for a restaurant with vegan options, a zero-waste shop or an eco-friendly accommodation, OpenPlaces helps you discover them through real community reviews — no greenwashing, just verified experiences from those who live them every day.",
+    "p3": "If you run a business and want to be part of it, sign up and suggest it on OpenPlaces. If you're a curious user, explore the map and leave your reviews — every contribution helps the community grow."
   },
   "cookie": {
-    "title": "Cookie Policy"
+    "title": "Cookie Policy",
+    "intro": "OpenPlaces uses essential technical cookies for the website to function. We do not use profiling or tracking cookies for advertising purposes.",
+    "techTitle": "Technical cookies",
+    "techText": "We use an httpOnly cookie for user session management (refresh token). This cookie is not accessible from JavaScript and is required to keep authentication active securely. It is automatically deleted on logout or after 7 days.",
+    "thirdTitle": "Third-party cookies",
+    "thirdText": "Maps are provided by OpenStreetMap via Leaflet. OpenStreetMap may set its own cookies — check their privacy policy for more information.",
+    "manageTitle": "Cookie management",
+    "manageText": "You can disable cookies in your browser, but some site features (such as session persistence) may not work correctly."
   },
   "notFound": {
     "title": "Page not found",

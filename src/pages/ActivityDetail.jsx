@@ -6,20 +6,13 @@ import { useTranslation } from "react-i18next";
 import { motion } from "motion/react";
 
 const CATEGORY_IMAGES = {
-  ristorante:
-    "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1600&q=80",
-  negozio:
-    "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=1600&q=80",
-  mercato:
-    "https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=1600&q=80",
-  alloggio:
-    "https://images.unsplash.com/photo-1587061949409-02df41d5e562?w=1600&q=80",
-  punto_riciclo:
-    "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=1600&q=80",
-  servizio:
-    "https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=1600&q=80",
-  altro:
-    "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1600&q=80",
+  ristorante: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1600&q=80",
+  negozio: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=1600&q=80",
+  mercato: "https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=1600&q=80",
+  alloggio: "https://images.unsplash.com/photo-1587061949409-02df41d5e562?w=1600&q=80",
+  punto_riciclo: "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=1600&q=80",
+  servizio: "https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=1600&q=80",
+  altro: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1600&q=80",
 };
 
 function ActivityDetail() {
@@ -48,22 +41,9 @@ function ActivityDetail() {
   const averages =
     reviews.length > 0
       ? {
-          eco: (
-            reviews.reduce(
-              (sum, r) => sum + (r.ratings?.ecoFriendliness || 0),
-              0,
-            ) / reviews.length
-          ).toFixed(1),
-          accessibility: (
-            reviews.reduce(
-              (sum, r) => sum + (r.ratings?.accessibility || 0),
-              0,
-            ) / reviews.length
-          ).toFixed(1),
-          diet: (
-            reviews.reduce((sum, r) => sum + (r.ratings?.dietOptions || 0), 0) /
-            reviews.length
-          ).toFixed(1),
+          eco: (reviews.reduce((sum, r) => sum + (r.ratings?.ecoFriendliness || 0), 0) / reviews.length).toFixed(1),
+          accessibility: (reviews.reduce((sum, r) => sum + (r.ratings?.accessibility || 0), 0) / reviews.length).toFixed(1),
+          diet: (reviews.reduce((sum, r) => sum + (r.ratings?.dietOptions || 0), 0) / reviews.length).toFixed(1),
         }
       : null;
 
@@ -78,7 +58,7 @@ function ActivityDetail() {
         setActivity(activityRes.data);
         setReviews(reviewsRes.data);
         setMenuItems(menuRes.data);
-      } catch (err) {
+      } catch {
         setError("Errore nel caricamento dell'attività");
       } finally {
         setLoading(false);
@@ -123,47 +103,39 @@ function ActivityDetail() {
       if (myReview) {
         const response = await api.put(
           `/activities/${id}/reviews/${myReview._id}`,
-          reviewForm,
+          reviewForm
         );
         setReviews((prev) =>
           prev.map((r) =>
             r._id === myReview._id
               ? { ...response.data.review, user: myReview.user }
-              : r,
-          ),
+              : r
+          )
         );
         setReviewSuccess(t("activity.reviewUpdated"));
       } else {
-        const response = await api.post(
-          `/activities/${id}/reviews`,
-          reviewForm,
-        );
+        const response = await api.post(`/activities/${id}/reviews`, reviewForm);
         setReviews((prev) => [...prev, response.data.review]);
         setReviewSuccess(t("activity.reviewCreated"));
       }
     } catch (err) {
-      setReviewError(
-        err.response?.data?.message || "Errore nell'invio della recensione",
-      );
+      setReviewError(err.response?.data?.message || "Errore nell'invio della recensione");
     } finally {
       setReviewLoading(false);
     }
   };
 
-  if (loading) return <p className="text-center py-20">Caricamento...</p>;
+  if (loading) return <p className="text-center py-20">...</p>;
   if (error) return <p className="text-center py-20 text-red-600">{error}</p>;
   if (!activity) return null;
 
   return (
     <div className="bg-ocean-50 min-h-screen pb-16">
+
       {/* Hero immersivo con immagine */}
       <div className="relative h-80 md:h-96">
         <img
-          src={
-            activity.image ||
-            CATEGORY_IMAGES[activity.category] ||
-            CATEGORY_IMAGES.altro
-          }
+          src={activity.image || CATEGORY_IMAGES[activity.category] || CATEGORY_IMAGES.altro}
           alt={activity.name}
           className="w-full h-full object-cover"
         />
@@ -186,17 +158,17 @@ function ActivityDetail() {
             )}
           </div>
           <h1 className="text-3xl md:text-5xl mb-2">{activity.name}</h1>
-          <p className="text-ocean-100">
-            📍 {activity.address}, {activity.city}
-          </p>
+          <p className="text-ocean-100">📍 {activity.address}, {activity.city}</p>
         </motion.div>
       </div>
 
       {/* Contenuto a due colonne */}
       <div className="max-w-5xl mx-auto px-6 -mt-6 relative">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+
           {/* Colonna principale */}
           <div className="md:col-span-2 flex flex-col gap-6">
+
             {/* Descrizione */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -218,44 +190,27 @@ function ActivityDetail() {
                 transition={{ duration: 0.5 }}
                 className="bg-white rounded-3xl p-6 md:p-8 shadow-sm"
               >
-                <h2 className="text-xl mb-4 text-ocean-800">
-                  🍽️ {t("activity.menu")}
-                </h2>
+                <h2 className="text-xl mb-4 text-ocean-800">🍽️ {t("activity.menu")}</h2>
                 {menuItems.length === 0 ? (
-                  <p className="text-gray-500 text-sm">
-                    {t("activity.noMenu")}
-                  </p>
+                  <p className="text-gray-500 text-sm">{t("activity.noMenu")}</p>
                 ) : (
                   <div className="flex flex-col gap-3">
                     {menuItems.map((item) => (
-                      <div
-                        key={item._id}
-                        className="bg-ocean-50 rounded-2xl p-5 flex justify-between items-start"
-                      >
+                      <div key={item._id} className="bg-ocean-50 rounded-2xl p-5 flex justify-between items-start">
                         <div>
-                          <p className="font-semibold text-ocean-800">
-                            {item.name}
-                          </p>
+                          <p className="font-semibold text-ocean-800">{item.name}</p>
                           {item.description && (
-                            <p className="text-sm text-gray-500 mt-1">
-                              {item.description}
-                            </p>
+                            <p className="text-sm text-gray-500 mt-1">{item.description}</p>
                           )}
                           <div className="flex flex-wrap gap-1 mt-2">
                             {item.dietTags.map((tag) => (
-                              <span
-                                key={tag}
-                                className="bg-mint-100 text-mint-700 text-xs px-2 py-0.5 rounded-full"
-                              >
-                                {tag}
+                              <span key={tag} className="bg-mint-100 text-mint-700 text-xs px-2 py-0.5 rounded-full">
+                                {t(`options.${tag}`)}
                               </span>
                             ))}
                             {item.allergens.map((allergen) => (
-                              <span
-                                key={allergen}
-                                className="bg-red-50 text-red-600 text-xs px-2 py-0.5 rounded-full"
-                              >
-                                ⚠ {allergen}
+                              <span key={allergen} className="bg-red-50 text-red-600 text-xs px-2 py-0.5 rounded-full">
+                                ⚠ {t(`options.${allergen}`)}
                               </span>
                             ))}
                           </div>
@@ -280,10 +235,7 @@ function ActivityDetail() {
                 className="bg-white rounded-3xl p-6 md:p-8 shadow-sm"
               >
                 <h2 className="text-xl mb-5 text-ocean-800">
-                  ✍️{" "}
-                  {myReview
-                    ? t("activity.editReview")
-                    : t("activity.leaveReview")}
+                  ✍️ {myReview ? t("activity.editReview") : t("activity.leaveReview")}
                 </h2>
 
                 {reviewError && (
@@ -301,27 +253,15 @@ function ActivityDetail() {
                   </motion.p>
                 )}
 
-                <form
-                  onSubmit={handleReviewSubmit}
-                  className="flex flex-col gap-4"
-                >
+                <form onSubmit={handleReviewSubmit} className="flex flex-col gap-4">
                   {[
-                    {
-                      name: "ecoFriendliness",
-                      label: `🌿 ${t("activity.eco")}`,
-                    },
-                    {
-                      name: "accessibility",
-                      label: `♿ ${t("activity.accessibility")}`,
-                    },
+                    { name: "ecoFriendliness", label: `🌿 ${t("activity.eco")}` },
+                    { name: "accessibility", label: `♿ ${t("activity.accessibility")}` },
                     { name: "dietOptions", label: `🥗 ${t("activity.diet")}` },
                   ].map(({ name, label }) => (
                     <div key={name}>
                       <label className="block text-sm font-medium text-ocean-800 mb-1">
-                        {label}:{" "}
-                        <span className="font-bold">
-                          {reviewForm.ratings[name]}/5
-                        </span>
+                        {label}: <span className="font-bold">{reviewForm.ratings[name]}/5</span>
                       </label>
                       <input
                         type="range"
@@ -359,8 +299,8 @@ function ActivityDetail() {
                     {reviewLoading
                       ? t("activity.submitting")
                       : myReview
-                        ? t("activity.updateReview")
-                        : t("activity.submitReview")}
+                      ? t("activity.updateReview")
+                      : t("activity.submitReview")}
                   </motion.button>
                 </form>
               </motion.div>
@@ -379,24 +319,17 @@ function ActivityDetail() {
               </h2>
 
               {reviews.length === 0 ? (
-                <p className="text-gray-500 text-sm">
-                  {t("activity.noReviews")}
-                </p>
+                <p className="text-gray-500 text-sm">{t("activity.noReviews")}</p>
               ) : (
                 <div className="flex flex-col gap-4">
                   {reviews.map((review) => (
-                    <div
-                      key={review._id}
-                      className="bg-ocean-50 rounded-2xl p-5"
-                    >
+                    <div key={review._id} className="bg-ocean-50 rounded-2xl p-5">
                       <div className="flex justify-between items-center mb-2">
                         <div className="flex items-center gap-2">
                           <div className="w-8 h-8 bg-ocean-700 text-white rounded-full flex items-center justify-center font-bold text-sm">
                             {review.user?.name?.charAt(0)?.toUpperCase() || "?"}
                           </div>
-                          <span className="font-semibold text-ocean-800">
-                            {review.user?.name}
-                          </span>
+                          <span className="font-semibold text-ocean-800">{review.user?.name}</span>
                         </div>
                         <span className="text-xs text-gray-400">
                           {new Date(review.createdAt).toLocaleDateString()}
@@ -407,9 +340,7 @@ function ActivityDetail() {
                         <span>♿ {review.ratings?.accessibility}/5</span>
                         <span>🥗 {review.ratings?.dietOptions}/5</span>
                       </div>
-                      <p className="text-gray-600 text-sm leading-relaxed">
-                        {review.comment}
-                      </p>
+                      <p className="text-gray-600 text-sm leading-relaxed">{review.comment}</p>
                     </div>
                   ))}
                 </div>
@@ -419,6 +350,7 @@ function ActivityDetail() {
 
           {/* Sidebar */}
           <div className="flex flex-col gap-6">
+
             {/* Card valutazioni */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -426,36 +358,18 @@ function ActivityDetail() {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="bg-white rounded-3xl p-6 shadow-sm"
             >
-              <h3 className="font-semibold text-ocean-800 mb-4">
-                ⭐ {t("activity.ratings")}
-              </h3>
+              <h3 className="font-semibold text-ocean-800 mb-4">⭐ {t("activity.ratings")}</h3>
               {averages ? (
                 <div className="flex flex-col gap-3">
                   {[
-                    {
-                      emoji: "🌿",
-                      label: t("activity.eco"),
-                      value: averages.eco,
-                    },
-                    {
-                      emoji: "♿",
-                      label: t("activity.accessibility"),
-                      value: averages.accessibility,
-                    },
-                    {
-                      emoji: "🥗",
-                      label: t("activity.diet"),
-                      value: averages.diet,
-                    },
+                    { emoji: "🌿", label: t("activity.eco"), value: averages.eco },
+                    { emoji: "♿", label: t("activity.accessibility"), value: averages.accessibility },
+                    { emoji: "🥗", label: t("activity.diet"), value: averages.diet },
                   ].map((r) => (
                     <div key={r.label}>
                       <div className="flex justify-between text-sm mb-1">
-                        <span className="text-gray-500">
-                          {r.emoji} {r.label}
-                        </span>
-                        <span className="font-bold text-ocean-700">
-                          {r.value}
-                        </span>
+                        <span className="text-gray-500">{r.emoji} {r.label}</span>
+                        <span className="font-bold text-ocean-700">{r.value}</span>
                       </div>
                       <div className="h-2 bg-ocean-100 rounded-full overflow-hidden">
                         <motion.div
@@ -473,9 +387,7 @@ function ActivityDetail() {
                   </p>
                 </div>
               ) : (
-                <p className="text-sm text-gray-400">
-                  {t("activity.noReviews")}
-                </p>
+                <p className="text-sm text-gray-400">{t("activity.noReviews")}</p>
               )}
             </motion.div>
 
@@ -490,40 +402,26 @@ function ActivityDetail() {
                 transition={{ duration: 0.5, delay: 0.4 }}
                 className="bg-white rounded-3xl p-6 shadow-sm"
               >
-                <h3 className="font-semibold text-ocean-800 mb-4">
-                  ✨ {t("activity.features")}
-                </h3>
+                <h3 className="font-semibold text-ocean-800 mb-4">✨ {t("activity.features")}</h3>
                 <div className="flex flex-wrap gap-2">
                   {activity.tags.diet.map((tag) => (
-                    <span
-                      key={tag}
-                      className="bg-mint-100 text-mint-700 text-sm font-medium px-3 py-1.5 rounded-full"
-                    >
-                      🥗 {tag}
+                    <span key={tag} className="bg-mint-100 text-mint-700 text-sm font-medium px-3 py-1.5 rounded-full">
+                      🥗 {t(`options.${tag}`)}
                     </span>
                   ))}
                   {activity.tags.accessibility.map((tag) => (
-                    <span
-                      key={tag}
-                      className="bg-ocean-100 text-ocean-700 text-sm font-medium px-3 py-1.5 rounded-full"
-                    >
-                      ♿ {tag}
+                    <span key={tag} className="bg-ocean-100 text-ocean-700 text-sm font-medium px-3 py-1.5 rounded-full">
+                      ♿ {t(`options.${tag}`)}
                     </span>
                   ))}
                   {activity.tags.other.map((tag) => (
-                    <span
-                      key={tag}
-                      className="bg-sun-100 text-ocean-700 text-sm font-medium px-3 py-1.5 rounded-full"
-                    >
+                    <span key={tag} className="bg-sun-100 text-ocean-700 text-sm font-medium px-3 py-1.5 rounded-full">
                       {tag}
                     </span>
                   ))}
                   {activity.tags.foodBases?.map((tag) => (
-                    <span
-                      key={tag}
-                      className="bg-sun-100 text-ocean-800 text-sm font-medium px-3 py-1.5 rounded-full"
-                    >
-                      🌾 {tag}
+                    <span key={tag} className="bg-sun-100 text-ocean-800 text-sm font-medium px-3 py-1.5 rounded-full">
+                      🌾 {t(`options.${tag}`)}
                     </span>
                   ))}
                 </div>

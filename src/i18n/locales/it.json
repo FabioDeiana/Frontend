@@ -123,10 +123,20 @@
     "noReviews": "Non hai ancora lasciato recensioni."
   },
   "about": {
-    "title": "Chi siamo"
+    "title": "Chi siamo",
+    "p1": "OpenPlaces nasce dalla convinzione che ogni scelta quotidiana possa fare la differenza. Siamo una community di persone che credono nella sostenibilità, nell'accessibilità e nella trasparenza — e vogliamo rendere più facile trovare attività locali che condividono questi valori.",
+    "p2": "Che tu stia cercando un ristorante con opzioni vegane, un negozio zero-waste o un alloggio eco-sostenibile, OpenPlaces ti aiuta a scoprirli grazie alle recensioni reali della community — niente greenwashing, solo esperienze verificate da chi le vive ogni giorno.",
+    "p3": "Se gestisci un'attività e vuoi farne parte, registrati e candidala su OpenPlaces. Se sei un utente curioso, esplora la mappa e lascia le tue recensioni — ogni contributo aiuta la community a crescere."
   },
   "cookie": {
-    "title": "Cookie Policy"
+    "title": "Cookie Policy",
+    "intro": "OpenPlaces utilizza cookie tecnici essenziali per il funzionamento del sito. Non utilizziamo cookie di profilazione o di tracciamento per fini pubblicitari.",
+    "techTitle": "Cookie tecnici",
+    "techText": "Utilizziamo un cookie httpOnly per la gestione della sessione utente (refresh token). Questo cookie non è accessibile da JavaScript ed è necessario per mantenere l'autenticazione attiva in modo sicuro. Viene eliminato automaticamente al logout o dopo 7 giorni.",
+    "thirdTitle": "Cookie di terze parti",
+    "thirdText": "Le mappe sono fornite da OpenStreetMap tramite Leaflet. OpenStreetMap potrebbe impostare cookie propri — consulta la loro privacy policy per maggiori informazioni.",
+    "manageTitle": "Gestione dei cookie",
+    "manageText": "Puoi disabilitare i cookie dal tuo browser, ma alcune funzionalità del sito (come il mantenimento della sessione) potrebbero non funzionare correttamente."
   },
   "notFound": {
     "title": "Pagina non trovata",
@@ -201,5 +211,40 @@
     "location": "Posizione",
     "features": "Caratteristiche",
     "foodBases": "Basi alimentari utilizzate"
+  },
+  "options": {
+    "vegetariano": "vegetariano",
+    "vegano": "vegano",
+    "senza glutine": "senza glutine",
+    "senza lattosio": "senza lattosio",
+    "halal": "halal",
+    "kosher": "kosher",
+    "sedia a rotelle": "sedia a rotelle",
+    "ipovedente": "ipovedente",
+    "ipoudente": "ipoudente",
+    "difficolta motorie": "difficoltà motorie",
+    "glutine": "glutine",
+    "lattosio": "lattosio",
+    "uova": "uova",
+    "pesce": "pesce",
+    "crostacei": "crostacei",
+    "arachidi": "arachidi",
+    "soia": "soia",
+    "frutta a guscio": "frutta a guscio",
+    "sedano": "sedano",
+    "senape": "senape",
+    "sesamo": "sesamo",
+    "anidride solforosa": "anidride solforosa",
+    "lupini": "lupini",
+    "molluschi": "molluschi",
+    "avena": "avena",
+    "riso": "riso",
+    "cocco": "cocco",
+    "mandorla": "mandorla",
+    "anacardi": "anacardi",
+    "piselli": "piselli",
+    "grano saraceno": "grano saraceno",
+    "biologico": "biologico",
+    "accesso disabili": "accesso disabili"
   }
 }

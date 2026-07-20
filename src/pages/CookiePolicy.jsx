@@ -16,31 +16,22 @@ function CookiePolicy() {
           <h1 className="text-3xl text-ocean-700 mb-6">🍪 {t("cookie.title")}</h1>
 
           <p className="text-gray-600 leading-relaxed mb-6">
-            OpenPlaces utilizza cookie tecnici essenziali per il funzionamento del
-            sito. Non utilizziamo cookie di profilazione o di tracciamento per fini
-            pubblicitari.
+            {t("cookie.intro")}
           </p>
 
-          <h2 className="text-xl text-ocean-800 mb-3">Cookie tecnici</h2>
+          <h2 className="text-xl text-ocean-800 mb-3">{t("cookie.techTitle")}</h2>
           <p className="text-gray-600 leading-relaxed mb-6">
-            Utilizziamo un cookie httpOnly per la gestione della sessione utente
-            (refresh token). Questo cookie non è accessibile da JavaScript ed è
-            necessario per mantenere l'autenticazione attiva in modo sicuro. Viene
-            eliminato automaticamente al logout o dopo 7 giorni.
+            {t("cookie.techText")}
           </p>
 
-          <h2 className="text-xl text-ocean-800 mb-3">Cookie di terze parti</h2>
+          <h2 className="text-xl text-ocean-800 mb-3">{t("cookie.thirdTitle")}</h2>
           <p className="text-gray-600 leading-relaxed mb-6">
-            Le mappe sono fornite da OpenStreetMap tramite Leaflet. OpenStreetMap
-            potrebbe impostare cookie propri — consulta la loro privacy policy per
-            maggiori informazioni.
+            {t("cookie.thirdText")}
           </p>
 
-          <h2 className="text-xl text-ocean-800 mb-3">Gestione dei cookie</h2>
+          <h2 className="text-xl text-ocean-800 mb-3">{t("cookie.manageTitle")}</h2>
           <p className="text-gray-600 leading-relaxed">
-            Puoi disabilitare i cookie dal tuo browser, ma alcune funzionalità del
-            sito (come il mantenimento della sessione) potrebbero non funzionare
-            correttamente.
+            {t("cookie.manageText")}
           </p>
         </motion.div>
       </div>

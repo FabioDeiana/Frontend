@@ -32,25 +32,9 @@ function About() {
           transition={{ duration: 0.5, delay: 0.15 }}
           className="bg-white rounded-3xl shadow-sm p-8 md:p-10 flex flex-col gap-6"
         >
-          <p className="text-gray-600 text-lg leading-relaxed">
-            OpenPlaces nasce dalla convinzione che ogni scelta quotidiana possa fare
-            la differenza. Siamo una community di persone che credono nella
-            sostenibilità, nell'accessibilità e nella trasparenza — e vogliamo
-            rendere più facile trovare attività locali che condividono questi valori.
-          </p>
-
-          <p className="text-gray-600 text-lg leading-relaxed">
-            Che tu stia cercando un ristorante con opzioni vegane, un negozio
-            zero-waste o un alloggio eco-sostenibile, OpenPlaces ti aiuta a scoprirli
-            grazie alle recensioni reali della community — niente greenwashing,
-            solo esperienze verificate da chi le vive ogni giorno.
-          </p>
-
-          <p className="text-gray-600 text-lg leading-relaxed">
-            Se gestisci un'attività e vuoi farne parte, registrati e candidala su
-            OpenPlaces. Se sei un utente curioso, esplora la mappa e lascia le tue
-            recensioni — ogni contributo aiuta la community a crescere.
-          </p>
+          <p className="text-gray-600 text-lg leading-relaxed">{t("about.p1")}</p>
+          <p className="text-gray-600 text-lg leading-relaxed">{t("about.p2")}</p>
+          <p className="text-gray-600 text-lg leading-relaxed">{t("about.p3")}</p>
         </motion.div>
       </div>
     </div>
